@@ -1,5 +1,15 @@
 ---
 
+osx_i18n:
+  calendar: Calendrier
+  trash: Corbeille
+
+osx_languages:
+  - fr
+  - en
+
+osx_locale: fr_FR@currency=EUR
+
 brew_packages:
   - md5sha1sum # More checksum tools
   - coreutils # for things like realpath…
@@ -31,3 +41,46 @@ brew_cask_apps:
   - spectacle # Window manager
   - ngrok # Secure(?) tunneling
   - postman # HTTP requesting interface
+
+removed_dock_items:
+  - Launchpad
+  - Safari
+  - Contacts
+  - Notes
+  - Reminders
+  - Maps
+  - Photos
+  - Messages
+  - FaceTime
+  - iTunes
+  - iBooks
+  - App Store
+  - System Preferences
+
+added_dock_items:
+  - name: Finder
+    position: 1
+  - name: Mail
+    position: 2
+  - name: "{{ osx_i18n['calendar'] }}"
+    position: 3
+  - name: iTerm
+    path: "/Applications/iTerm.app"
+    position: 4
+  - name: Google Chrome
+    path: "/Applications/Google Chrome.app"
+    position: 5
+  - name: Spotify
+    path: /Applications/Spotify.app
+    position: 6
+  - name: MacPass
+    path: "/Applications/MacPass.app"
+    position: 7
+  - name: Atom
+    path: /Applications/Atom.app
+    position: 8
+  - name: Slack
+    path: /Applications/Slack.app
+    position: 9
+  - name: "{{ osx_i18n['trash'] }}"
+    position: 10

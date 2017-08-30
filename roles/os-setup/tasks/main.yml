@@ -3,9 +3,13 @@
 - name: Computing dev distribution name
   set_fact:
     dev_distribution: "{{ ansible_distribution|lower }}"
+  tags:
+    - always
 
 - name: Loading distribution's vars
   include_vars: "{{ dev_distribution }}.yml"
+  tags:
+    - always
 
 - name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
