@@ -1,0 +1,28 @@
+---
+
+aptitude_packages:
+  - silversearcher-ag
+  - docker
+  - docker-compose # Docker dev with docker-compose.yml files
+  - docker-machine # Manage Docker hosts
+  - gnupg2
+  # The following packages are not available via aptitude.
+  # TODO Find an alternative install method for each one of them.
+  #- rclone # Cloud sync à-la rsync
+  #- caddy # Webserver/Reverse-Proxy/more…
+  #- fdupes # Duplicates file finder
+  #- devd # Local webserver for developers
+  #- forego # Foreman in Go
+  #- fzf # Command line fuzzy finder
+  #- diff-so-fancy # Differ
+  #- bfg # Git repositories cleanup
+
+aptitude_apps:
+  - default-jre
+  - chromium-browser
+  - keepassx
+  - terminator
+  #- atom
+  #- spotify
+  #- ngrok # Secure(?) tunneling
+  #- postman

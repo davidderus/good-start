@@ -1,0 +1,25 @@
+---
+
+# Packages existing for aptitude and brew
+common_packages:
+  - bash # Updating default macOS bash
+  - ffmpeg # Video and GIFs modifications and conversions
+  - python # Updating macOS default python
+  - git # No comments needed
+  - git-flow # Git extensions to enforce a better branching model
+  - tig # Git repos browser
+  - ghostscript # Postscript and PDF tools
+  - graphicsmagick # Images transformations and conversions
+  - pwgen # Password generation from the command line
+  - htop # Top replacement
+  - tree # To list files and dirs as a tree
+  - tmux # Terminal multiplexer
+  - ssh-copy-id # Copy ssh keys to remote hosts
+  - nmap # Network scan
+  - httpie # HTTP requests made easy
+  - direnv # Per directory ENV vars
+
+common_apps:
+  - virtualbox # Virtualisation
+  - vagrant # VM per projects
+  - firefox # Alternative browser

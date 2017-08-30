@@ -1,0 +1,11 @@
+---
+
+- name: Updating apt
+  apt:
+    update_cache: yes
+
+- name: Installing packages and apps
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ common_packages }} + {{ aptitude_packages }} + {{ aptitude_apps }}"

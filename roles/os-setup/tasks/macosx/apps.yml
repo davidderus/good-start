@@ -1,0 +1,17 @@
+---
+
+- name: Updating homebrew
+  homebrew:
+    update_homebrew: yes
+
+- name: Installing packages
+  homebrew:
+    name: "{{ item }}"
+    state: latest
+  with_items: "{{ common_packages }} + {{ brew_packages }}"
+
+- name: Installing apps
+  homebrew_cask:
+    name: "{{ item }}"
+    state: present
+  with_items: "{{ common_apps }} + {{ brew_cask_apps }}"
