@@ -16,7 +16,6 @@ aptitude_packages:
   #- fzf # Command line fuzzy finder
   #- diff-so-fancy # Differ
   #- bfg # Git repositories cleanup
-  #- neovim # Vim fork
 
 aptitude_apps:
   - default-jre

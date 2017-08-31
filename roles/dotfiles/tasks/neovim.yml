@@ -1,0 +1,19 @@
+---
+
+- name: Installing neovim for macOS
+  homebrew:
+    name: neovim
+    state: present
+  when: ansible_distribution == 'MacOSX'
+
+- name: Installing neovim for Ubuntu
+  apt:
+    name: neovim
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Symlinking .vimrc for neovim
+  file:
+    src: ~/.vimrc
+    dest: ~/.config/nvim/init.vim
+    state: link
