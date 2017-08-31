@@ -201,10 +201,10 @@
     type: bool
     value:  true
 
-- name: Don’t show Dashboard as a Space
+- name: Disable Dashboard
   osx_defaults:
-    domain: com.apple.dock
-    key: dashboard-in-overlay
+    domain: com.apple.dashboard
+    key: mcx-disabled
     type: bool
     value: true
 
@@ -270,3 +270,18 @@
     key: PMPrintingExpandedStateForPrint2
     type: bool
     value: true
+
+- name: Disable windows shadow in screen capture
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: disable-shadow
+    type: boolean
+    value: true
+
+- name: Restart processes
+  command: "killall {{ item }}"
+  ignore_errors: yes
+  with_items:
+    - Finder
+    - Dock
+    - SystemUIServer

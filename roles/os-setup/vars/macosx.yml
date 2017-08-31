@@ -2,7 +2,6 @@
 
 osx_i18n:
   calendar: Calendrier
-  trash: Corbeille
 
 osx_languages:
   - fr
@@ -82,5 +81,3 @@ added_dock_items:
   - name: Slack
     path: /Applications/Slack.app
     position: 9
-  - name: "{{ osx_i18n['trash'] }}"
-    position: 10
