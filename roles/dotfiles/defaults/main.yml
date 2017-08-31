@@ -1,0 +1,35 @@
+---
+
+dotfiles_devlog_enabled: True
+dotfiles_default_editor: nvim
+dotfiles_default_pager: vimpager
+dotfiles_go_path: ~/go/
+
+dotfiles_git_pager: diff-so-fancy
+dotfiles_git_editor: "{{ dotfiles_default_editor }}"
+
+dotfiles_zsh_plugins:
+  - git
+  - ruby
+  - git-flow
+  - tmux
+  - docker
+  - docker-compose
+  - docker-machine
+
+dotfiles_files:
+  - agignore
+  - aliases
+  - exports
+  - functions
+  - gitconfig
+  - gitignore
+  - screenrc
+  - tmux.conf
+  - vimrc
+  - zshrc
+
+dotfiles_git_name: "{{ dotfiles_user_name }}"
+dotfiles_git_email: "{{ dotfiles_user_email }}"
+
+dotfiles_sync_force: True

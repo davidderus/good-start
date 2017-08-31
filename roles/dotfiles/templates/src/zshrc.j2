@@ -1,0 +1,55 @@
+# Path to your oh-my-zsh installation.
+export ZSH=$HOME/.oh-my-zsh
+
+# Set name of the theme to load.
+ZSH_THEME="robbyrussell"
+
+# Uncomment the following line if you want to disable marking untracked files
+# under VCS as dirty. This makes repository status check for large repositories
+# much, much faster.
+# DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Uncomment the following line if you want to change the command execution time
+# stamp shown in the history command output.
+# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
+# HIST_STAMPS="mm/dd/yyyy"
+
+# Would you like to use another custom folder than $ZSH/custom?
+# ZSH_CUSTOM=/path/to/new-custom-folder
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=({{ (dotfiles_zsh_plugins + dotfiles_zsh_additional_plugins)|join(' ') }})
+
+# User configuration
+source $ZSH/oh-my-zsh.sh
+
+for file in ~/.{exports,aliases,functions}; do
+	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+done;
+unset file;
+
+######################
+# Keyboard shortcuts #
+######################
+
+# https://stackoverflow.com/a/12403798
+# Using the Maj key as it mimics Vim (forward|backward)-word shortcut.
+# Also because Ctrl is used by macOS and Alt by Tmux
+bindkey -e
+bindkey '^[[1;2C' forward-word # Maj + ->
+bindkey '^[[1;2D' backward-word # Maj + <-
+
+#######################
+# https://direnv.net/ #
+#######################
+
+eval "$(direnv hook zsh)"
+
+##################
+# fzf completion #
+##################
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

@@ -1,0 +1,8 @@
+---
+
+- name: Syncing dotfiles
+  template:
+    src: "src/{{ item }}.j2"
+    dest: "~/.{{ item }}"
+    force: "{{ dotfiles_sync_force }}"
+  with_items: "{{ dotfiles_files }}"

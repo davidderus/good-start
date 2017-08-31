@@ -1,0 +1,10 @@
+---
+
+- name: Loading distribution's vars
+  include_vars: "{{ dev_distribution }}.yml"
+  tags:
+    - always
+
+- name: Dotfiles setup
+  include: setup.yml
+  tags: dotfiles
