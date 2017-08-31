@@ -1,71 +1,11 @@
 ---
 
-- name: Remove all useless Dock items
-  shell: dockutil --remove '{{ item }}'
-  ignore_errors: true
-  with_items: removed_dock_items
+# See https://www.learningosx.com/101-ways-to-tweak-os-x-using-terminal/ and
+# https://www.defaults-write.com for more
 
-- name: Check if the Dock items exist
-  shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }}'
-  with_items: "{{ added_dock_items }}"
-  when: path is defined
-
-- name: Fix the Dock items order
-  shell: dockutil --move '{{ item.name }}' --position {{ item.position }}
-  with_items: "{{ added_dock_items }}"
-
-
-# What follows is from
-# https://www.learningosx.com/101-ways-to-tweak-os-x-using-terminal/
-
-- name: Activate debug menu in Safari
-  osx_defaults:
-    domain: com.apple.Safari
-    key: IncludeInternalDebugMenu
-    type: bool
-    value: true
-    state: present
-
-- name: Auto-hide the Dock
-  osx_defaults:
-    domain: com.apple.dock
-    key: autohide-time-modifier
-    type: bool
-    value: true
-
-- name: Setup os languages
-  osx_defaults:
-    key: AppleLanguages
-    type: array
-    value: "{{ osx_languages }}"
-
-- name: Setup keyboard language
-  osx_defaults:
-    key: AppleLocale
-    value: "{{ osx_locale }}"
-
-- name: Setting measurement unit
-  osx_defaults:
-    key: AppleMeasurementUnits
-    type: string
-    value: Centimeters
-
-- name: Enabling metric units
-  osx_defaults:
-    key: AppleMetricUnits
-    type: bool
-    value: true
-
-- name: Enable Dark mode
-  osx_defaults:
-    key: AppleInterfaceStyle
-    value: Dark
-
-- name: Disable transparency
-  osx_defaults:
-    key: AppleEnableMenuBarTransparency
-    type: bool
-    value: false
+######
+# OS #
+######
 
 - name: Save to disk by default
   osx_defaults:
@@ -100,33 +40,43 @@
     type: float
     value: 0.0
 
-- name: Hide icons for external hard drives on the desktop
+- name: Avoid creating .DS_Store files on network volumes
   osx_defaults:
-    domain: com.apple.finder
-    key: ShowExternalHardDrivesOnDesktop
+    domain: com.apple.desktopservices
+    key: DSDontWriteNetworkStores
     type: bool
-    value: false
+    value: true
 
-- name: Hide icons for hard drives on the desktop
+- name: Avoid creating .DS_Store files on USB volumes
   osx_defaults:
-    domain: com.apple.finder
-    key: ShowHardDrivesOnDesktop
+    domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
     type: bool
-    value: false
+    value: true
 
-- name: Hide icons for servers on the desktop
+- name: Expand save panel by default
   osx_defaults:
-    domain: com.apple.finder
-    key: ShowMountedServersOnDesktop
+    key: NSNavPanelExpandedStateForSaveMode
     type: bool
-    value: false
+    value: true
 
-- name: Hide icons for removable media on the desktop
+- name: Automatically quit printer app once the print jobs complete
   osx_defaults:
-    domain: com.apple.finder
-    key: ShowRemovableMediaOnDesktop
+    domain: com.apple.print.PrintingPrefs
+    key: "Quit When Finished"
     type: bool
-    value: false
+    value:  true
+
+- name: Prevent Time Machine from prompting to use new hard drives as backup volume
+  osx_defaults:
+    domain: com.apple.TimeMachine
+    key: DoNotOfferNewDisksForBackup
+    type: bool
+    value: true
+
+##########
+# Finder #
+##########
 
 - name: Show all filename extensions
   osx_defaults:
@@ -161,29 +111,96 @@
     type: bool
     value: false
 
-- name: Avoid creating .DS_Store files on network volumes
-  osx_defaults:
-    domain: com.apple.desktopservices
-    key: DSDontWriteNetworkStores
-    type: bool
-    value: true
-
-- name: Avoid creating .DS_Store files on USB volumes
-  osx_defaults:
-    domain: com.apple.desktopservices
-    key: DSDontWriteUSBStores
-    type: bool
-    value: true
-
 - name: Use list view in all Finder windows by default
   osx_defaults:
     domain: com.apple.finder
     key: FXPreferredViewStyle
     value: "clmv"
 
-- name: Expand save panel by default
+- name: Hide icons for external hard drives on the desktop
   osx_defaults:
-    key: NSNavPanelExpandedStateForSaveMode
+    domain: com.apple.finder
+    key: ShowExternalHardDrivesOnDesktop
+    type: bool
+    value: false
+
+- name: Hide icons for hard drives on the desktop
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowHardDrivesOnDesktop
+    type: bool
+    value: false
+
+- name: Hide icons for servers on the desktop
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowMountedServersOnDesktop
+    type: bool
+    value: false
+
+- name: Hide icons for removable media on the desktop
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowRemovableMediaOnDesktop
+    type: bool
+    value: false
+
+- name: Disable windows shadow in screen capture
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: disable-shadow
+    type: boolean
+    value: true
+
+########################
+# Internationalization #
+########################
+
+- name: Setup os languages
+  osx_defaults:
+    key: AppleLanguages
+    type: array
+    value: "{{ osx_languages }}"
+
+- name: Setup keyboard language
+  osx_defaults:
+    key: AppleLocale
+    value: "{{ osx_locale }}"
+
+- name: Setting measurement unit
+  osx_defaults:
+    key: AppleMeasurementUnits
+    type: string
+    value: Centimeters
+
+- name: Enabling metric units
+  osx_defaults:
+    key: AppleMetricUnits
+    type: bool
+    value: true
+
+########
+# Dock #
+########
+
+- name: Remove all useless Dock items
+  shell: dockutil --remove '{{ item }}'
+  ignore_errors: true
+  with_items: removed_dock_items
+
+- name: Check if the Dock items exist
+  shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }} --no-restart'
+  with_items: "{{ added_dock_items }}"
+  when: path is defined
+
+- name: Fix the Dock items order
+  shell: dockutil --move '{{ item.name }}' --position {{ item.position }}
+  with_items: "{{ added_dock_items }}"
+
+- name: Auto-hide the Dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide-time-modifier
     type: bool
     value: true
 
@@ -192,14 +209,18 @@
     domain: com.apple.dock
     key: tilesize
     type: float
-    value: 36.0
+    value: "{{ dock_icons_size }}"
 
-- name: Automatically quit printer app once the print jobs complete
+- name: Automatically hide and show the Dock
   osx_defaults:
-    domain: com.apple.print.PrintingPrefs
-    key: "Quit When Finished"
+    domain: com.apple.dock
+    key: autohide
     type: bool
-    value:  true
+    value: true
+
+##########
+# Spaces #
+##########
 
 - name: Disable Dashboard
   osx_defaults:
@@ -215,19 +236,32 @@
     type: bool
     value: false
 
-- name: Automatically hide and show the Dock
-  osx_defaults:
-    domain: com.apple.dock
-    key: autohide
-    type: bool
-    value: true
+##############
+# Appearance #
+##############
 
-- name: Prevent Time Machine from prompting to use new hard drives as backup volume
+- name: Enable Dark mode
   osx_defaults:
-    domain: com.apple.TimeMachine
-    key: DoNotOfferNewDisksForBackup
+    key: AppleInterfaceStyle
+    value: Dark
+
+- name: Disable transparency
+  osx_defaults:
+    key: AppleEnableMenuBarTransparency
+    type: bool
+    value: false
+
+- name: Activate debug menu in Safari
+  osx_defaults:
+    domain: com.apple.Safari
+    key: IncludeInternalDebugMenu
     type: bool
     value: true
+    state: present
+
+#############
+# App Store #
+#############
 
 - name: Enable the automatic update check
   osx_defaults:
@@ -257,6 +291,10 @@
     type: int
     value: 1
 
+########
+# Apps #
+########
+
 - name: Use the system-native print preview dialog
   osx_defaults:
     domain: com.google.Chrome
@@ -271,12 +309,9 @@
     type: bool
     value: true
 
-- name: Disable windows shadow in screen capture
-  osx_defaults:
-    domain: com.apple.screencapture
-    key: disable-shadow
-    type: boolean
-    value: true
+##############
+# Restarting #
+##############
 
 - name: Restart processes
   command: "killall {{ item }}"

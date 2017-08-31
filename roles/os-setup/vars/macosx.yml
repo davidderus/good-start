@@ -81,3 +81,5 @@ added_dock_items:
   - name: Slack
     path: /Applications/Slack.app
     position: 9
+
+dock_icons_size: 36.0
