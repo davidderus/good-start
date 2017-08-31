@@ -8,3 +8,16 @@
 - name: Dotfiles setup
   include: setup.yml
   tags: dotfiles
+
+- name: Neovim installation
+  include: neovim.yml
+  when: dotfiles_with_neovim
+  tags:
+    - dotfiles
+    - neovim
+
+- name: Setting up apps packages
+  include: packages.yml
+  tags:
+    - dotfiles
+    - packages
