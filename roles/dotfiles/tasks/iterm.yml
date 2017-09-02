@@ -1,0 +1,20 @@
+---
+
+- name: iTerm2 ▸ Creating preferences directory
+  file:
+    dest: "{{ dotfiles_iterm_settings_directory }}"
+    state: directory
+    mode: 0755
+
+- name: iTerm2 ▸ Creating preferences file with Solarized theming
+  template:
+    src: macosx/iterm2.plist.j2
+    dest: "{{ dotfiles_iterm_settings_directory }}/com.googlecode.iterm2.plist"
+    force: "{{ dotfiles_sync_force }}"
+    mode: 0644
+
+- name: Tell iTerm where to look for its preferences
+  osx_defaults:
+    domain: com.googlecode.iterm2
+    key: NSNavLastRootDirectory
+    value: "{{ dotfiles_iterm_settings_directory }}"
