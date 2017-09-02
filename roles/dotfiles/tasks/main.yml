@@ -28,3 +28,10 @@
   tags:
     - dotfiles
     - iterm
+
+- name: Customizing Terminator
+  include: terminator.yml
+  when: dev_distribution == 'ubuntu'
+  tags:
+    - dotfiles
+    - terminator
