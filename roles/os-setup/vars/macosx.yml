@@ -22,7 +22,6 @@ brew_packages:
   - fzf # Command line fuzzy finder
   - diff-so-fancy # Differ
   - bfg # Git repositories cleanup
-  #- docker, docker-compose and docker-machine are installed through the Docker.app
 
 brew_cask_apps:
   - java # Adding official JVM to macOS

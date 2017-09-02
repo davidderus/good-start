@@ -2,9 +2,6 @@
 
 aptitude_packages:
   - silversearcher-ag
-  - docker
-  - docker-compose # Docker dev with docker-compose.yml files
-  - docker-machine # Manage Docker hosts
   - gnupg2
   - zsh
   # The following packages are not available via aptitude.
