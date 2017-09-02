@@ -21,3 +21,10 @@
   tags:
     - dotfiles
     - packages
+
+- name: Customizing iTerm
+  include: iterm.yml
+  when: dev_distribution == 'macosx'
+  tags:
+    - dotfiles
+    - iterm
