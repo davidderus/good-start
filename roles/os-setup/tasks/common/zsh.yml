@@ -10,4 +10,3 @@
     name: "{{ ansible_user_id }}"
     shell: /bin/zsh
   become: true
-  become_user: "{{ ansible_user_id }}"

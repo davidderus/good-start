@@ -2,8 +2,7 @@
 
 - name: Dotfiles ▸ Loading distribution's vars
   include_vars: "{{ dev_distribution }}.yml"
-  tags:
-    - always
+  tags: dotfiles
 
 - name: Dotfiles ▸ Setup
   include: common/setup.yml
