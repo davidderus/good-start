@@ -9,7 +9,7 @@
   include: "{{ dev_distribution }}/main.yml"
 
 - name: Oh-My-Zsh setup
-  include: zsh.yml
+  include: common/zsh.yml
   tags:
     - apps
     - zsh

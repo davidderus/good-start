@@ -6,31 +6,31 @@
     - always
 
 - name: Dotfiles setup
-  include: setup.yml
+  include: common/setup.yml
   tags: dotfiles
 
 - name: Neovim installation
-  include: neovim.yml
+  include: common/neovim.yml
   when: dotfiles_with_neovim
   tags:
     - dotfiles
     - neovim
 
 - name: Setting up apps packages
-  include: packages.yml
+  include: common/packages.yml
   tags:
     - dotfiles
     - packages
 
 - name: Customizing iTerm
-  include: iterm.yml
+  include: macosx/iterm.yml
   when: dev_distribution == 'macosx'
   tags:
     - dotfiles
     - iterm
 
 - name: Customizing Terminator
-  include: terminator.yml
+  include: ubuntu/terminator.yml
   when: dev_distribution == 'ubuntu'
   tags:
     - dotfiles
