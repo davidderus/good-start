@@ -1,16 +1,16 @@
 ---
 
-- name: Updating homebrew
+- name: OSSetup ▸ Updating homebrew
   homebrew:
     update_homebrew: yes
 
-- name: Installing packages
+- name: OSSetup ▸ Installing packages
   homebrew:
     name: "{{ item }}"
     state: present
   with_items: "{{ common_packages }} + {{ brew_packages }}"
 
-- name: Installing apps
+- name: OSSetup ▸ Installing apps
   homebrew_cask:
     name: "{{ item }}"
     state: present
