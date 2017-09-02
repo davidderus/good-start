@@ -7,3 +7,9 @@
 
 - name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
+
+- name: Oh-My-Zsh setup
+  include: zsh.yml
+  tags:
+    - apps
+    - zsh
