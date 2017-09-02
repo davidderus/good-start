@@ -1,18 +1,18 @@
 ---
 
-- name: Neovim ▸ Installing neovim for macOS
+- name: Dotfiles ▸ Installing Neovim for macOS
   homebrew:
     name: neovim
     state: present
   when: dev_distribution == 'macosx'
 
-- name: Neovim ▸ Installing neovim for Ubuntu
+- name: Dotfiles ▸ Installing Neovim for Ubuntu
   apt:
     name: neovim
     state: present
   when: dev_distribution == 'ubuntu'
 
-- name: Neovim ▸ Symlinking .vimrc for neovim
+- name: Dotfiles ▸ Symlinking .vimrc for Neovim
   file:
     src: ~/.vimrc
     dest: ~/.config/nvim/init.vim

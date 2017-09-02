@@ -1,0 +1,6 @@
+---
+
+- name: Docker ▸ Pulling images from the Docker Hub
+  docker_image:
+    name: "{{ item }}"
+  with_items: "{{ docker_images_to_pull }}"

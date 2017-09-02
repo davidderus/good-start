@@ -1,10 +1,10 @@
 ---
 
-- name: Updating apt
+- name: OSSetup ▸ Updating apt
   apt:
     update_cache: yes
 
-- name: Installing packages and apps
+- name: OSSetup ▸ Installing packages and apps
   apt:
     name: "{{ item }}"
     state: present
