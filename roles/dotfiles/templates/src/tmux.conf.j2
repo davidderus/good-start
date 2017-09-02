@@ -1,0 +1,102 @@
+# remap prefix from 'C-b' to 'C-a'
+unbind C-b
+set-option -g prefix C-a
+bind-key C-a send-prefix
+
+# split panes using right (|) and down (-)
+bind Right split-window -h -c "#{pane_current_path}"
+bind Down split-window -v -c "#{pane_current_path}"
+unbind '"'
+unbind %
+
+# reload config with R
+bind r source-file ~/.tmux.conf
+
+# switch panes using Alt-arrow without prefix
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# Enable mouse mode (tmux 2.1 and above)
+# Mouse mode can be temporary disabled via option key in iTerm2
+set -g mouse on
+
+# don't rename windows automatically
+set-option -g allow-rename off
+
+# colors problem is OS X
+set -g default-terminal "screen-256color"
+
+# Allow pbcopy and paste for OS X
+# Requires `brew install reattach-to-user-namespace --with-wrap-pbcopy-and-pbpaste`
+set-option -g default-command "reattach-to-user-namespace -l $SHELL"
+
+# Fixing vim escape key latency
+set -g escape-time 10
+
+# Allow using xterm keys in vim (for eg)
+# See http://superuser.com/a/402084
+set-window-option -g xterm-keys on
+
+# New window creation is in current pane path
+bind c new-window -c "#{pane_current_path}"
+
+# List of plugins
+# https://github.com/tmux-plugins/tpm
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-sessionist'
+
+# Plugins options
+# Active continuum restore on computer startup
+set -g @continuum-restore 'on'
+set -g @resurrect-capture-pane-contents 'on'
+set -g @continuum-boot-options 'iterm'
+
+# Styling
+#### COLOUR (Solarized dark)
+
+# default statusbar colors
+set-option -g status-bg black #base02
+set-option -g status-fg yellow #yellow
+set-option -g status-attr default
+
+# default window title colors
+set-window-option -g window-status-fg brightblue #base0
+set-window-option -g window-status-bg default
+#set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg brightred #orange
+set-window-option -g window-status-current-bg default
+#set-window-option -g window-status-current-attr bright
+
+# pane border
+set-option -g pane-border-fg black #base02
+set-option -g pane-active-border-fg brightgreen #base01
+
+# message text
+set-option -g message-bg black #base02
+set-option -g message-fg brightred #orange
+
+# pane number display
+set-option -g display-panes-active-colour blue #blue
+set-option -g display-panes-colour brightred #orange
+
+# clock
+set-window-option -g clock-mode-colour brightred
+
+# bell
+set-window-option -g window-status-bell-style fg=black,bg=red #base02, red
+
+# Left bar infos
+set -g status-left-length 32
+
+# Right bar infos
+set -g status-right-length 100
+set -g status-right '#(echo $USER) @ #H | %d/%m %H:%M'
+
+# Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
+run '~/.tmux/plugins/tpm/tpm'

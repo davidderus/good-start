@@ -1,0 +1,53 @@
+###########
+# Aliases #
+###########
+
+unalias gsta
+unalias gm
+
+# Git
+alias gstat="git status"
+alias gcommit="git commit -m"
+alias gcommita="git commit -am"
+alias gadd="git add"
+alias ghist="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+alias gstash="git stash"
+alias gco="git checkout"
+alias gdiff="git diff"
+alias gpush="git push --follow-tags"
+alias gpull="git pull"
+alias gfl="git flow"
+alias gamend="git commit --amend"
+
+# Tar
+alias tarc="tar -cvf"
+alias gz="tar -zcvf"
+alias bz="tar -jcvf"
+alias lz="tar --lzma -cvf"
+alias ungz="tar -zxf"
+alias unbz="tar -jxf"
+alias untar="tar -xf"
+alias unlz="tar --lzma -xf"
+
+# Shortcuts
+alias py="python"
+alias he="heroku"
+alias dig_short="dig +noall +answer"
+alias dk="docker"
+alias dkc='docker-compose'
+alias dkm='docker-machine'
+alias dkcr='docker-compose run $DKC_SERVICE '
+alias dkce='docker-compose exec $DKC_SERVICE '
+
+# Replacements
+alias rsync="rsync -azP" # Adding recursivity, compression and progress to rsync by default
+alias top="htop"
+{% if dotfiles_with_neovim %}alias vim="nvim"{% endif %}
+{% if dotfiles_with_neovim %}alias vimdiff="/usr/local/bin/nvim -d"{% endif %}
+
+# expand aliases after sudo command
+alias sudo="sudo "
+
+alias ip-address="ifconfig | grep 192.168 | cut -d\  -f2"
+
+alias ansirun="ansible-playbook playbook.yml --ask-vault-pass"

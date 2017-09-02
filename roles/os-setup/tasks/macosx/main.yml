@@ -1,9 +1,11 @@
 ---
 
-- include: apps.yml
+- name: Apps to install
+  include: apps.yml
   tags:
     - apps
 
-- include: settings.yml
+- name: OS settings
+  include: settings.yml
   tags:
     - settings

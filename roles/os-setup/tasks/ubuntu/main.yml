@@ -1,5 +1,6 @@
 ---
 
-- include: apps.yml
+- name: Apps to install
+  include: apps.yml
   tags:
     - apps
