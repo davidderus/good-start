@@ -1,0 +1,61 @@
+---
+
+#########
+# Clone #
+#########
+
+- name: Create src/project directory
+  file:
+    path: "{{ project_directory }}"
+    state: directory
+
+- name: Cloning project
+  git:
+    repo: "{{ project.repo }}"
+    dest: "{{ project_directory }}"
+    update: no
+    key_file: "{{ projects_ssh_keys[project.ssh_key] if project.ssh_key is defined }}"
+    accept_hostkey: yes
+
+############
+# Env file #
+############
+
+- name: Validating env template existence
+  stat:
+    path: "{{ project_directory }}/{{ project.env_file|default(projects_default_env_tpl) }}"
+  register: project_env_file
+  when:
+    - project.setup_env is defined
+    - project.setup_env
+
+- name: Setup env files
+  file:
+    src: "{{ project_directory }}/{{ project.env_file|default(projects_default_env_tpl) }}"
+    dest: "{{ project_directory }}/.env"
+    force: no
+  when:
+    - project.setup_env is defined
+    - project.setup_env
+    - project_env_file.stat.exists
+
+- name: Alert on missing env file
+  debug:
+    msg: "Env file {{ project.env_file|default(projects_default_env_tpl) }} is missing for {{ project.name }}"
+  when: project_env_file.stat.exists == False
+
+##########
+# Direnv #
+##########
+
+- name: Setup direnv files
+  template:
+    src: direnv/envrc.j2
+    dest: "{{ project_directory }}"
+    force: no
+  when: project.with_direnv
+  register: direnv_setupped
+
+- name: Allow direnv files
+  command: "direnv allow {{ project_directory }}"
+  when: direnv_setupped.changed

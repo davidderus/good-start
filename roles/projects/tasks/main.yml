@@ -1,0 +1,14 @@
+---
+
+- name: Create src folder
+  file:
+    path: "{{ projects_root }}"
+    state: directory
+  tags: projects
+
+- name: "Setting up {{ item.name }}"
+  include: setup-project.yml
+  vars:
+    project_directory: {{ projects_root + '/' }}{{ (item.parent_directory + '/') if item.parent_directory is defined }}{{ item.name }}
+    project: "{{ item }}"
+  with_items: "{{ projects_list }}"

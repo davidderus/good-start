@@ -1,0 +1,9 @@
+---
+
+projects_root: ~/src
+
+projects_ssh_keys: {}
+
+projects_list: []
+
+projects_default_env_tpl: env.tpl 
