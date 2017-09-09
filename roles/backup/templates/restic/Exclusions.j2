@@ -1,0 +1,31 @@
+.rvm
+.git
+.bundle
+.sass-cache
+.gitmodules
+.idea
+*.swp
+*.mbox
+.AppleDB
+.AppleDesktop
+.AppleDouble
+.com.apple.timemachine.supported
+.dbfseventsd
+.DocumentRevisions-V100*
+.DS_Store
+.fseventsd
+.PKInstallSandboxManager
+.Spotlight*
+.SymAV*
+.symSchedScanLockxz
+.TemporaryItems
+.Trash*
+.vol
+.VolumeIcon.icns
+Thumbs.db
+.log
+.Spotlight-*/
+.localized
+{% for exclusion in backup_additional_exclusions %}
+{{ exclusion }}
+{% endfor %}

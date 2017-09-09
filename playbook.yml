@@ -3,8 +3,6 @@
 - hosts: all
   vars:
     dev_distribution: "{{ ansible_distribution|lower }}"
-  vars_files:
-    - config.yml
   roles:
     - os-setup
     - dotfiles

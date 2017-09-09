@@ -1,7 +1,3 @@
 ---
 
-docker_images_to_pull:
-  - alpine
-  - golang:alpine
-  - abiosoft/caddy
-  - postgres:alpine
+docker_images_to_pull: []
