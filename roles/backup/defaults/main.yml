@@ -1,0 +1,8 @@
+---
+
+backup_scripts_directory: ~/restic-backup
+backup_additional_exclusions: []
+backup_with_cron: False
+backup_cron:
+  hour: "12,20"
+  minute: "30"

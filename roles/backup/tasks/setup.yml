@@ -1,0 +1,37 @@
+---
+
+- name: Check for an already setup backup scripts directory
+  stat:
+    path: "{{ backup_scripts_directory }}"
+  register: scripts_dir
+
+- name: Setting up backup scripts directory
+  file:
+    path: "{{ backup_scripts_directory }}"
+    state: directory
+
+- name: Copying scripts
+  template:
+    src: "restic/{{ item.name }}"
+    dest: "{{ backup_scripts_directory }}"
+    mode: "{{ item.mode }}"
+    backup: "{{ item.with_backup }}"
+  with_items:
+    - { name: 'backup-script.sh.j2', mode: '0700', with_backup: 'yes' }
+    - { name: 'Exclusions.j2', mode: '0644', with_backup: 'no' }
+
+- name: Initializing restic local repository
+  command: restic init
+  environment:
+    RESTIC_REPOSITORY: "{{ backup_repository }}"
+    RESTIC_PASSWORD: "{{ backup_password }}"
+  when: scripts_dir.stat.exists == False
+
+- name: Setup backup cron
+  cron:
+    name: "Restic backup"
+    minute: "{{ backup_cron.minute }}"
+    hour: "{{ backup_cron.hour }}"
+    job: "{{ backup_scripts_directory | expanduser }}/backup-script.sh"
+    state: present
+  when: backup_with_cron

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+unset HISTFILE
+
+# Vars setup
+export RESTIC_REPOSITORY='{{ backup_repository }}'
+export RESTIC_PASSWORD='{{ backup_password }}'
+
+# Backing up home dir
+# Some folders and files are excluded, see Exclusions
+
+echo "== Starting $HOME backup with restic"
+
+restic backup $HOME --exclude-file {{ backup_scripts_directory }}/Exclusions
+
+echo
+
+# Using the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
+# archives of THIS machine.
+#
+# Only one backup keep per day
+
+echo "== Cleaning up old backups"
+
+restic forget --keep-daily=7 --keep-weekly=4 --keep-monthly=6 --prune
+
+echo "- Cleanup done"
+echo
+
+# Listing existing archives to allow history check
+
+echo "== Listing present archives"
+
+restic snapshots
+
+unset RESTIC_REPOSITORY RESTIC_PASSWORD
+
+echo "- All done, exiting"
+exit 0
