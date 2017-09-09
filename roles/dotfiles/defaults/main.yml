@@ -29,6 +29,7 @@ dotfiles_files:
   - tmux.conf
   - vimrc
   - zshrc
+  - direnvrc
 
 dotfiles_git_name: "{{ dotfiles_user_name }}"
 dotfiles_git_email: "{{ dotfiles_user_email }}"

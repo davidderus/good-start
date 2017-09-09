@@ -11,7 +11,7 @@
     dest: "{{ dotfiles_vimplug_destination }}"
 
 - name: Installing vim packages
-  command: "{{ dotfiles_vim_executable }} +PlugInstall +qall"
+  command: "{{ dotfiles_vim_executable|quote }} +PlugInstall +qall"
 
 ########
 # Tmux #

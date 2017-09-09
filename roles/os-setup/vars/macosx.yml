@@ -38,6 +38,7 @@ brew_cask_apps:
   - spectacle # Window manager
   - ngrok # Secure(?) tunneling
   - postman # HTTP requesting interface
+  - fluid # Dedicated Mac app per website
 
 removed_dock_items:
   - Launchpad
