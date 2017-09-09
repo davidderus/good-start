@@ -17,6 +17,7 @@ restic backup $HOME --exclude-file {{ backup_scripts_directory }}/Exclusions
 
 echo
 
+{% if backup_cleanup %}
 # Using the `prune` subcommand to maintain 7 daily, 4 weekly and 6 monthly
 # archives of THIS machine.
 #
@@ -24,10 +25,16 @@ echo
 
 echo "== Cleaning up old backups"
 
-restic forget --keep-daily=7 --keep-weekly=4 --keep-monthly=6 --prune
+restic forget
+{%- if backup_allow_prune %} --prune{%- endif %}
+{% for key, value in backup_cleanup_settings.iteritems() %}
+ --{{ key|replace('_', '-') }}={{ value }}
+{%- endfor %}
+
 
 echo "- Cleanup done"
 echo
+{% endif %}
 
 # Listing existing archives to allow history check
 
