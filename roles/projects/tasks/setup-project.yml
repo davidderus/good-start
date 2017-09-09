@@ -9,6 +9,10 @@
     path: "{{ project_directory }}"
     state: directory
 
+- debug:
+    msg: "Will use ssh key {{ projects_ssh_keys[project.ssh_key] }} to clone {{ project.name }}"
+  when: project.ssh_key is defined
+
 - name: Cloning project
   git:
     repo: "{{ project.repo }}"

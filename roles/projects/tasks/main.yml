@@ -9,6 +9,7 @@
 - name: "Setting up {{ item.name }}"
   include: setup-project.yml
   vars:
-    project_directory: {{ projects_root + '/' }}{{ (item.parent_directory + '/') if item.parent_directory is defined }}{{ item.name }}
+    project_directory: "{{ projects_root + '/' }}{{ (item.parent_directory is defined) | ternary((item.parent_directory + '/'), '') }}{{ item.name }}"
     project: "{{ item }}"
   with_items: "{{ projects_list }}"
+  tags: projects
