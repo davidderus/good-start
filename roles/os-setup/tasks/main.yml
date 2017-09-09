@@ -1,14 +1,14 @@
 ---
 
-- name: OSSetup ▸ Loading distribution's vars
+- name: Loading distribution's vars
   include_vars: "{{ dev_distribution }}.yml"
   tags: os-setup
 
-- name: "OSSetup ▸ {{ ansible_distribution }} Setup"
+- name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
   tags: os-setup
 
-- name: OSSetup ▸ Oh-My-Zsh setup
+- name: Oh-My-Zsh setup
   include: common/zsh.yml
   tags:
     - os-setup

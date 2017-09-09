@@ -1,6 +1,6 @@
 ---
 
-- name: Docker ▸ Install packages
+- name: Install packages
   apt:
     name: "{{ item }}"
     state: present

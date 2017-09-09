@@ -1,34 +1,34 @@
 ---
 
-- name: Dotfiles ▸ Loading distribution's vars
+- name: Loading distribution's vars
   include_vars: "{{ dev_distribution }}.yml"
   tags: dotfiles
 
-- name: Dotfiles ▸ Setup
+- name: Setup
   include: common/setup.yml
   tags: dotfiles
 
-- name: Dotfiles ▸ Neovim installation
+- name: Neovim installation
   include: common/neovim.yml
   when: dotfiles_with_neovim
   tags:
     - dotfiles
     - neovim
 
-- name: Dotfiles ▸ Setting up apps packages
+- name: Setting up apps packages
   include: common/packages.yml
   tags:
     - dotfiles
     - packages
 
-- name: Dotfiles ▸ Customizing iTerm
+- name: Customizing iTerm
   include: macosx/iterm.yml
   when: dev_distribution == 'macosx'
   tags:
     - dotfiles
     - iterm
 
-- name: Dotfiles ▸ Customizing Terminator
+- name: Customizing Terminator
   include: ubuntu/terminator.yml
   when: dev_distribution == 'ubuntu'
   tags:

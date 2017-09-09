@@ -1,11 +1,11 @@
 ---
 
-- name: OSSetup ▸ Apps to install
+- name: Apps to install
   include: apps.yml
   tags:
     - apps
 
-- name: OSSetup ▸ OS settings
+- name: OS settings
   include: settings.yml
   tags:
     - settings

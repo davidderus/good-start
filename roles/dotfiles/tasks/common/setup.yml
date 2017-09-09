@@ -4,20 +4,20 @@
 # Main Setup #
 ##############
 
-- name: Dotfiles ▸ Syncing dotfiles
+- name: Syncing dotfiles
   template:
     src: "src/{{ item }}.j2"
     dest: "~/.{{ item }}"
     force: "{{ dotfiles_sync_force }}"
   with_items: "{{ dotfiles_files }}"
 
-- name: Dotfiles ▸ Create required directories
+- name: Create required directories
   file:
     path: "{{ item }}"
     state: directory
   with_items: "{{ dotfiles_required_directories }}"
 
-- name: Dotfiles ▸ Create required files
+- name: Create required files
   file:
     path: "{{ item.path }}"
     state: file
@@ -28,13 +28,13 @@
 # SSH #
 #######
 
-- name: Dotfiles ▸ Checking main SSH key existence
+- name: Checking main SSH key existence
   stat:
     path: ~/.ssh/id_rsa
   register: main_ssh_key
 
 # This will not overwrite an existing SSH key in any cases.
-- name: Dotfiles ▸ SSH key generation
+- name: SSH key generation
   user:
     name: "{{ ansible_user_id }}"
     generate_ssh_key: yes

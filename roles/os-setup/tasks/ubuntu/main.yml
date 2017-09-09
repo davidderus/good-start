@@ -1,6 +1,6 @@
 ---
 
-- name: OSSetup ▸ Apps to install
+- name: Apps to install
   include: apps.yml
   tags:
     - apps

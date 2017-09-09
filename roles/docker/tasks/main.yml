@@ -1,11 +1,11 @@
 ---
 
-- name: "Docker ▸ {{ ansible_distribution }} setup"
+- name: "{{ ansible_distribution }} setup"
   include: "{{ dev_distribution }}/main.yml"
   tags: docker
 
 # Using apt for pip was triggering an ImportError
-- name: Docker ▸ Install pip
+- name: Install pip
   easy_install:
     name: pip
     state: present
@@ -13,7 +13,7 @@
   tags: docker
 
 # See https://docs.ansible.com/ansible/guide_docker.html#requirements
-- name: Docker ▸ Add Ansible required pip packages
+- name: Add Ansible required pip packages
   pip:
     name: docker-compose
     state: present

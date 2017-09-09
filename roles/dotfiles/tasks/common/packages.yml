@@ -5,12 +5,12 @@
 ################
 
 # https://github.com/junegunn/vim-plug#installation
-- name: Dotfiles ▸ Getting vim-plug
+- name: Getting vim-plug
   get_url:
     url: https://github.com/junegunn/vim-plug/blob/master/plug.vim
     dest: "{{ dotfiles_vimplug_destination }}"
 
-- name: Dotfiles ▸ Installing vim packages
+- name: Installing vim packages
   command: "{{ dotfiles_vim_executable }} +PlugInstall +qall"
 
 ########
@@ -18,19 +18,19 @@
 ########
 
 # https://github.com/tmux-plugins/tpm
-- name: Dotfiles ▸ Getting tpm
+- name: Getting tpm
   git:
     repo: https://github.com/tmux-plugins/tpm
     dest: ~/.tmux/plugins/tpm
     update: no
 
-- name: Dotfiles ▸ Installing tmux packages
+- name: Installing tmux packages
   command: ~/.tmux/plugins/tpm/bin/install_plugins
 
 ########
 # Atom #
 ########
 
-- name: Dotfiles ▸ Atom packages installation
+- name: Atom packages installation
   command: "apm install {{ item|quote }}"
   with_items: "{{ dotfiles_apm_packages }}"
