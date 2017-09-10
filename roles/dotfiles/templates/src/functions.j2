@@ -1,0 +1,50 @@
+{% if dotfiles_devlog_enabled %}
+###################
+# Devlog handling #
+###################
+
+# Creates a devlog directory for the current user and init a Caddyfile for easier devlog browsing
+# Usage: `devlog_init`
+devlog_init() {
+  DEVLOG_DIR="$HOME/Devlog"
+  mkdir -p $DEVLOG_DIR
+  echo "localhost:2020\ngzip\nbrowse\nmarkdown { ext .md .txt }" > $DEVLOG_DIR/Caddyfile
+}
+
+# Creates or opens a post
+# Post path: $HOME/Devlog/$WEEK_NUMBER/$DATE-$NAME.md
+# Usage: `devlog_post MyApp`
+devlog_post() {
+  dev_dir=`date +"$HOME/Devlog/S%V"`
+  mkdir -p $dev_dir
+  filename=`date +"$dev_dir/%Y-%m-%d-$1.md"`
+  vim $filename
+}
+
+# Serves the Devlog thanks to Caddy
+# Usage: devlog_serve
+devlog_serve() {
+  cd $HOME/Devlog
+  caddy
+}
+
+# Searches a string in the Devlog
+# Usage: `devlog_search foobar`
+devlog_search() {
+  ag -i --markdown $1 $HOME/Devlog/
+}
+
+unalias devlog
+{% endif %}
+
+#######
+# ——— #
+#######
+
+# Replace a pattern by another globally in a set of files without backups
+# WARNING: Always diff the result to prevent some mistakes
+#
+# Usage: sed_in_place 0.3.9 0.3.10 bower.json package.json app/scripts/config.js
+sed_in_place() {
+  sed -i '' -e "s/$1/$2/g" ${@:3}
+}

@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  vars:
+    dev_distribution: "{{ ansible_distribution | lower }}"
+  roles:
+    - os-setup
+    - dotfiles
+    - docker
+    - projects
+    - backup

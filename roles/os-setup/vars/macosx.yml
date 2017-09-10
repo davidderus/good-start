@@ -1,0 +1,84 @@
+---
+
+osx_i18n:
+  calendar: Calendrier
+
+osx_languages:
+  - fr
+  - en
+
+osx_locale: fr_FR@currency=EUR
+
+brew_packages:
+  - md5sha1sum # More checksum tools
+  - coreutils # for things like realpath…
+  - rclone # Cloud sync à-la rsync
+  - caddy # Webserver/Reverse-Proxy/more…
+  - fdupes # Duplicates file finder
+  - devd # Local webserver for developers
+  - watch # GNU watch command
+  - forego # Foreman in Go
+  - ag # Grep replacement
+  - fzf # Command line fuzzy finder
+  - diff-so-fancy # Differ
+  - bfg # Git repositories cleanup
+
+brew_cask_apps:
+  - java # Adding official JVM to macOS
+  - google-chrome # Default browser
+  - appcleaner # For easy apps cleanup
+  - iterm2 # Default terminal emulator
+  - atom # Default code editor
+  - launchbar # Spotlight replacement
+  - macpass # Password manager
+  - gpgtools # GPG made easy (+ Mail.app extension)
+  - slack # For team communications
+  - spotify # Music ease the mind
+  - lunchy # Launchctl wrapper
+  - spectacle # Window manager
+  - ngrok # Secure(?) tunneling
+  - postman # HTTP requesting interface
+  - fluid # Dedicated Mac app per website
+
+removed_dock_items:
+  - Launchpad
+  - Safari
+  - Contacts
+  - Notes
+  - Reminders
+  - Maps
+  - Photos
+  - Messages
+  - FaceTime
+  - iTunes
+  - iBooks
+  - App Store
+  - System Preferences
+
+added_dock_items:
+  - name: Finder
+    position: 1
+  - name: Mail
+    position: 2
+  - name: "{{ osx_i18n['calendar'] }}"
+    position: 3
+  - name: iTerm
+    path: "/Applications/iTerm.app"
+    position: 4
+  - name: Google Chrome
+    path: "/Applications/Google Chrome.app"
+    position: 5
+  - name: Spotify
+    path: /Applications/Spotify.app
+    position: 6
+  - name: MacPass
+    path: "/Applications/MacPass.app"
+    position: 7
+  - name: Atom
+    path: /Applications/Atom.app
+    position: 8
+  - name: Slack
+    path: /Applications/Slack.app
+    position: 9
+
+dock_icons_size: 36.0

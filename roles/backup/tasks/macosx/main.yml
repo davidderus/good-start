@@ -1,0 +1,11 @@
+---
+
+- name: Taping restic repo
+  homebrew_tap:
+    name: restic/restic
+    state: present
+
+- name: Installing restic package
+  homebrew:
+    name: restic
+    state: present

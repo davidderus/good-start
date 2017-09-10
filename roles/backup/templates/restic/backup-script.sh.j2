@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -e
+
+unset HISTFILE
+
+# Vars setup
+export RESTIC_REPOSITORY='{{ backup_repository }}'
+export RESTIC_PASSWORD='{{ backup_password }}'
+
+# Backing up home dir
+# Some folders and files are excluded, see Exclusions
+
+echo "== Starting $HOME backup with restic"
+
+restic backup -x $HOME --exclude-file {{ backup_scripts_directory }}/Exclusions
+
+echo
+
+{% if backup_cleanup %}
+echo "== Cleaning up old backups"
+
+restic forget
+{%- if backup_allow_prune %} --prune{%- endif %}
+{% for key, value in backup_cleanup_settings.iteritems() %}
+ --{{ key | replace('_', '-') }}={{ value }}
+{%- endfor %}
+
+
+echo "- Cleanup done"
+echo
+{% endif %}
+
+# Listing existing archives to allow history check
+
+echo "== Listing present archives"
+
+restic snapshots
+
+unset RESTIC_REPOSITORY RESTIC_PASSWORD
+
+echo "- All done, exiting"
+exit 0

@@ -1,0 +1,55 @@
+---
+
+dotfiles_devlog_enabled: True
+dotfiles_default_editor: nvim
+dotfiles_default_pager: vimpager
+dotfiles_go_path: ~/go/
+
+dotfiles_git_pager: diff-so-fancy
+dotfiles_git_editor: "{{ dotfiles_default_editor }}"
+
+dotfiles_zsh_plugins:
+  - git
+  - ruby
+  - git-flow
+  - tmux
+  - docker
+  - docker-compose
+  - docker-machine
+
+dotfiles_files:
+  - agignore
+  - aliases
+  - ansible.cfg
+  - exports
+  - functions
+  - gitconfig
+  - gitignore
+  - screenrc
+  - tmux.conf
+  - vimrc
+  - zshrc
+  - direnvrc
+
+dotfiles_git_name: "{{ dotfiles_user_name }}"
+dotfiles_git_email: "{{ dotfiles_user_email }}"
+
+dotfiles_sync_force: True
+
+dotfiles_required_directories:
+  - ~/.ansible/group_vars
+  - ~/.ansible/host_vars
+  - "{{ dotfiles_go_path }}"
+  - ~/.vim/autoload/
+  - ~/.tmux/plugins
+
+dotfiles_required_files:
+  - { path: '~/.ansible/hosts.ini', mode: '0600' }
+  - { path: '~/.ssh/config', mode: '0600' }
+
+dotfiles_apm_packages:
+  - sync-settings # Other packages and settings are pulled by this package
+
+dotfiles_with_neovim: True
+dotfiles_vimplug_destination: "{{ '~/.local/share/nvim/site/autoload/plug.vim' if dotfiles_with_neovim else '~/.vim/autoload/plug.vim' }}"
+dotfiles_vim_executable: "{{ 'nvim' if dotfiles_with_neovim else 'vim' }}"

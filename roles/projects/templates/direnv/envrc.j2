@@ -1,0 +1,11 @@
+{% if project.docker_machine_name is defined %}
+use docker-machine {{ project.docker_machine_name }}
+{% endif %}
+
+{% for key, value in project.direnv_exports.iteritems() %}
+export {{ key }}={{ value }}
+{% endfor %}
+
+{%- if project.docker_compose_app is defined -%}
+export DKC_SERVICE={{ project.docker_compose_app }}
+{%- endif %}

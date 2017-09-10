@@ -1,0 +1,55 @@
+set expandtab
+set shiftwidth=2
+set softtabstop=2
+
+set smartcase
+
+set number
+
+set autoindent
+
+set showmode
+
+call plug#begin('~/.vim/plugged')
+  " Styling
+  Plug 'chriskempson/base16-vim'
+  Plug 'altercation/vim-colors-solarized'
+
+  " Syntax helper
+  Plug 'bash-support.vim'
+
+  " Utilities
+  Plug 'junegunn/vim-easy-align'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'scrooloose/nerdtree', { 'on':  'TreeToggle' }
+
+  " Schemes
+  Plug 'godlygeek/tabular'
+  Plug 'plasticboy/vim-markdown'
+call plug#end()
+
+let g:solarized_termcolors = 256
+let g:solarized_termtrans = 1
+
+set background=dark
+colorscheme solarized
+
+let g:fzf_layout = { 'window': 'enew' }
+let g:fzf_layout = { 'window': '-tabnew' }
+
+let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_json_frontmatter = 1
+let g:vim_markdown_frontmatter = 1
+
+" Fix for crontab error 'crontab: temp file must be edited in place'
+autocmd filetype crontab setlocal nobackup nowritebackup
+
+" Copy and paste in tmux
+set clipboard=unnamed
+
+" Completion
+set wildmenu "display completion menu
+set wildmode=list:longest,list:full "content of completion menu
+"ignore some extensions while completing filename
+set wildignore=*.o,*.so,,*.gz,*.bz2,*.tar,*.tgz,*.tbz2,*.png,*.jpg,*.jpeg,*.gif
+set wildchar=<TAB> "wildcar expansion character

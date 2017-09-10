@@ -1,0 +1,14 @@
+---
+
+backup_scripts_directory: ~/restic-backup
+backup_additional_exclusions: []
+backup_cleanup: True
+backup_cleanup_settings:
+  keep_daily: 7
+  keep_weekly: 4
+  keep_monthly: 6
+backup_allow_prune: True
+backup_with_cron: False
+backup_cron:
+  hour: "12,20"
+  minute: "30"

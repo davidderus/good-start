@@ -1,0 +1,322 @@
+---
+
+# See https://www.learningosx.com/101-ways-to-tweak-os-x-using-terminal/ and
+# https://www.defaults-write.com for more
+
+######
+# OS #
+######
+
+- name: Save to disk by default
+  osx_defaults:
+    key: NSDocumentSaveNewDocumentsToCloud
+    type: bool
+    value: false
+
+- name: Disable apps quarantine
+  osx_defaults:
+    domain: com.apple.LaunchServices
+    key: LSQuarantine
+    type: bool
+    value: false
+
+- name: Disable auto-correct
+  osx_defaults:
+    key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+
+- name: Require password immediately after sleep or screen saver begins
+  osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPassword
+    type: integer
+    value: 1
+
+- name: Require password immediately after sleep or screen saver begins
+  osx_defaults:
+    domain: com.apple.screensaver
+    key: askForPasswordDelay
+    type: float
+    value: 0.0
+
+- name: Avoid creating .DS_Store files on network volumes
+  osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteNetworkStores
+    type: bool
+    value: true
+
+- name: Avoid creating .DS_Store files on USB volumes
+  osx_defaults:
+    domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
+    type: bool
+    value: true
+
+- name: Expand save panel by default
+  osx_defaults:
+    key: NSNavPanelExpandedStateForSaveMode
+    type: bool
+    value: true
+
+- name: Automatically quit printer app once the print jobs complete
+  osx_defaults:
+    domain: com.apple.print.PrintingPrefs
+    key: "Quit When Finished"
+    type: bool
+    value:  true
+
+- name: Prevent Time Machine from prompting to use new hard drives as backup volume
+  osx_defaults:
+    domain: com.apple.TimeMachine
+    key: DoNotOfferNewDisksForBackup
+    type: bool
+    value: true
+
+##########
+# Finder #
+##########
+
+- name: Show all filename extensions
+  osx_defaults:
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+
+- name: Show status bar
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+
+- name: Show path bar
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+
+- name: When performing a search, search the current folder by default
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXDefaultSearchScope
+    value: "SCcf"
+
+- name: Disable the warning when changing a file extension
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
+    value: false
+
+- name: Use list view in all Finder windows by default
+  osx_defaults:
+    domain: com.apple.finder
+    key: FXPreferredViewStyle
+    value: "clmv"
+
+- name: Hide icons for external hard drives on the desktop
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowExternalHardDrivesOnDesktop
+    type: bool
+    value: false
+
+- name: Hide icons for hard drives on the desktop
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowHardDrivesOnDesktop
+    type: bool
+    value: false
+
+- name: Hide icons for servers on the desktop
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowMountedServersOnDesktop
+    type: bool
+    value: false
+
+- name: Hide icons for removable media on the desktop
+  osx_defaults:
+    domain: com.apple.finder
+    key: ShowRemovableMediaOnDesktop
+    type: bool
+    value: false
+
+- name: Disable windows shadow in screen capture
+  osx_defaults:
+    domain: com.apple.screencapture
+    key: disable-shadow
+    type: boolean
+    value: true
+
+########################
+# Internationalization #
+########################
+
+- name: Setup os languages
+  osx_defaults:
+    key: AppleLanguages
+    type: array
+    value: "{{ osx_languages }}"
+
+- name: Setup keyboard language
+  osx_defaults:
+    key: AppleLocale
+    value: "{{ osx_locale }}"
+
+- name: Setting measurement unit
+  osx_defaults:
+    key: AppleMeasurementUnits
+    type: string
+    value: Centimeters
+
+- name: Enabling metric units
+  osx_defaults:
+    key: AppleMetricUnits
+    type: bool
+    value: true
+
+########
+# Dock #
+########
+
+- name: Remove all useless Dock items
+  shell: dockutil --remove '{{ item }}'
+  ignore_errors: true
+  with_items: removed_dock_items
+
+- name: Check if the Dock items exist
+  shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }} --no-restart'
+  with_items: "{{ added_dock_items }}"
+  when: path is defined
+
+- name: Fix the Dock items order
+  shell: dockutil --move '{{ item.name }}' --position {{ item.position }}
+  with_items: "{{ added_dock_items }}"
+
+- name: Auto-hide the Dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide-time-modifier
+    type: bool
+    value: true
+
+- name: Set the icon size of Dock items to X pixels
+  osx_defaults:
+    domain: com.apple.dock
+    key: tilesize
+    type: float
+    value: "{{ dock_icons_size }}"
+
+- name: Automatically hide and show the Dock
+  osx_defaults:
+    domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: true
+
+##########
+# Spaces #
+##########
+
+- name: Disable Dashboard
+  osx_defaults:
+    domain: com.apple.dashboard
+    key: mcx-disabled
+    type: bool
+    value: true
+
+- name: Don’t automatically rearrange Spaces based on most recent use
+  osx_defaults:
+    domain: com.apple.dock
+    key: mru-spaces
+    type: bool
+    value: false
+
+##############
+# Appearance #
+##############
+
+- name: Enable Dark mode
+  osx_defaults:
+    key: AppleInterfaceStyle
+    value: Dark
+
+- name: Disable transparency
+  osx_defaults:
+    key: AppleEnableMenuBarTransparency
+    type: bool
+    value: false
+
+- name: Activate debug menu in Safari
+  osx_defaults:
+    domain: com.apple.Safari
+    key: IncludeInternalDebugMenu
+    type: bool
+    value: true
+    state: present
+
+#############
+# App Store #
+#############
+
+- name: Enable the automatic update check
+  osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: AutomaticCheckEnabled
+    type: bool
+    value: true
+
+- name: Check for software updates daily, not just once per week
+  osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: ScheduleFrequency
+    type: int
+    value: 1
+
+- name: Download newly available updates in background
+  osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: AutomaticDownload
+    type: int
+    value: 1
+
+- name: Install System data files & security updates
+  osx_defaults:
+    domain: com.apple.SoftwareUpdate
+    key: CriticalUpdateInstall
+    type: int
+    value: 1
+
+########
+# Apps #
+########
+
+- name: Use the system-native print preview dialog
+  osx_defaults:
+    domain: com.google.Chrome
+    key: DisablePrintPreview
+    type: bool
+    value: true
+
+- name: Expand the print dialog by default
+  osx_defaults:
+    domain: com.google.Chrome
+    key: PMPrintingExpandedStateForPrint2
+    type: bool
+    value: true
+
+##############
+# Restarting #
+##############
+
+- name: Restart processes
+  command: "killall {{ item | quote }}"
+  ignore_errors: yes
+  with_items:
+    - Finder
+    - Dock
+    - SystemUIServer
