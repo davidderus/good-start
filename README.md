@@ -1,6 +1,10 @@
-# good-start
+# good-start 1.0.0-beta.1
 
 Advanced developper setup for macOS and Ubuntu.
+
+## Disclaimer
+
+**⚠️ This is a beta, meaning that this project is not fully tested yet.**
 
 ## Quick start
 
@@ -120,3 +124,7 @@ This playbook includes the following roles:
 - Generate a backup script and an exclusions file
 - Initialize a restic repository for $HOME backup
 - Schedule the backup with cron
+
+## Licence
+
+MIT Licence. Click [here](LICENCE) to see the full text.
