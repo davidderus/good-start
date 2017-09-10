@@ -34,7 +34,7 @@
 
 - name: Validating env template existence
   stat:
-    path: "{{ project_directory }}/{{ project.env_file|default(projects_default_env_tpl) }}"
+    path: "{{ project_directory }}/{{ project.env_file | default(projects_default_env_tpl) }}"
   register: project_env_file
   when:
     - project.setup_env is defined
@@ -42,7 +42,7 @@
 
 - name: Setup env files
   file:
-    src: "{{ project_directory }}/{{ project.env_file|default(projects_default_env_tpl) }}"
+    src: "{{ project_directory }}/{{ project.env_file | default(projects_default_env_tpl) }}"
     dest: "{{ project_directory }}/.env"
     force: no
   when:
@@ -51,7 +51,7 @@
     - project_env_file.stat.exists
 
 - debug:
-    msg: "Env file {{ project.env_file|default(projects_default_env_tpl) }} is missing for {{ project.name }}"
+    msg: "Env file {{ project.env_file | default(projects_default_env_tpl) }} is missing for {{ project.name }}"
   when:
     - project.setup_env is defined
     - project.setup_env

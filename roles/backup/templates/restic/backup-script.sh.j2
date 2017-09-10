@@ -23,7 +23,7 @@ echo "== Cleaning up old backups"
 restic forget
 {%- if backup_allow_prune %} --prune{%- endif %}
 {% for key, value in backup_cleanup_settings.iteritems() %}
- --{{ key|replace('_', '-') }}={{ value }}
+ --{{ key | replace('_', '-') }}={{ value }}
 {%- endfor %}
 
 

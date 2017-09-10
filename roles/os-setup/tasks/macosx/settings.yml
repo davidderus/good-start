@@ -314,7 +314,7 @@
 ##############
 
 - name: Restart processes
-  command: "killall {{ item|quote }}"
+  command: "killall {{ item | quote }}"
   ignore_errors: yes
   with_items:
     - Finder

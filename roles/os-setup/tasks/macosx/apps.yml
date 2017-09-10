@@ -8,10 +8,10 @@
   homebrew:
     name: "{{ item }}"
     state: present
-  with_items: "{{ common_packages }} + {{ brew_packages }}"
+  with_items: "{{ common_packages | union(brew_packages) }}"
 
 - name: Installing apps
   homebrew_cask:
     name: "{{ item }}"
     state: present
-  with_items: "{{ common_apps }} + {{ brew_cask_apps }}"
+  with_items: "{{ common_apps | union(brew_cask_apps) }}"

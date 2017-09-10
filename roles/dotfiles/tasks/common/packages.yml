@@ -11,7 +11,7 @@
     dest: "{{ dotfiles_vimplug_destination }}"
 
 - name: Installing vim packages
-  command: "{{ dotfiles_vim_executable|quote }} +PlugInstall +qall"
+  command: "{{ dotfiles_vim_executable | quote }} +PlugInstall +qall"
 
 ########
 # Tmux #
@@ -32,5 +32,5 @@
 ########
 
 - name: Atom packages installation
-  command: "apm install {{ item|quote }}"
+  command: "apm install {{ item | quote }}"
   with_items: "{{ dotfiles_apm_packages }}"

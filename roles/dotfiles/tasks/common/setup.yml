@@ -21,7 +21,7 @@
   file:
     path: "{{ item.path }}"
     state: file
-    mode: "{{ item.mode|default('0644') }}"
+    mode: "{{ item.mode | default('0644') }}"
   with_items: "{{ dotfiles_required_files }}"
 
 #######

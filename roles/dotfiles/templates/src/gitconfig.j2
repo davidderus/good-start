@@ -4,8 +4,8 @@
 [core]
   excludesfile = ~/.gitignore
   quotepath = false
-  editor = {{ dotfiles_git_editor|default('vim') }}
-  pager = {{ dotfiles_git_pager|default('less --tabs=4 -RFX') }}
+  editor = {{ dotfiles_git_editor | default('vim') }}
+  pager = {{ dotfiles_git_pager | default('less --tabs=4 -RFX') }}
 [push]
   default = simple
   followTags = true
