@@ -13,7 +13,7 @@
 - name: Copying scripts
   template:
     src: "restic/{{ item.name }}"
-    dest: "{{ backup_scripts_directory }}"
+    dest: "{{ backup_scripts_directory }}/{{ item.name[:-3] }}"
     mode: "{{ item.mode }}"
     backup: "{{ item.with_backup }}"
   with_items:

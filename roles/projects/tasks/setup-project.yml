@@ -64,7 +64,7 @@
 - name: Setup direnv files
   template:
     src: direnv/envrc.j2
-    dest: "{{ project_directory }}"
+    dest: "{{ project_directory }}/.envrc"
     force: no
   when: project.with_direnv is defined and project.with_direnv
   register: direnv_setupped

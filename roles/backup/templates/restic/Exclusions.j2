@@ -1,3 +1,6 @@
+{% for exclusion in backup_additional_exclusions %}
+{{ exclusion }}
+{% endfor %}
 .rvm
 .git
 .bundle
@@ -26,6 +29,4 @@ Thumbs.db
 .log
 .Spotlight-*/
 .localized
-{% for exclusion in backup_additional_exclusions %}
-{{ exclusion }}
-{% endfor %}
+node_modules
