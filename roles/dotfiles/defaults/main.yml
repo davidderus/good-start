@@ -53,5 +53,3 @@ dotfiles_apm_packages:
 dotfiles_with_neovim: True
 dotfiles_vimplug_destination: "{{ '~/.local/share/nvim/site/autoload/plug.vim' if dotfiles_with_neovim else '~/.vim/autoload/plug.vim' }}"
 dotfiles_vim_executable: "{{ 'nvim' if dotfiles_with_neovim else 'vim' }}"
-
-dotfiles_iterm_settings_directory: ~/.config/iterm2
