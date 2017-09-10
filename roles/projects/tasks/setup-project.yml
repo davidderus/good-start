@@ -4,10 +4,17 @@
 # Clone #
 #########
 
-- name: Create src/project directory
+- fail:
+    msg: Project repository or name is missing, can't continue
+  when:
+    - project.repo is not defined or project.repo == ""
+    - project.name is not defined or project.name == ""
+
+- name: "Create {{ project_directory }} directory"
   file:
     path: "{{ project_directory }}"
     state: directory
+    recurse: yes
 
 - debug:
     msg: "Will use ssh key {{ projects_ssh_keys[project.ssh_key] }} to clone {{ project.name }}"
@@ -18,7 +25,7 @@
     repo: "{{ project.repo }}"
     dest: "{{ project_directory }}"
     update: no
-    key_file: "{{ projects_ssh_keys[project.ssh_key] if project.ssh_key is defined }}"
+    key_file: "{{ projects_ssh_keys[project.ssh_key] if (project.ssh_key is defined) else omit }}"
     accept_hostkey: yes
 
 ############
@@ -43,10 +50,12 @@
     - project.setup_env
     - project_env_file.stat.exists
 
-- name: Alert on missing env file
-  debug:
+- debug:
     msg: "Env file {{ project.env_file|default(projects_default_env_tpl) }} is missing for {{ project.name }}"
-  when: project_env_file.stat.exists == False
+  when:
+    - project.setup_env is defined
+    - project.setup_env
+    - project_env_file.stat.exists == False
 
 ##########
 # Direnv #
@@ -57,7 +66,7 @@
     src: direnv/envrc.j2
     dest: "{{ project_directory }}"
     force: no
-  when: project.with_direnv
+  when: project.with_direnv is defined and project.with_direnv
   register: direnv_setupped
 
 - name: Allow direnv files

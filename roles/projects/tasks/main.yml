@@ -4,12 +4,13 @@
   file:
     path: "{{ projects_root }}"
     state: directory
+    recurse: true
   tags: projects
 
-- name: "Setting up {{ item.name }}"
+- name: Setting up projects
   include: setup-project.yml
   vars:
-    project_directory: "{{ projects_root + '/' }}{{ (item.parent_directory is defined) | ternary((item.parent_directory + '/'), '') }}{{ item.name }}"
+    project_directory: "{{ projects_root + '/' }}{{ (item.parent_directory + '/') if (item.parent_directory is defined) else '' }}{{ item.name }}"
     project: "{{ item }}"
   with_items: "{{ projects_list }}"
   tags: projects
