@@ -3,9 +3,11 @@
 - name: Updating apt
   apt:
     update_cache: yes
+  become: true
 
 - name: Installing packages and apps
   apt:
     name: "{{ item }}"
     state: present
   with_items: "{{ common_packages | union(aptitude_packages | union(aptitude_apps) }}"
+  become: true
