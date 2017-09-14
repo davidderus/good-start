@@ -4,3 +4,4 @@
   apt:
     name: restic
     state: present
+  become: true

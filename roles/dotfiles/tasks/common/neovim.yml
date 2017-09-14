@@ -11,6 +11,7 @@
     name: neovim
     state: present
   when: dev_distribution == 'ubuntu'
+  become: true
 
 - name: Symlinking .vimrc for Neovim
   file:
