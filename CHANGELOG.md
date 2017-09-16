@@ -4,6 +4,7 @@
 
 ### Unreleased
 
+- Launchbar configuration updates and actions installation
 - Aria2 configuration dotfile
 - Custom destination file support for dotfiles
 - Custom bindkey support for zshrc
