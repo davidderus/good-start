@@ -68,6 +68,7 @@ This playbook includes the following roles:
   (*Only for macOS | tags: `settings`*)
 - Customize the Dock content (*macOS only | tags: `settings`*)
 - Oh-My-Zsh setup (*tags: `apps,zsh`*)
+- Launchbar configuration updates and actions installation (*tags: `launchbar`*)
 
 ### dotfiles role
 

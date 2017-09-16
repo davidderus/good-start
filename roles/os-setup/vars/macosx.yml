@@ -22,6 +22,7 @@ brew_packages:
   - fzf # Command line fuzzy finder
   - diff-so-fancy # Differ
   - bfg # Git repositories cleanup
+  - ssh-copy-id # Copy ssh keys to remote hosts
 
 brew_cask_apps:
   - java # Adding official JVM to macOS
@@ -82,3 +83,19 @@ added_dock_items:
     position: 9
 
 dock_icons_size: 36.0
+
+launchbar_actions_directory: ~/Library/Application Support/LaunchBar/Actions
+launchbar_actions:
+  - filename: 'Spotify - Play:Pause.lbaction'
+    url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Play:Pause.lbaction?raw=true
+    checksum: 'sha256:a08d1bb667c6cec1089ac7dfd853c2a376e3d5269a8ad5e380cafe85526cb141'
+  - filename: 'Spotify - Next Song.lbaction'
+    url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Next%20Song.lbaction?raw=true
+    checksum: 'sha256:e6e2ee949eafed06ea93baf58cdc36af8e84258fb01f6562b15f706cc1bd8c1a'
+  - filename: 'Spotify - Previous Song.lbaction'
+    url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Previous%20Song.lbaction?raw=true
+    checksum: 'sha256:f4f3698b1bda0d40e893d00afb972248b20fa143a02cce91213325f068703d62'
+  - filename: 'Caffeinate.lbaction'
+    url: https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction
+    checksum: 'sha256:70c5d4512b95d89add73d698ed0fc194a46be9b6d559358ee6abce5810d512cc'
+launchbar_plist_domain: at.obdev.LaunchBar
