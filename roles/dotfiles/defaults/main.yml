@@ -18,18 +18,19 @@ dotfiles_zsh_plugins:
   - docker-machine
 
 dotfiles_files:
-  - agignore
-  - aliases
-  - ansible.cfg
-  - exports
-  - functions
-  - gitconfig
-  - gitignore
-  - screenrc
-  - tmux.conf
-  - vimrc
-  - zshrc
-  - direnvrc
+  - { name: 'agignore' }
+  - { name: 'aliases' }
+  - { name: 'ansible.cfg' }
+  - { name: 'exports' }
+  - { name: 'functions' }
+  - { name: 'gitconfig' }
+  - { name: 'gitignore' }
+  - { name: 'screenrc' }
+  - { name: 'tmux.conf' }
+  - { name: 'vimrc' }
+  - { name: 'zshrc' }
+  - { name: 'direnvrc' }
+  - { name: 'aria2.conf', destination: '~/.aria2/aria2.conf' }
 
 dotfiles_git_name: "{{ dotfiles_user_name }}"
 dotfiles_git_email: "{{ dotfiles_user_email }}"

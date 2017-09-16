@@ -84,6 +84,7 @@ This playbook includes the following roles:
     - Tmux
     - Vim
     - Zsh
+    - Aria2
 - SSH key generation (*only if none found*)
 - Vim/Neovim packages installation
 - Tmux packages installation
