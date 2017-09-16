@@ -1,0 +1,98 @@
+---
+
+###########
+# Actions #
+###########
+
+- name: Installing LaunchBar actions
+  get_url:
+    url: "{{ item.url }}"
+    checksum: "{{ item.checksum }}"
+    dest: "{{ launchbar_actions_directory }}/{{ item.filename }}"
+  with_items: "{{ launchbar_actions }}"
+
+############
+# Settings #
+############
+
+- name: Enable ClipMerge
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: ClipMergeEnabled
+    type: bool
+    value: true
+
+- name: Enable Clipboard History
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: ClipboardHistoryEnabled
+    type: bool
+    value: true
+
+- name: Enable IgnoreApplication for the Clipboard History
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: ClipboardHistoryIgnoreApplicationsEnabled
+    type: bool
+    value: true
+
+- name: Ignore some applications in the Clipboard History
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: ClipboardHistoryIgnoreApplications
+    type: array
+    value:
+      - com.apple.keychainaccess
+      - com.hicknhacksoftware.MacPass
+
+- name: Prefer secure schemes
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: OpenLocationPreferSecureSchemes
+    type: bool
+    value: true
+
+- name: Hide dock icon
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: ShowDockIcon
+    type: bool
+    value: false
+
+- name: Use dark theme
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: Theme
+    type: string
+    value: at.obdev.LaunchBar.theme.Dark
+
+- name: Enable calculator with the equal sign
+  osx_defaults:
+    domain: "{{ launchbar_plist_domain }}"
+    key: SwitchToCalculatorWithEqualsSign
+    type: bool
+    value: true
+
+#########
+# Index #
+#########
+
+- name: Disable some index rules
+  replace:
+    path: '~/Library/Application Support/LaunchBar/Configuration.plist'
+    regexp: '<key>disabledItems</key>.*</array>'
+    replace: |
+      <key>disabledItems</key>
+      <array>
+        <string>ODLBSharingServiceAction:com.apple.share.System.add-to-iphoto</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesRewind</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesFastForward</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesUpdateAllPodcasts</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.CallWithPhone</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesBackTrack</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesPreviousSong</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesNextSong</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesPlay</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesPlayPause</string>
+        <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesPause</string>
+      </array>
