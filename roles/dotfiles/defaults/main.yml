@@ -53,3 +53,13 @@ dotfiles_apm_packages:
 dotfiles_with_neovim: True
 dotfiles_vimplug_destination: "{{ '~/.local/share/nvim/site/autoload/plug.vim' if dotfiles_with_neovim else '~/.vim/autoload/plug.vim' }}"
 dotfiles_vim_executable: "{{ 'nvim' if dotfiles_with_neovim else 'vim' }}"
+
+# Using the Maj key as it mimics Vim (forward|backward)-word shortcut.
+# Also because Ctrl is used by macOS and Alt by Tmux
+dotfiles_terminal_shortcuts:
+  - sequence: ^[[1;2C
+    action: forward-word
+    comment: Maj + ->
+  - sequence: ^[[1;2D
+    action: backward-word
+    comment: Maj + <-

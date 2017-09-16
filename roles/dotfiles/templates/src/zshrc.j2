@@ -1,3 +1,4 @@
+#jinja2:trim_blocks: False
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
@@ -35,12 +36,11 @@ unset file;
 # Keyboard shortcuts #
 ######################
 
-# https://stackoverflow.com/a/12403798
-# Using the Maj key as it mimics Vim (forward|backward)-word shortcut.
-# Also because Ctrl is used by macOS and Alt by Tmux
+# Inspired by https://stackoverflow.com/a/12403798
 bindkey -e
-bindkey '^[[1;2C' forward-word # Maj + ->
-bindkey '^[[1;2D' backward-word # Maj + <-
+{% for shortcut in dotfiles_terminal_shortcuts %}
+bindkey '{{ shortcut.sequence }}' {{ shortcut.action }}{% if shortcut.comment is defined %} # {{ shortcut.comment }}{% endif %}
+{% endfor %}
 
 #######################
 # https://direnv.net/ #
