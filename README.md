@@ -1,6 +1,6 @@
 # good-start 1.0.0-beta.2
 
-Advanced developper setup for macOS and Ubuntu.
+Advanced developer setup for macOS and Ubuntu.
 
 ## Disclaimer
 
