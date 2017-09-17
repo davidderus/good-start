@@ -1,4 +1,4 @@
-# good-start 1.0.0-beta.2
+# good-start v1.0.0-beta.3
 
 Advanced developer setup for macOS and Ubuntu.
 
@@ -135,4 +135,3 @@ MIT Licence. Click [here](LICENCE) to see the full text.
 
 With the project `Vagrantfile`, you can test the playbook on Ubuntu Xenial and macOS Sierra.
 Use `vagrant up` to launch the two VMs, and ssh into both to test the playbook in the `/vagrant` mounted directory.
-
