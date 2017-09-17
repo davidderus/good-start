@@ -4,6 +4,7 @@
 
 ### Unreleased
 
+- Ubuntu testing and bug fixes
 - Launchbar configuration updates and actions installation
 - Aria2 configuration dotfile
 - Custom destination file support for dotfiles

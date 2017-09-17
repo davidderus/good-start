@@ -11,9 +11,10 @@
   with_items: "{{ dotfiles_required_directories }}"
 
 - name: Create required files
-  file:
-    path: "{{ item.path }}"
-    state: file
+  copy:
+    content: ''
+    dest: "{{ item.path }}"
+    force: no
     mode: "{{ item.mode | default('0644') }}"
   with_items: "{{ dotfiles_required_files }}"
 
