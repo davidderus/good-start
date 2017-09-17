@@ -2,7 +2,7 @@
 
 ## Releases
 
-### Unreleased
+### v1.0.0-beta.3 - 2017/09/17
 
 - Ubuntu testing and bug fixes
 - Launchbar configuration updates and actions installation
