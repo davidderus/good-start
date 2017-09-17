@@ -18,18 +18,19 @@ dotfiles_zsh_plugins:
   - docker-machine
 
 dotfiles_files:
-  - agignore
-  - aliases
-  - ansible.cfg
-  - exports
-  - functions
-  - gitconfig
-  - gitignore
-  - screenrc
-  - tmux.conf
-  - vimrc
-  - zshrc
-  - direnvrc
+  - { name: 'agignore' }
+  - { name: 'aliases' }
+  - { name: 'ansible.cfg' }
+  - { name: 'exports' }
+  - { name: 'functions' }
+  - { name: 'gitconfig' }
+  - { name: 'gitignore' }
+  - { name: 'screenrc' }
+  - { name: 'tmux.conf' }
+  - { name: 'vimrc' }
+  - { name: 'zshrc' }
+  - { name: 'direnvrc' }
+  - { name: 'aria2.conf', destination: '~/.aria2/aria2.conf' }
 
 dotfiles_git_name: "{{ dotfiles_user_name }}"
 dotfiles_git_email: "{{ dotfiles_user_email }}"
@@ -40,8 +41,12 @@ dotfiles_required_directories:
   - ~/.ansible/group_vars
   - ~/.ansible/host_vars
   - "{{ dotfiles_go_path }}"
-  - ~/.vim/autoload/
+  - ~/.vim/autoload
   - ~/.tmux/plugins
+  - ~/.aria2
+  - ~/.config/nvim
+  - ~/.config/terminator
+  - "{{ dotfiles_vimplug_destination | dirname }}"
 
 dotfiles_required_files:
   - { path: '~/.ansible/hosts.ini', mode: '0600' }
@@ -53,3 +58,13 @@ dotfiles_apm_packages:
 dotfiles_with_neovim: True
 dotfiles_vimplug_destination: "{{ '~/.local/share/nvim/site/autoload/plug.vim' if dotfiles_with_neovim else '~/.vim/autoload/plug.vim' }}"
 dotfiles_vim_executable: "{{ 'nvim' if dotfiles_with_neovim else 'vim' }}"
+
+# Using the Maj key as it mimics Vim (forward|backward)-word shortcut.
+# Also because Ctrl is used by macOS and Alt by Tmux
+dotfiles_terminal_shortcuts:
+  - sequence: ^[[1;2C
+    action: forward-word
+    comment: Maj + ->
+  - sequence: ^[[1;2D
+    action: backward-word
+    comment: Maj + <-

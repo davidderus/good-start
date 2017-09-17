@@ -1,6 +1,6 @@
-# good-start 1.0.0-beta.2
+# good-start v1.0.0-beta.3
 
-Advanced developper setup for macOS and Ubuntu.
+Advanced developer setup for macOS and Ubuntu.
 
 ## Disclaimer
 
@@ -68,6 +68,7 @@ This playbook includes the following roles:
   (*Only for macOS | tags: `settings`*)
 - Customize the Dock content (*macOS only | tags: `settings`*)
 - Oh-My-Zsh setup (*tags: `apps,zsh`*)
+- Launchbar configuration updates and actions installation (*tags: `launchbar`*)
 
 ### dotfiles role
 
@@ -84,6 +85,7 @@ This playbook includes the following roles:
     - Tmux
     - Vim
     - Zsh
+    - Aria2
 - SSH key generation (*only if none found*)
 - Vim/Neovim packages installation
 - Tmux packages installation
@@ -128,3 +130,8 @@ This playbook includes the following roles:
 ## Licence
 
 MIT Licence. Click [here](LICENCE) to see the full text.
+
+## Testing
+
+With the project `Vagrantfile`, you can test the playbook on Ubuntu Xenial and macOS Sierra.
+Use `vagrant up` to launch the two VMs, and ssh into both to test the playbook in the `/vagrant` mounted directory.

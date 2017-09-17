@@ -4,13 +4,6 @@
 # Main Setup #
 ##############
 
-- name: Syncing dotfiles
-  template:
-    src: "src/{{ item }}.j2"
-    dest: "~/.{{ item }}"
-    force: "{{ dotfiles_sync_force }}"
-  with_items: "{{ dotfiles_files }}"
-
 - name: Create required directories
   file:
     path: "{{ item }}"
@@ -18,11 +11,19 @@
   with_items: "{{ dotfiles_required_directories }}"
 
 - name: Create required files
-  file:
-    path: "{{ item.path }}"
-    state: file
+  copy:
+    content: ''
+    dest: "{{ item.path }}"
+    force: no
     mode: "{{ item.mode | default('0644') }}"
   with_items: "{{ dotfiles_required_files }}"
+
+- name: Syncing dotfiles
+  template:
+    src: "src/{{ item.name }}.j2"
+    dest: "{{ item.destination if (item.destination is defined) else ('~/.' + item.name) }}"
+    force: "{{ dotfiles_sync_force }}"
+  with_items: "{{ dotfiles_files }}"
 
 #######
 # SSH #

@@ -39,7 +39,10 @@ dotfiles_user_email: john@doe.com
 # - dotfiles_git_pager | Sets the pager used by git
 # - dotfiles_git_editor | Sets the editor used by git
 # - dotfiles_zsh_plugins | Lists enabled Oh-my-zsh plugins
-# - dotfiles_files | List the dotfiles to sync (see roles/dotfiles/templates/src for details)
+# - dotfiles_files | List the dotfiles to sync as
+    {name: 'template-name', destination: 'optional-destination'}
+    where 'optional-destination' is a destination different
+    than ~/.template-name (see roles/dotfiles/templates/src for details)
 # - dotfiles_sync_force | Disabled by default. Will override any changes to the system dotfiles
 # - dotfiles_apm_packages | A list of Atom packages to install
 # - dotfiles_with_neovim | Enabled by default. Will use neovim system-wide instead of vim

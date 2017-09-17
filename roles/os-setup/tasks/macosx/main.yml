@@ -9,3 +9,8 @@
   include: settings.yml
   tags:
     - settings
+
+- name: Launchbar actions and settings
+  include: launchbar.yml
+  tags:
+    - launchbar

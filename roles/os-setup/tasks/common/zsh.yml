@@ -3,7 +3,8 @@
 - name: Clone the oh-my-zsh repo
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: ~/{{ ansible_user_id }}/.oh-my-zsh
+    dest: ~/.oh-my-zsh
+    update: no
 
 - name: Make zsh the default shell
   user:
