@@ -41,8 +41,12 @@ dotfiles_required_directories:
   - ~/.ansible/group_vars
   - ~/.ansible/host_vars
   - "{{ dotfiles_go_path }}"
-  - ~/.vim/autoload/
+  - ~/.vim/autoload
   - ~/.tmux/plugins
+  - ~/.aria2
+  - ~/.config/nvim
+  - ~/.config/terminator
+  - "{{ dotfiles_vimplug_destination | dirname }}"
 
 dotfiles_required_files:
   - { path: '~/.ansible/hosts.ini', mode: '0600' }

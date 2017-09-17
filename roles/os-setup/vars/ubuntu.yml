@@ -4,6 +4,7 @@ aptitude_packages:
   - silversearcher-ag
   - gnupg2
   - zsh
+  - python-setuptools
   # The following packages are not available via aptitude.
   # TODO Find an alternative install method for each one of them.
   #- rclone # Cloud sync à-la rsync
@@ -14,6 +15,7 @@ aptitude_packages:
   #- fzf # Command line fuzzy finder
   #- diff-so-fancy # Differ
   #- bfg # Git repositories cleanup
+  #- ssh-copy-id # Copy ssh keys to remote hosts
 
 aptitude_apps:
   - default-jre

@@ -16,7 +16,7 @@ call plug#begin('~/.vim/plugged')
   Plug 'altercation/vim-colors-solarized'
 
   " Syntax helper
-  Plug 'bash-support.vim'
+  Plug 'https://github.com/vim-scripts/bash-support.vim'
 
   " Utilities
   Plug 'junegunn/vim-easy-align'
@@ -32,7 +32,10 @@ let g:solarized_termcolors = 256
 let g:solarized_termtrans = 1
 
 set background=dark
-colorscheme solarized
+
+if globpath(&runtimepath, 'plugged/vim-colors-solarized/colors/solarized.vim', 1) !=# ''
+  colorscheme solarized
+endif
 
 let g:fzf_layout = { 'window': 'enew' }
 let g:fzf_layout = { 'window': '-tabnew' }
