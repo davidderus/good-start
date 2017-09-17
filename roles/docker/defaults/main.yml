@@ -2,6 +2,7 @@
 
 docker_images_to_pull: []
 
+# For Ubuntu only
 docker_machine_version: v0.12.2
 docker_machine_filename: docker-machine-linux-x86_64
 docker_machine_url: "https://github.com/docker/machine/releases/download/{{ docker_machine_version }}/{{ docker_machine_filename }}"
