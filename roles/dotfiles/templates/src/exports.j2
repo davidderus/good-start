@@ -22,4 +22,4 @@ export GOPATH='{{ dotfiles_go_path | expanduser }}'
 export PAGER='{{ dotfiles_default_pager }}'
 
 # PATH
-PATH="$PATH:{{ dotfiles_go_path + 'bin' | expanduser }}"
+PATH="$PATH:{{ dotfiles_go_path | expanduser }}bin"

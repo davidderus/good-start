@@ -46,5 +46,5 @@ custom_app_installations:
   - restic
 
 restic_repository: 'restic/restic'
-restic_binary: linux_amd64
-restic_release_regex: "{{ github_release_regex | format((restic_repository | regex_escape), restic_binary) }}"
+restic_binary_name: linux_amd64
+restic_release_regex: "{{ github_release_regex | format((restic_repository | regex_escape), restic_binary_name) }}"

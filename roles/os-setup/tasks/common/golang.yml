@@ -5,6 +5,7 @@
     name: golang-go
     state: present
   when: dev_distribution == 'ubuntu'
+  become: true
 
 - name: Installing Golang
   homebrew:
@@ -14,6 +15,8 @@
 
 - name: Go get
   command: "go get {{ go_pkg | quote }}"
+  environment:
+    GOPATH: "{{ dotfiles_go_path | expanduser }}"
   with_items: "{{ go_get }}"
   loop_control:
     loop_var: go_pkg

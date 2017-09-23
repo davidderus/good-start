@@ -33,7 +33,7 @@
   register: apps_build_dir
 
 - name: Installing custom apps
-  include: ../common/zipped-binary.yml
+  include: common/zipped-binary.yml
   vars:
     apps_build_dir_path: "{{ apps_build_dir.path }}"
     app_build_dir: "{{ apps_build_dir_path }}/build_{{ app.name }}"
