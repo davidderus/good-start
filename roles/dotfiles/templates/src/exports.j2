@@ -1,6 +1,6 @@
 # Prefer US English and use UTF-8.
-export LANG='en_US.UTF-8';
-export LC_ALL='en_US.UTF-8';
+export LANG='{{ dotfiles_locale }}';
+export LC_ALL='{{ dotfiles_locale }}';
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -16,7 +16,7 @@ fi
 export MANPAGER='less -X';
 
 # Go apps & sources directory
-export GOPATH='{{ dotfiles_go_path }}'
+export GOPATH='{{ dotfiles_go_path | expanduser }}'
 
 # Using vim as a pager
 export PAGER='{{ dotfiles_default_pager }}'
