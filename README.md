@@ -29,7 +29,7 @@ ansible-playbook playbook.yml --ask-vault-pass --tags "dotfiles,projects" # just
 
 ## Requirements
 
-This playbook requires [ansible](https://github.com/ansible/ansible),
+This playbook requires [ansible](https://github.com/ansible/ansible) (*≥ v2.3.0*),
 aptitude for Ubuntu or [brew](https://brew.sh/index_fr.html) and
 [brew-cask](https://caskroom.github.io/) for macOS.
 
