@@ -23,3 +23,8 @@
     groups: docker
     append: yes
   become: true
+
+- name: Reset ssh connection
+  meta: reset_connection
+  become: true
+  ignore_errors: true
