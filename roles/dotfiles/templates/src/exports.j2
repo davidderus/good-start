@@ -20,3 +20,6 @@ export GOPATH='{{ dotfiles_go_path | expanduser }}'
 
 # Using vim as a pager
 export PAGER='{{ dotfiles_default_pager }}'
+
+# PATH
+PATH="$PATH:{{ dotfiles_go_path + 'bin' | expanduser }}"
