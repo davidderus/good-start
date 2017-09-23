@@ -2,7 +2,11 @@
 
 - name: Loading distribution's vars
   include_vars: "{{ dev_distribution }}.yml"
-  tags: os-setup
+  tags:
+    - os-setup
+    - apps
+    - zsh
+    - golang
 
 - name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
@@ -14,3 +18,31 @@
     - os-setup
     - apps
     - zsh
+
+- name: Golang setup
+  include: common/golang.yml
+  tags:
+    - os-setup
+    - apps
+    - golang
+
+- name: Create temporary build directory
+  tempfile:
+    state: directory
+    suffix: build
+  register: apps_build_dir
+
+- name: Installing custom apps
+  include: ../common/zipped-binary.yml
+  vars:
+    apps_build_dir_path: "{{ apps_build_dir.path }}"
+    app_build_dir: "{{ apps_build_dir_path }}/build_{{ app.name }}"
+    app_binary_name: "{{ app.binary_name | default(app.name) }}"
+  with_items: "{{ zipped_binaries }}"
+  loop_control:
+    loop_var: app
+
+- name: Remove temp build directory
+  file:
+    path: "{{ apps_build_dir.path }}"
+    state: absent

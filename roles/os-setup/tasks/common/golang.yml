@@ -1,0 +1,19 @@
+---
+
+- name: Installing Golang
+  apt:
+    name: golang-go
+    state: present
+  when: dev_distribution == 'ubuntu'
+
+- name: Installing Golang
+  homebrew:
+    name: go
+    state: present
+  when: dev_distribution == 'macosx'
+
+- name: Go get
+  command: "go get {{ go_pkg | quote }}"
+  with_items: "{{ go_get }}"
+  loop_control:
+    loop_var: go_pkg

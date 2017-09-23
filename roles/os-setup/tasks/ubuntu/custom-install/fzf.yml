@@ -1,0 +1,14 @@
+---
+
+# https://github.com/junegunn/fzf#using-git
+- name: Clone fzf repository
+  git:
+    repo: https://github.com/junegunn/fzf.git
+    dest:  ~/.fzf
+    depth: 1
+    update: no
+  register: cloned_fzf
+
+- name: Install fzf
+  command: ~/.fzf/install --completion --key-bindings --no-update-rc --no-zsh --64
+  when: cloned_fzf.changed

@@ -1,0 +1,13 @@
+---
+
+- name: Check for Atom
+  stat:
+    path: /usr/bin/atom
+  register: atom_binary
+
+# https://github.com/atom/atom#debian-based-debian-ubuntu-linux-mint
+- name: Install Atom
+  apt:
+    deb: https://atom.io/download/deb
+  become: true
+  when: atom_binary.stat.exists == False

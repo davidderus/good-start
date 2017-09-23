@@ -1,6 +1,10 @@
 ---
 
-- name: Apps to install
-  include: apps.yml
-  tags:
-    - apps
+- name: Apps to install (apt installation)
+  include: apt-installation.yml
+  tags: apps
+
+- name: Apps to install (custom installation)
+  include: "custom-install/{{ item }}.yml"
+  with_items: "{{ custom_app_installations }}"
+  tags: apps
