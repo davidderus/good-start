@@ -4,6 +4,7 @@
 
 ### Unreleased
 
+- Small iTerm2 preferences update
 - Manually installing restic, Postman, Spotify, Atom and others on Ubuntu, thus
   guaranteeing symmetry with macOS
 - Fixing Gopath in zshrc and introducing Golang and go-get
