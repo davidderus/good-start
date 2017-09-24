@@ -22,3 +22,5 @@ common_apps:
   - virtualbox # Virtualisation
   - vagrant # VM per projects
   - firefox # Alternative browser
+
+github_release_regex: 'https:\/\/github\.com\/%s\/releases\/download\/[\d\w\.]{5,}\/[\w\.]+_%s\.\w+'

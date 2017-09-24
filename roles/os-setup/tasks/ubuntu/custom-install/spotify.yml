@@ -1,0 +1,27 @@
+---
+
+# https://www.spotify.com/fr/download/linux/
+- name: Add Spotify keys
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    id: "{{ key }}"
+  with_items:
+    - BBEBDCB318AD50EC6865090613B00F1FD2C19886
+    - 0DF731E45CE24F27EEEB1450EFDC8610341D9410
+  become: true
+  loop_control:
+    loop_var: key
+
+- name: Add Spotify repository
+  apt_repository:
+    repo: deb http://repository.spotify.com stable non-free
+    state: present
+  become: true
+
+- name: Install Spotify
+  apt:
+    name: spotify-client
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  become: true

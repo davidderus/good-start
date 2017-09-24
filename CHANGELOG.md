@@ -2,6 +2,13 @@
 
 ## Releases
 
+### v1.0.0-beta.4 - 2017/09/24
+
+- Small iTerm2 preferences update
+- Manually installing restic, Postman, Spotify, Atom and others on Ubuntu, thus
+  guaranteeing symmetry with macOS
+- Fixing Gopath in zshrc and introducing Golang and go-get
+
 ### v1.0.0-beta.3 - 2017/09/17
 
 - Ubuntu testing and bug fixes

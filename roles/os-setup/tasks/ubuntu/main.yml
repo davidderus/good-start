@@ -1,6 +1,15 @@
 ---
 
-- name: Apps to install
-  include: apps.yml
-  tags:
-    - apps
+- name: Apps to install (apt installation)
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items: "{{ common_packages | union(aptitude_packages) | union(aptitude_apps) }}"
+  become: true
+
+- name: Apps to install (custom installation)
+  include: "custom-install/{{ item }}.yml"
+  with_items: "{{ custom_app_installations }}"
+  tags: apps

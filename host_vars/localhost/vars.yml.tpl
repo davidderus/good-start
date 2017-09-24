@@ -6,11 +6,16 @@
 # OSSetup #
 ###########
 
-# Other available vars:
+# Overridable vars:
 # - common_packages | The default cross-platform list of packages to install
 # - common_apps | The default cross-platform list of apps to install
+# - zipped_binaries | Remote zipped/gzipped binaries to unarchive and install.
+    Syntax is { name: 'super-binary', url: 'https://binary', recurse: False, binary_name: 'binary_beta', binary_dest: '/usr/bin/binary' },
+    where binary_name is only required if the binary in the archive is different from name and binary_dest is for a custom destination (default is /usr/bin/binary).
+    Nothing will be download/installed if the final binary already exists in the path.
+# - go_get | An array of Golang packages to get (eg: github.com/ddollar/forego)
 
-# Other available vars - macOS specific:
+# Overridable vars - macOS specific:
 # - osx_i18n | key-values translations to be used elsewhere (for example in the Dock setup)
 # - osx_languages | An array of string of system languages
 # - osx_locale | The system locale (default: fr_FR@currency=EUR)
@@ -19,10 +24,17 @@
 # - removed_dock_items | An array of string of items to remove from the Dock
 # - added_dock_items | An array of hashes{name, path, position} of positionned items to add to the dock
 # - dock_icons_size | The Dock icons size
+# - zipped_binaries | Default: []
+# - go_get | Default: []
 
-# Other available vars - Ubuntu specific:
+# Overridable vars - Ubuntu specific:
 # - aptitude_packages | APT-specific packages
 # - aptitude_apps | APT-specific apps
+# - default_binary_dest | Defines the place to store manually downloaded binaries (default: /usr/bin)
+# - custom_app_installations | A list of custom install task to load for Ubuntu (default: atom, diff-so-fancy, fzf, postman, spotify, restic)
+# - restic_binary | The platform to download restic for (default: linux_amd64). Must match the platform in the release file name.
+# - zipped_binaries | Default: rclone, caddy and ngrok
+# - go_get | Default: forego and devd
 
 ############
 # Dotfiles #
@@ -31,7 +43,7 @@
 dotfiles_user_name: John Doe
 dotfiles_user_email: john@doe.com
 
-# Other available vars:
+# Overridable vars:
 # - dotfiles_devlog_enabled | Enable a developpment log for day-to-day notes
 # - dotfiles_default_editor | Sets the $EDITOR
 # - dotfiles_default_pager | Sets the $PAGER
@@ -82,7 +94,7 @@ backup_cron:
 backup_additional_exclusions:
   - $HOME/go
 
-# Other available vars:
+# Overridable vars:
 # - backup_scripts_directory | Where the backup scripts are saved
 
 ############
@@ -109,5 +121,5 @@ projects_list:
     setup_env: True # copy
     env_file: env.tpl
 
-# Other available vars:
+# Overridable vars:
 # - projects_default_env_tpl | The default env template file used by your projects (instead of setting a env_file per project)
