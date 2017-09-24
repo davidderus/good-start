@@ -1,7 +1,10 @@
 ---
 
-- name: Install restic package
-  apt:
-    name: restic
-    state: present
-  become: true
+- name: Checking that restic does not already exists
+  shell: command -v restic >/dev/null 2>&1
+  register: restic_exists
+  ignore_errors: yes
+
+- fail:
+    msg: Restic is not installed, aborting!
+  when: restic_exists.rc != 0

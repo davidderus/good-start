@@ -5,6 +5,8 @@ dotfiles_default_editor: nvim
 dotfiles_default_pager: vimpager
 dotfiles_go_path: ~/go/
 
+dotfiles_locale: en_US.UTF-8
+
 dotfiles_git_pager: diff-so-fancy
 dotfiles_git_editor: "{{ dotfiles_default_editor }}"
 

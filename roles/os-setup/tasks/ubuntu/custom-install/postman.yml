@@ -1,0 +1,23 @@
+---
+
+- name: Check for Postman
+  stat:
+    path: /usr/bin/postman
+  register: postman_dir
+
+# https://blog.bluematador.com/posts/postman-how-to-install-on-ubuntu-1604/
+- name: Download Postman
+  unarchive:
+    src: https://dl.pstmn.io/download/latest/linux64
+    dest: /opt
+    remote_src: yes
+  become: true
+  when: postman_dir.stat.exists == False
+
+- name: Symlinking Postman
+  file:
+    src: /opt/Postman/Postman
+    dest: /usr/bin/postman
+    state: link
+  become: true
+  when: postman_dir.stat.exists == False

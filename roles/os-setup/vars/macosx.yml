@@ -99,3 +99,6 @@ launchbar_actions:
     url: https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction
     checksum: 'sha256:70c5d4512b95d89add73d698ed0fc194a46be9b6d559358ee6abce5810d512cc'
 launchbar_plist_domain: at.obdev.LaunchBar
+
+go_get: []
+zipped_binaries: []

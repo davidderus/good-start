@@ -1,0 +1,53 @@
+---
+
+# Remote zipped/gzipped binaries to unarchive and install.
+# Nothing will be download/installed if the final binary already exists in the
+# path.
+
+- name: "Checking that {{ app.name }} does not already exists"
+  shell: "command -v {{ app_binary_name | quote }} >/dev/null 2>&1"
+  register: app_exists
+  ignore_errors: yes
+
+- debug:
+    msg: "{{ app.name }} does not exist, installing it!"
+  when: app_exists.rc != 0
+
+- name: Create temp dir for app
+  file:
+    path: "{{ app_build_dir }}"
+    state: directory
+  when: app_exists.rc != 0
+
+- name: "Installing {{ app.name }}"
+  unarchive:
+    src: "{{ app.url }}"
+    dest: "{{ app_build_dir }}"
+    remote_src: yes
+  when: app_exists.rc != 0
+
+- name: Checking for binary existence
+  find:
+    paths: "{{ app_build_dir }}"
+    patterns: "{{ app_binary_name }}"
+    recurse: "{{ app.recurse | default(omit) }}"
+    file_type: file
+  when:
+    - app_exists.rc != 0
+  register: app_found_binary
+
+- debug:
+    msg: "Can't get path to binary ({{ app_binary_name }}) in {{ app_build_dir }}"
+  when:
+    - app_exists.rc != 0
+    - app_found_binary['files'][0] is not defined
+
+- name: "Copy {{ app.name }} executable"
+  copy:
+    src: "{{ app_found_binary['files'][0]['path'] }}"
+    dest: "{{ app.binary_dest | default(default_binary_dest + '/' + app_binary_name) }}"
+    mode: "{{ app.mode | default(0755) }}"
+  become: true
+  when:
+    - app_exists.rc != 0
+    - app_found_binary['files'][0] is defined

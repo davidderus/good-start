@@ -5,24 +5,46 @@ aptitude_packages:
   - gnupg2
   - zsh
   - python-setuptools
-  # The following packages are not available via aptitude.
-  # TODO Find an alternative install method for each one of them.
-  #- rclone # Cloud sync à-la rsync
-  #- caddy # Webserver/Reverse-Proxy/more…
-  #- fdupes # Duplicates file finder
-  #- devd # Local webserver for developers
-  #- forego # Foreman in Go
-  #- fzf # Command line fuzzy finder
-  #- diff-so-fancy # Differ
-  #- bfg # Git repositories cleanup
-  #- ssh-copy-id # Copy ssh keys to remote hosts
+  - fdupes # Duplicates file finder
+  - unzip
 
 aptitude_apps:
   - default-jre
   - chromium-browser
   - keepassx
   - terminator
-  #- atom
-  #- spotify
-  #- ngrok # Secure(?) tunneling
-  #- postman
+
+default_binary_dest: '/usr/bin'
+
+# zipped_binaries will use the first file matching app.binary_name or app.name.
+# You can use a wilcard to match a custom filename like 'binary_v*'.
+#
+# You may also set the `recurse` option to true in order to find the binary
+# in a subfolder.
+#
+# ⚠️  A wrong binary_name or filename may result in a incorrect file being copied
+# to `binary_dest`
+zipped_binaries:
+  - name: rclone
+    url: https://downloads.rclone.org/rclone-current-linux-amd64.zip
+    recurse: true
+  - name: caddy
+    url: https://caddyserver.com/download/linux/amd64?license=personal
+  - name: ngrok
+    url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+
+go_get:
+  - github.com/ddollar/forego
+  - github.com/cortesi/devd/cmd/devd
+
+custom_app_installations:
+  - atom
+  - diff-so-fancy
+  - fzf
+  - postman
+  - spotify
+  - restic
+
+restic_repository: 'restic/restic'
+restic_binary_name: linux_amd64
+restic_release_regex: "{{ github_release_regex | format((restic_repository | regex_escape), restic_binary_name) }}"
