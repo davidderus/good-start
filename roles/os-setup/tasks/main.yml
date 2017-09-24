@@ -31,6 +31,9 @@
     state: directory
     suffix: build
   register: apps_build_dir
+  tags:
+    - os-setup
+    - apps
 
 - name: Installing custom apps
   include: common/zipped-binary.yml
@@ -41,8 +44,15 @@
   with_items: "{{ zipped_binaries }}"
   loop_control:
     loop_var: app
+  tags:
+    - os-setup
+    - apps
 
 - name: Remove temp build directory
   file:
     path: "{{ apps_build_dir.path }}"
     state: absent
+  when: apps_build_dir is defined and apps_build_dir.path is defined # Preventing check-mode error
+  tags:
+    - os-setup
+    - apps
