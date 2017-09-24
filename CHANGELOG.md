@@ -2,7 +2,7 @@
 
 ## Releases
 
-### Unreleased
+### v1.0.0-beta.4 - 2017/09/24
 
 - Small iTerm2 preferences update
 - Manually installing restic, Postman, Spotify, Atom and others on Ubuntu, thus
