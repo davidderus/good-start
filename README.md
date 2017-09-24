@@ -1,4 +1,4 @@
-# good-start v1.0.0-beta.3
+# good-start v1.0.0-beta.4
 
 Advanced developer setup for macOS and Ubuntu.
 
