@@ -28,6 +28,12 @@
     - dotfiles
     - iterm
 
+- name: Packages for tmux
+  include: macosx/tmux.yml
+  when: dev_distribution == 'macosx'
+  tags:
+    - dotfiles
+
 - name: Customizing Terminator
   include: ubuntu/terminator.yml
   when: dev_distribution == 'ubuntu'

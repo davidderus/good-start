@@ -2,6 +2,10 @@
 
 ## Releases
 
+### Unreleased
+
+- Fixing Tmux config for Ubuntu
+
 ### v1.0.0-beta.4 - 2017/09/24
 
 - Some bugfixes
