@@ -53,6 +53,7 @@ dotfiles_required_directories:
 dotfiles_required_files:
   - { path: '~/.ansible/hosts.ini', mode: '0600' }
   - { path: '~/.ssh/config', mode: '0600' }
+  - { path: '~/.extra', mode: '0600' }
 
 dotfiles_apm_packages:
   - sync-settings # Other packages and settings are pulled by this package
