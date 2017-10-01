@@ -71,3 +71,7 @@ dotfiles_terminal_shortcuts:
   - sequence: ^[[1;2D
     action: backward-word
     comment: Maj + <-
+
+dotfiles_install_atom_packages: True
+dotfiles_install_tmux_packages: True
+dotfiles_install_vim_packages: True

@@ -1,0 +1,9 @@
+---
+
+########
+# Atom #
+########
+
+- name: Atom packages installation
+  command: "apm install {{ item | quote }}"
+  with_items: "{{ dotfiles_apm_packages }}"

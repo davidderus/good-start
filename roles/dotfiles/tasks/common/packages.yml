@@ -1,36 +1,13 @@
 ---
 
-################
-# VIM & Neovim #
-################
-
-# https://github.com/junegunn/vim-plug#installation
-- name: Getting vim-plug
-  get_url:
-    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    dest: "{{ dotfiles_vimplug_destination }}"
-
-- name: Installing vim packages
-  command: "{{ dotfiles_vim_executable | quote }} +PlugInstall +qall"
-
-########
-# Tmux #
-########
-
-# https://github.com/tmux-plugins/tpm
-- name: Getting tpm
-  git:
-    repo: https://github.com/tmux-plugins/tpm
-    dest: ~/.tmux/plugins/tpm
-    update: no
+- name: Installing Atom packages
+  include: apm.yml
+  when: dotfiles_install_atom_packages
 
 - name: Installing tmux packages
-  command: ~/.tmux/plugins/tpm/bin/install_plugins
+  include: tpm.yml
+  when: dotfiles_install_tmux_packages
 
-########
-# Atom #
-########
-
-- name: Atom packages installation
-  command: "apm install {{ item | quote }}"
-  with_items: "{{ dotfiles_apm_packages }}"
+- name: Installing Vim packages
+  include: vimplug.yml
+  when: dotfiles_install_vim_packages

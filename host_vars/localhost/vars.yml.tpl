@@ -60,6 +60,9 @@ dotfiles_user_email: john@doe.com
 # - dotfiles_with_neovim | Enabled by default. Will use neovim system-wide instead of vim
 # - dotfiles_iterm_settings_directory | Stores the iTerm configuration in a syncable directory
 # - dotfiles_zsh_additional_plugins | Other Oh-my-zsh plugins, to be merged with dotfiles_zsh_plugins
+# - dotfiles_install_atom_packages | Install Atom packages mentioned in dotfiles (apm)
+# - dotfiles_install_tmux_packages | Install tmux packages mentioned in dotfiles (tpm)
+# - dotfiles_install_vim_packages | Install Vim packages mentioned in dotfiles (vim-plug)
 
 ##########
 # Docker #
