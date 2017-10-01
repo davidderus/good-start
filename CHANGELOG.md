@@ -4,6 +4,10 @@
 
 ### Unreleased
 
+- Fixing fzf blocking install
+- Muting 2.4.0 deprecation warnings for now
+- Updating vim on both macOS and Ubuntu
+- Adding an unmodified ~/.extra file in zsh config
 - Fixing Tmux config for Ubuntu
 
 ### v1.0.0-beta.4 - 2017/09/24
