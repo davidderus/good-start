@@ -17,6 +17,7 @@ common_packages:
   - nmap # Network scan
   - httpie # HTTP requests made easy
   - direnv # Per directory ENV vars
+  - vim # An up-to-date vim version
 
 common_apps:
   - virtualbox # Virtualisation
