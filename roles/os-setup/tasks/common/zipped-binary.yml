@@ -11,20 +11,20 @@
 
 - debug:
     msg: "{{ app.name }} does not exist, installing it!"
-  when: app_exists.rc != 0
+  when: not app_exists.skipped and app_exists.rc != 0
 
 - name: Create temp dir for app
   file:
     path: "{{ app_build_dir }}"
     state: directory
-  when: app_exists.rc != 0
+  when: not app_exists.skipped and app_exists.rc != 0
 
 - name: "Installing {{ app.name }}"
   unarchive:
     src: "{{ app.url }}"
     dest: "{{ app_build_dir }}"
     remote_src: yes
-  when: app_exists.rc != 0
+  when: not app_exists.skipped and app_exists.rc != 0
 
 - name: Checking for binary existence
   find:
@@ -33,13 +33,13 @@
     recurse: "{{ app.recurse | default(omit) }}"
     file_type: file
   when:
-    - app_exists.rc != 0
+    - not app_exists.skipped and app_exists.rc != 0
   register: app_found_binary
 
 - debug:
     msg: "Can't get path to binary ({{ app_binary_name }}) in {{ app_build_dir }}"
   when:
-    - app_exists.rc != 0
+    - not app_exists.skipped and app_exists.rc != 0
     - app_found_binary['files'][0] is not defined
 
 - name: "Copy {{ app.name }} executable"
@@ -49,5 +49,5 @@
     mode: "{{ app.mode | default(0755) }}"
   become: true
   when:
-    - app_exists.rc != 0
+    - not app_exists.skipped and app_exists.rc != 0
     - app_found_binary['files'][0] is defined
