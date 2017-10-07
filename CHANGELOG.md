@@ -4,6 +4,14 @@
 
 ### Unreleased
 
+- Adding debug msg for docker pull bug on first run
+- Allowing playbook to be played on Debian too
+- Preventing failure in check mode
+- Fixing newline problem in zsh aliases
+- Removing invalid `cache_valid_time` for ppa add
+- Removing xcode --install check in favor of the one done by brew
+- Adding synaptic for Ubuntu
+- Adding missing dockutil for macOS
 - Fixing fzf blocking install
 - Muting 2.4.0 deprecation warnings for now
 - Updating vim on both macOS and Ubuntu
@@ -33,5 +41,5 @@
 ### v1.0.0-beta.1 - 2017/09/10
 
 - Initial public beta release
-  - Adding LICENCE file
-  - Adding CHANGELOG.md
+- Adding LICENCE file
+- Adding CHANGELOG.md
