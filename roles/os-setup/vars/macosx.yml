@@ -21,11 +21,10 @@ brew_packages:
   - ag # Grep replacement
   - fzf # Command line fuzzy finder
   - diff-so-fancy # Differ
-  - bfg # Git repositories cleanup
   - ssh-copy-id # Copy ssh keys to remote hosts
+  - dockutil # Dock management from the command line
 
 brew_cask_apps:
-  - java # Adding official JVM to macOS
   - google-chrome # Default browser
   - appcleaner # For easy apps cleanup
   - iterm2 # Default terminal emulator
