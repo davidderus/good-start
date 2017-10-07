@@ -27,11 +27,11 @@
 # - zipped_binaries | Default: []
 # - go_get | Default: []
 
-# Overridable vars - Ubuntu specific:
+# Overridable vars - Debian specific:
 # - aptitude_packages | APT-specific packages
 # - aptitude_apps | APT-specific apps
 # - default_binary_dest | Defines the place to store manually downloaded binaries (default: /usr/bin)
-# - custom_app_installations | A list of custom install task to load for Ubuntu (default: atom, diff-so-fancy, fzf, postman, spotify, restic)
+# - custom_app_installations | A list of custom install task to load for Debian (default: atom, diff-so-fancy, fzf, postman, spotify, restic)
 # - restic_binary | The platform to download restic for (default: linux_amd64). Must match the platform in the release file name.
 # - zipped_binaries | Default: rclone, caddy and ngrok
 # - go_get | Default: forego and devd

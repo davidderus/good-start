@@ -4,21 +4,21 @@
   homebrew:
     name: neovim
     state: present
-  when: dev_distribution == 'macosx'
+  when: dev_distribution == 'darwin'
 
-- name: Add Neovim ppa on Ubuntu
+- name: Add Neovim ppa on Debian
   apt_repository:
     repo: ppa:neovim-ppa/stable
     state: present
     update_cache: yes
-  when: dev_distribution == 'ubuntu'
+  when: dev_distribution == 'debian'
   become: true
 
-- name: Installing Neovim for Ubuntu
+- name: Installing Neovim for Debian
   apt:
     name: neovim
     state: present
-  when: dev_distribution == 'ubuntu'
+  when: dev_distribution == 'debian'
   become: true
 
 - name: Symlinking .vimrc for Neovim

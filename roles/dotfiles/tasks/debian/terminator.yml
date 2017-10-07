@@ -2,5 +2,5 @@
 
 - name: Creating Terminator preferences file
   template:
-    src: ubuntu/terminator-config.j2
+    src: debian/terminator-config.j2
     dest: ~/.config/terminator/config

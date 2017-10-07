@@ -4,14 +4,14 @@
   apt:
     name: golang-go
     state: present
-  when: dev_distribution == 'ubuntu'
+  when: dev_distribution == 'debian'
   become: true
 
 - name: Installing Golang
   homebrew:
     name: go
     state: present
-  when: dev_distribution == 'macosx'
+  when: dev_distribution == 'darwin'
 
 - name: Go get
   command: "go get {{ go_pkg | quote }}"

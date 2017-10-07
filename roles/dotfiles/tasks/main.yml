@@ -22,21 +22,21 @@
     - packages
 
 - name: Customizing iTerm
-  include: macosx/iterm.yml
-  when: dev_distribution == 'macosx'
+  include: darwin/iterm.yml
+  when: dev_distribution == 'darwin'
   tags:
     - dotfiles
     - iterm
 
 - name: Packages for tmux
-  include: macosx/tmux.yml
-  when: dev_distribution == 'macosx'
+  include: darwin/tmux.yml
+  when: dev_distribution == 'darwin'
   tags:
     - dotfiles
 
 - name: Customizing Terminator
-  include: ubuntu/terminator.yml
-  when: dev_distribution == 'ubuntu'
+  include: debian/terminator.yml
+  when: dev_distribution == 'debian'
   tags:
     - dotfiles
     - terminator
