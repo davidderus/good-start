@@ -11,7 +11,6 @@
     repo: ppa:neovim-ppa/stable
     state: present
     update_cache: yes
-    cache_valid_time: 3600
   when: dev_distribution == 'ubuntu'
   become: true
 
