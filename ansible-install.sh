@@ -50,15 +50,6 @@ checkMacRequirements() {
 }
 
 macSetup() {
-  xcode-select -p  &> /dev/null;
-
-  if [[ "$?" == "0" ]]; then
-    echo "-> Xcode installation is okay"
-  else
-    echo "-> Xcode installation validation"
-    xcode-select --install
-  fi
-
   if command_exists brew ; then
     echo "-> Brew installation is already done"
   else
