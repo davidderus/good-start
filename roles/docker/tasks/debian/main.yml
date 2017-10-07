@@ -23,3 +23,11 @@
     groups: docker
     append: yes
   become: true
+  register: user_to_docker
+
+# Problem: Current ssh user does not have docker group loaded on first run
+# Solution: Printing following message awaiting a fix
+# Possible fixes: Resetting ssh connection without killing it (and making ansible fail).
+- debug:
+    msg: "Pulling Docker images may fail. Relaunching the playbook will fix it."
+  when: user_to_docker.changed
