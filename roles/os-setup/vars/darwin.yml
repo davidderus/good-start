@@ -39,6 +39,7 @@ brew_cask_apps:
   - ngrok # Secure(?) tunneling
   - postman # HTTP requesting interface
   - fluid # Dedicated Mac app per website
+  - typora # Useful markdown editor
 
 removed_dock_items:
   - Launchpad
