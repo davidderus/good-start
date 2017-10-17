@@ -4,6 +4,11 @@
 # Actions #
 ###########
 
+- name: Creating LaunchBar actions directory
+  file:
+    state: directory
+    path: "{{ launchbar_actions_directory }}"
+
 - name: Installing LaunchBar actions
   get_url:
     url: "{{ item.url }}"

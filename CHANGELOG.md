@@ -4,6 +4,7 @@
 
 ### Unreleased
 
+- Creating launchbar actions directory if it does not exists
 - Adding debug msg for docker pull bug on first run
 - Allowing playbook to be played on Debian too
 - Preventing failure in check mode
