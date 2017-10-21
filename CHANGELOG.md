@@ -4,6 +4,7 @@
 
 ### Unreleased
 
+- Launchbar indexing customization was failing on a fresh install
 - Creating launchbar actions directory if it does not exists
 - Adding debug msg for docker pull bug on first run
 - Allowing playbook to be played on Debian too
