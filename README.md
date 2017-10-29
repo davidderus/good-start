@@ -1,4 +1,4 @@
-# good-start v1.0.0-beta.4
+# good-start v1.0.0-beta.5
 
 Advanced developer setup for macOS and Debian/Ubuntu.
 
