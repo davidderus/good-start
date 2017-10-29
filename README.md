@@ -1,5 +1,7 @@
 # good-start v1.0.0-beta.4
 
+[![Build Status](https://travis-ci.org/davidderus/good-start.svg?branch=master)](https://travis-ci.org/davidderus/good-start)
+
 Advanced developer setup for macOS and Debian/Ubuntu.
 
 ## Disclaimer
