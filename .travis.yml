@@ -5,16 +5,16 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
+      language: python
+      python: "2.7"
     - os: osx
       sudo: required
-
-language: python
-python: "2.7"
+      language: generic
 
 before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew tap caskroom/cask ; brew update ; fi
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sudo apt-get update -qq ; fi
-  - sed -i '' 's/become_ask_pass = True/become_ask_pass = False/g' ansible.cfg
+  - sed -i.bak 's/become_ask_pass = True/become_ask_pass = False/g' ansible.cfg
   - mv host_vars/localhost/vars.yml.tpl host_vars/localhost/vars.yml
 
 install:
