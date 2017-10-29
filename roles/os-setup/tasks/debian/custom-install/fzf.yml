@@ -10,5 +10,5 @@
   register: cloned_fzf
 
 - name: Install fzf
-  command: ~/.fzf/install --completion --key-bindings --no-zsh --64
+  command: ~/.fzf/install --completion --key-bindings --no-zsh --64 --update-rc
   when: cloned_fzf.changed

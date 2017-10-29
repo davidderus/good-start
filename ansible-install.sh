@@ -50,15 +50,6 @@ checkMacRequirements() {
 }
 
 macSetup() {
-  xcode-select -p  &> /dev/null;
-
-  if [[ "$?" == "0" ]]; then
-    echo "-> Xcode installation is okay"
-  else
-    echo "-> Xcode installation validation"
-    xcode-select --install
-  fi
-
   if command_exists brew ; then
     echo "-> Brew installation is already done"
   else
@@ -78,10 +69,10 @@ macSetup() {
 
 linuxSetup() {
   # Do nothing
-  sudo apt-get install software-properties-common
-  sudo apt-add-repository ppa:ansible/ansible
+  sudo apt-get install -y software-properties-common
+  sudo apt-add-repository -y ppa:ansible/ansible
   sudo apt-get update
-  sudo apt-get install ansible
+  sudo apt-get install -y ansible
 }
 
 if [[ "$OSTYPE" == "darwin"* ]]; then

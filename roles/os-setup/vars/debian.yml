@@ -13,6 +13,7 @@ aptitude_apps:
   - chromium-browser
   - keepassx
   - terminator
+  - synaptic
 
 default_binary_dest: '/usr/bin'
 

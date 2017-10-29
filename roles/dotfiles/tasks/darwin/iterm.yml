@@ -8,7 +8,7 @@
 
 - name: Creating iTerm2 preferences file with Solarized theming
   template:
-    src: macosx/iterm2.plist.j2
+    src: darwin/iterm2.plist.j2
     dest: "{{ dotfiles_iterm_settings_directory }}/com.googlecode.iterm2.plist"
     force: "{{ dotfiles_sync_force }}"
     mode: 0644

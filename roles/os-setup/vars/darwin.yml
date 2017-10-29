@@ -21,17 +21,16 @@ brew_packages:
   - ag # Grep replacement
   - fzf # Command line fuzzy finder
   - diff-so-fancy # Differ
-  - bfg # Git repositories cleanup
   - ssh-copy-id # Copy ssh keys to remote hosts
+  - dockutil # Dock management from the command line
 
 brew_cask_apps:
-  - java # Adding official JVM to macOS
   - google-chrome # Default browser
   - appcleaner # For easy apps cleanup
   - iterm2 # Default terminal emulator
   - atom # Default code editor
   - launchbar # Spotlight replacement
-  - macpass # Password manager
+  - keepassxc # Password manager
   - gpgtools # GPG made easy (+ Mail.app extension)
   - slack # For team communications
   - spotify # Music ease the mind
@@ -40,6 +39,7 @@ brew_cask_apps:
   - ngrok # Secure(?) tunneling
   - postman # HTTP requesting interface
   - fluid # Dedicated Mac app per website
+  - typora # Useful markdown editor
 
 removed_dock_items:
   - Launchpad
@@ -99,6 +99,7 @@ launchbar_actions:
     url: https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction
     checksum: 'sha256:70c5d4512b95d89add73d698ed0fc194a46be9b6d559358ee6abce5810d512cc'
 launchbar_plist_domain: at.obdev.LaunchBar
+launchbar_configuration_file: ~/Library/Application Support/LaunchBar/Configuration.plist
 
 go_get: []
 zipped_binaries: []

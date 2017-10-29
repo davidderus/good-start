@@ -42,7 +42,9 @@ alias dkce='docker-compose exec $DKC_SERVICE '
 # Replacements
 alias rsync="rsync -azP" # Adding recursivity, compression and progress to rsync by default
 alias top="htop"
+
 {% if dotfiles_with_neovim %}alias vim="nvim"{% endif %}
+
 {% if dotfiles_with_neovim %}alias vimdiff="/usr/local/bin/nvim -d"{% endif %}
 
 # expand aliases after sudo command

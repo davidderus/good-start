@@ -1,6 +1,0 @@
----
-
-- name: Install Docker.app
-  homebrew_cask:
-    name: docker # Will also install docker-compose and docker-machine
-    state: present

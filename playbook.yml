@@ -2,7 +2,7 @@
 
 - hosts: all
   vars:
-    dev_distribution: "{{ ansible_distribution | lower }}"
+    dev_distribution: "{{ ansible_os_family | lower }}"
   roles:
     - os-setup
     - dotfiles

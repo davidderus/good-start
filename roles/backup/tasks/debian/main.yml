@@ -7,4 +7,4 @@
 
 - fail:
     msg: Restic is not installed, aborting!
-  when: restic_exists.rc != 0
+  when: restic_exists.skipped is not defined and restic_exists.rc != 0

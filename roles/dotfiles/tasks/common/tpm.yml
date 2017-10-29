@@ -1,0 +1,15 @@
+---
+
+########
+# Tmux #
+########
+
+# https://github.com/tmux-plugins/tpm
+- name: Getting tpm
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: ~/.tmux/plugins/tpm
+    update: no
+
+- name: Installing tmux packages
+  command: ~/.tmux/plugins/tpm/bin/install_plugins

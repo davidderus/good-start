@@ -1,0 +1,46 @@
+---
+
+- name: Install packages
+  apt:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - docker
+    - docker-compose # Docker dev with docker-compose.yml files
+  become: true
+
+# https://docs.docker.com/machine/install-machine/
+- name: Download docker-machine
+  get_url:
+    url: "{{ docker_machine_url }}"
+    dest: /usr/local/bin/docker-machine
+    mode: 0755
+  become: true
+
+- name: Adding user "{{ ansible_user_id }}"
+  user:
+    name: "{{ ansible_user_id }}"
+    groups: docker
+    append: yes
+  become: true
+  register: user_to_docker
+
+# Problem: Current ssh user does not have docker group loaded on first run
+# Solution: Printing following message awaiting a fix
+# Possible fixes: Resetting ssh connection without killing it (and making ansible fail).
+- debug:
+    msg: "Pulling Docker images may fail. Relaunching the playbook will fix it."
+  when: user_to_docker.changed
+
+- name: Launching Docker daemon
+  service:
+    name: dockerd
+    state: started
+    enabled: True
+  register: docker_daemon_launched
+  become: true
+
+- pause:
+    seconds: "{{ docker_daemon_waiting_time }}"
+    prompt: Waiting for Docker daemon
+  when: docker_daemon_launched.changed

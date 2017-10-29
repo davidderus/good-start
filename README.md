@@ -1,6 +1,6 @@
-# good-start v1.0.0-beta.4
+# good-start v1.0.0-beta.5
 
-Advanced developer setup for macOS and Ubuntu.
+Advanced developer setup for macOS and Debian/Ubuntu.
 
 ## Disclaimer
 
@@ -19,6 +19,7 @@ cp host_vars/localhost/vars.yml.tpl host_vars/localhost/vars.yml
 vim host_vars/localhost/vars.yml
 
 # (OPTIONNAL) Run in dry-run mode with diff (it will not change anything)
+# Note that some parts of the playbook may fail in check mode, while working fine in play mode
 ansible-playbook --check --diff playbook.yml
 
 # Run the playbook
@@ -30,7 +31,7 @@ ansible-playbook playbook.yml --ask-vault-pass --tags "dotfiles,projects" # just
 ## Requirements
 
 This playbook requires [ansible](https://github.com/ansible/ansible) (*≥ v2.3.0*),
-aptitude for Ubuntu or [brew](https://brew.sh/index_fr.html) and
+aptitude for Debian/Ubuntu or [brew](https://brew.sh/index_fr.html) and
 [brew-cask](https://caskroom.github.io/) for macOS.
 
 You may use `./ansible-install.sh` to set everything up or install each package
@@ -92,7 +93,7 @@ This playbook includes the following roles:
 - Atom packages installation
 - Neovim setup (*tags: `neovim`*)
 - Iterm2 setup with custom config and theming (*macOS only | tags: `iterm`*)
-- Terminator setup with custom config (*Ubuntu only | tags: `terminator`*)
+- Terminator setup with custom config (*Debian/Ubuntu only | tags: `terminator`*)
 
 ### docker role
 

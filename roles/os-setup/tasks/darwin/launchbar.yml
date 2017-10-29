@@ -4,6 +4,11 @@
 # Actions #
 ###########
 
+- name: Creating LaunchBar actions directory
+  file:
+    state: directory
+    path: "{{ launchbar_actions_directory }}"
+
 - name: Installing LaunchBar actions
   get_url:
     url: "{{ item.url }}"
@@ -77,9 +82,14 @@
 # Index #
 #########
 
+- name: Check for an already setup LaunchBar index
+  stat:
+    path: "{{ launchbar_configuration_file }}"
+  register: lb_config_file
+
 - name: Disable some index rules
   replace:
-    path: '~/Library/Application Support/LaunchBar/Configuration.plist'
+    path: "{{ launchbar_configuration_file }}"
     regexp: '<key>disabledItems</key>.*</array>'
     replace: |
       <key>disabledItems</key>
@@ -96,3 +106,4 @@
         <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesPlayPause</string>
         <string>ODLBScriptAction:at.obdev.LaunchBar.action.iTunesPause</string>
       </array>
+  when: lb_config_file.stat.exists

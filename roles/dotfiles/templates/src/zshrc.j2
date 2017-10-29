@@ -27,7 +27,11 @@ plugins=({{ (dotfiles_zsh_plugins + dotfiles_zsh_additional_plugins)|join(' ') }
 # User configuration
 source $ZSH/oh-my-zsh.sh
 
-for file in ~/.{exports,aliases,functions}; do
+# .exports for exporting vars
+# .aliases for all the alias and unalias things
+# .functions for the custom zsh functions
+# .extra for host specific infos (will not be overriden by good-start)
+for file in ~/.{exports,aliases,functions,extra}; do
 	[ -r "$file" ] && [ -f "$file" ] && source "$file";
 done;
 unset file;

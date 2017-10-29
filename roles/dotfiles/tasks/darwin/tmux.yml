@@ -1,0 +1,8 @@
+---
+
+# Used for tmux on macOS
+- name: Add reattach-to-user-namespace
+  homebrew:
+    name: reattach-to-user-namespace
+    install_options: with-wrap-pbcopy-and-pbpaste
+    state: present

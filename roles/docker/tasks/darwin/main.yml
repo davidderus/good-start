@@ -1,0 +1,21 @@
+---
+
+- name: Install Docker.app
+  homebrew_cask:
+    name: docker # Will also install docker-compose and docker-machine
+    state: present
+
+- name: Checking if Docker is running
+  shell: "docker info >/dev/null 2>&1"
+  register: docker_status
+  ignore_errors: yes
+
+- name: Launching Docker daemon
+  command: open /Applications/Docker.app
+  when: docker_status.rc > 0
+  register: docker_daemon_launched
+
+- pause:
+    seconds: "{{ docker_daemon_waiting_time }}"
+    prompt: Waiting for Docker daemon
+  when: docker_daemon_launched.changed
