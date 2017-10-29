@@ -18,6 +18,7 @@ common_packages:
   - httpie # HTTP requests made easy
   - direnv # Per directory ENV vars
   - vim # An up-to-date vim version
+  - jq # JSON manipulation
 
 common_apps:
   - virtualbox # Virtualisation

@@ -30,7 +30,7 @@ brew_cask_apps:
   - iterm2 # Default terminal emulator
   - atom # Default code editor
   - launchbar # Spotlight replacement
-  - macpass # Password manager
+  - keepassxc # Password manager
   - gpgtools # GPG made easy (+ Mail.app extension)
   - slack # For team communications
   - spotify # Music ease the mind

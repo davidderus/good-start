@@ -4,6 +4,7 @@
 
 ### Unreleased
 
+- Adding missing jq binary and installing KeepassXC on darwin
 - Checking that Docker daemon is running before pulling Docker images
 - Launchbar indexing customization was failing on a fresh install
 - Creating launchbar actions directory if it does not exists
