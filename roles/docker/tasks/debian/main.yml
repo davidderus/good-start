@@ -31,3 +31,16 @@
 - debug:
     msg: "Pulling Docker images may fail. Relaunching the playbook will fix it."
   when: user_to_docker.changed
+
+- name: Launching Docker daemon
+  service:
+    name: dockerd
+    state: started
+    enabled: True
+  register: docker_daemon_launched
+  become: true
+
+- pause:
+    seconds: "{{ docker_daemon_waiting_time }}"
+    prompt: Waiting for Docker daemon
+  when: docker_daemon_launched.changed

@@ -4,6 +4,7 @@
 
 ### Unreleased
 
+- Checking that Docker daemon is running before pulling Docker images
 - Launchbar indexing customization was failing on a fresh install
 - Creating launchbar actions directory if it does not exists
 - Adding debug msg for docker pull bug on first run
