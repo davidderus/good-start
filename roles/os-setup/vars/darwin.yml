@@ -31,7 +31,7 @@ brew_cask_apps:
   - atom # Default code editor
   - launchbar # Spotlight replacement
   - keepassxc # Password manager
-  - gpgtools # GPG made easy (+ Mail.app extension)
+  - gpg-suite # GPG made easy (+ Mail.app extension)
   - slack # For team communications
   - spotify # Music ease the mind
   - lunchy # Launchctl wrapper
