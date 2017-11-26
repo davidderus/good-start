@@ -2,6 +2,11 @@
 
 ## Releases
 
+### Unreleased
+
+- Insuring playbook idempotence by detecting changes
+- Fixing linting alerts
+
 ### v1.0.0-beta.5 - 2017/10/29
 
 - Adding missing jq binary and installing KeepassXC on darwin
