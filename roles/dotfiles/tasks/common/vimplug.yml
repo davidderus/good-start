@@ -12,3 +12,4 @@
 
 - name: Installing vim packages
   command: "{{ dotfiles_vim_executable | quote }} +PlugInstall +qall"
+  changed_when: True # I can't find a way to detect changes with vim-plug so we expect changes each time
