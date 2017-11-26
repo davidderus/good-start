@@ -6,6 +6,7 @@
 
 - name: "Checking that {{ app.name }} does not already exists"
   shell: "command -v {{ app_binary_name | quote }} >/dev/null 2>&1"
+  changed_when: False
   register: app_exists
   ignore_errors: yes
 
