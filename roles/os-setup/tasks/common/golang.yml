@@ -15,6 +15,8 @@
 
 - name: Go get
   command: "go get {{ go_pkg | quote }}"
+  register: go_get_output
+  changed_when: go_get_output.stdout | search('(download)')
   environment:
     GOPATH: "{{ dotfiles_go_path | expanduser }}"
   with_items: "{{ go_get }}"
