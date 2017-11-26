@@ -12,10 +12,10 @@
 
 - name: Launching Docker daemon
   command: open /Applications/Docker.app
-  when: docker_status.rc > 0
   register: docker_daemon_launched
+  when: not ansible_check_mode and docker_status.rc > 0
 
 - pause:
     seconds: "{{ docker_daemon_waiting_time }}"
     prompt: Waiting for Docker daemon
-  when: docker_daemon_launched.changed
+  when: not ansible_check_mode and docker_daemon_launched.changed

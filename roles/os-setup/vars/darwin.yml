@@ -31,7 +31,7 @@ brew_cask_apps:
   - atom # Default code editor
   - launchbar # Spotlight replacement
   - keepassxc # Password manager
-  - gpgtools # GPG made easy (+ Mail.app extension)
+  - gpg-suite # GPG made easy (+ Mail.app extension)
   - slack # For team communications
   - spotify # Music ease the mind
   - lunchy # Launchctl wrapper
@@ -72,8 +72,8 @@ added_dock_items:
   - name: Spotify
     path: /Applications/Spotify.app
     position: 6
-  - name: MacPass
-    path: "/Applications/MacPass.app"
+  - name: KeePassXC
+    path: /Applications/KeePassXC.app
     position: 7
   - name: Atom
     path: /Applications/Atom.app
@@ -97,9 +97,8 @@ launchbar_actions:
     checksum: 'sha256:f4f3698b1bda0d40e893d00afb972248b20fa143a02cce91213325f068703d62'
   - filename: 'Caffeinate.lbaction'
     url: https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction
-    checksum: 'sha256:70c5d4512b95d89add73d698ed0fc194a46be9b6d559358ee6abce5810d512cc'
+    checksum: 'sha256:0c71985eb6189fd021851718417064dcbe9ba14e9762194894583aeea95b3224'
 launchbar_plist_domain: at.obdev.LaunchBar
 launchbar_configuration_file: ~/Library/Application Support/LaunchBar/Configuration.plist
 
 go_get: []
-zipped_binaries: []

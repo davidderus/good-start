@@ -4,8 +4,13 @@
   vars:
     dev_distribution: "{{ ansible_os_family | lower }}"
   roles:
-    - os-setup
-    - dotfiles
-    - docker
-    - projects
-    - backup
+    - name: os-setup
+      tags: os-setup
+    - name: dotfiles
+      tags: dotfiles
+    - name: docker
+      tags: docker
+    - name: projects
+      tags: projects
+    - name: backup
+      tags: backup

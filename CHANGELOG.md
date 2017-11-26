@@ -2,6 +2,18 @@
 
 ## Releases
 
+### v1.0.0-beta.6 - 2017/11/26
+
+- Fixing solarized handling for vim
+- Replacing MacPass by KeepassXC
+- Updating caffeinate hash
+- Moving roles tags to roles and keeping others on a per-task basis
+- Including git dirs in backups
+- Showing project name when cloning
+- Handling checkmode in docker tasks
+- Insuring playbook idempotence by detecting changes
+- Fixing linting alerts
+
 ### v1.0.0-beta.5 - 2017/10/29
 
 - Adding missing jq binary and installing KeepassXC on darwin

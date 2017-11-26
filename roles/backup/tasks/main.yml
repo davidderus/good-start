@@ -2,8 +2,6 @@
 
 - name: "{{ ansible_distribution }} setup"
   include: "{{ dev_distribution }}/main.yml"
-  tags: backup
 
 - name: Restic setup
   include: setup.yml
-  tags: backup
