@@ -3,26 +3,22 @@
 - name: Loading distribution's vars
   include_vars: "{{ dev_distribution }}.yml"
   tags:
-    - os-setup
     - apps
     - zsh
     - golang
 
 - name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
-  tags: os-setup
 
 - name: Oh-My-Zsh setup
   include: common/zsh.yml
   tags:
-    - os-setup
     - apps
     - zsh
 
 - name: Golang setup
   include: common/golang.yml
   tags:
-    - os-setup
     - apps
     - golang
 
@@ -32,7 +28,6 @@
     suffix: build
   register: apps_build_dir
   tags:
-    - os-setup
     - apps
 
 - name: Installing custom apps
@@ -45,7 +40,6 @@
   loop_control:
     loop_var: app
   tags:
-    - os-setup
     - apps
 
 - name: Remove temp build directory
@@ -54,5 +48,4 @@
     state: absent
   when: apps_build_dir is defined and apps_build_dir.path is defined # Preventing check-mode error
   tags:
-    - os-setup
     - apps

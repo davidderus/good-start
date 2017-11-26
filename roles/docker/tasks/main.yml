@@ -2,7 +2,6 @@
 
 - name: "{{ ansible_distribution }} setup"
   include: "{{ dev_distribution }}/main.yml"
-  tags: docker
 
 # Using apt for pip was triggering an ImportError
 - name: Install pip
@@ -10,7 +9,6 @@
     name: pip
     state: present
   become: true
-  tags: docker
 
 # See https://docs.ansible.com/ansible/guide_docker.html#requirements
 - name: Add Ansible required pip packages
@@ -18,7 +16,5 @@
     name: docker-compose
     state: present
   become: true
-  tags: docker
 
 - include: common/images-pull.yml
-  tags: docker

@@ -102,4 +102,3 @@ launchbar_plist_domain: at.obdev.LaunchBar
 launchbar_configuration_file: ~/Library/Application Support/LaunchBar/Configuration.plist
 
 go_get: []
-zipped_binaries: []
