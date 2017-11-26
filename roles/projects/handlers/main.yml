@@ -1,0 +1,2 @@
+- name: Allow in direnv
+  command: "direnv allow {{ project_directory }}"

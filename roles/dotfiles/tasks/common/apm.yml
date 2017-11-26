@@ -4,6 +4,19 @@
 # Atom #
 ########
 
+- name: Ensuring packages directory exists
+  file:
+    path: "{{ dotfiles_apm_path }}"
+    state: directory
+    mode: 0755
+
+- name: Getting existing packages list
+  command: "ls -1 {{ dotfiles_apm_path }}"
+  changed_when: False
+  register: apm_packages_list
+
 - name: Atom packages installation
   command: "apm install {{ item | quote }}"
+  register: apm_install_output
+  when: item not in apm_packages_list
   with_items: "{{ dotfiles_apm_packages }}"

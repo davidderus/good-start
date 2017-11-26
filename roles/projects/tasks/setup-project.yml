@@ -4,7 +4,8 @@
 # Clone #
 #########
 
-- fail:
+- name: Checking project options validity
+  fail:
     msg: Project repository or name is missing, can't continue
   when:
     - project.repo is not defined or project.repo == ""
@@ -27,6 +28,7 @@
     update: no
     key_file: "{{ projects_ssh_keys[project.ssh_key] if (project.ssh_key is defined) else omit }}"
     accept_hostkey: yes
+    version: master
 
 ############
 # Env file #
@@ -67,8 +69,5 @@
     dest: "{{ project_directory }}/.envrc"
     force: no
   when: project.with_direnv is defined and project.with_direnv
-  register: direnv_setupped
+  notify: Allow in direnv
 
-- name: Allow direnv files
-  command: "direnv allow {{ project_directory }}"
-  when: direnv_setupped.changed

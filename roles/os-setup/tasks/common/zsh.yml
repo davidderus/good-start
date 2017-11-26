@@ -5,6 +5,7 @@
     repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: ~/.oh-my-zsh
     update: no
+    version: master
 
 - name: Make zsh the default shell
   user:
