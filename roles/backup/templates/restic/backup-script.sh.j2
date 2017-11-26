@@ -13,7 +13,7 @@ export RESTIC_PASSWORD='{{ backup_password }}'
 
 echo "== Starting $HOME backup with restic"
 
-restic backup -x $HOME --exclude-file {{ backup_scripts_directory }}/Exclusions
+restic backup -x $HOME --exclude-file {{ backup_scripts_directory | expanduser }}/Exclusions
 
 echo
 
