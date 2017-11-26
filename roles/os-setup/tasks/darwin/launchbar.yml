@@ -48,7 +48,7 @@
     type: array
     value:
       - com.apple.keychainaccess
-      - com.hicknhacksoftware.MacPass
+      - org.keepassx.keepassxc
 
 - name: Prefer secure schemes
   osx_defaults:

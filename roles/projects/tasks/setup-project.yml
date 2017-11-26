@@ -21,6 +21,11 @@
     msg: "Will use ssh key {{ projects_ssh_keys[project.ssh_key] }} to clone {{ project.name }}"
   when: project.ssh_key is defined
 
+- name: Checkin project existence
+  stat:
+    path: "{{ project_directory }}"
+  register: project_directory_check
+
 - name: "Cloning project {{ project.name }}"
   git:
     repo: "{{ project.repo }}"
@@ -29,6 +34,7 @@
     key_file: "{{ projects_ssh_keys[project.ssh_key] if (project.ssh_key is defined) else omit }}"
     accept_hostkey: yes
     version: master
+  when: not project_directory_check.stat.exists
 
 ############
 # Env file #

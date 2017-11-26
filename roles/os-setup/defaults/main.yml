@@ -21,7 +21,7 @@ common_packages:
   - jq # JSON manipulation
 
 common_apps:
-  - virtualbox # Virtualisation
+  #- virtualbox # Virtualisation
   - vagrant # VM per projects
   - firefox # Alternative browser
 
