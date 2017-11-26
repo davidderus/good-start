@@ -10,6 +10,7 @@
     repo: https://github.com/tmux-plugins/tpm
     dest: ~/.tmux/plugins/tpm
     update: no
+    version: master
 
 - name: Installing tmux packages
   command: ~/.tmux/plugins/tpm/bin/install_plugins

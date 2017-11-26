@@ -27,6 +27,7 @@
     update: no
     key_file: "{{ projects_ssh_keys[project.ssh_key] if (project.ssh_key is defined) else omit }}"
     accept_hostkey: yes
+    version: master
 
 ############
 # Env file #
