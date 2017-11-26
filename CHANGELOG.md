@@ -2,7 +2,7 @@
 
 ## Releases
 
-### Unreleased
+### v1.0.0-beta.6 - 2017/11/26
 
 - Fixing solarized handling for vim
 - Replacing MacPass by KeepassXC
