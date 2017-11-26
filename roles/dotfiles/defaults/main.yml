@@ -55,6 +55,7 @@ dotfiles_required_files:
   - { path: '~/.ssh/config', mode: '0600' }
   - { path: '~/.extra', mode: '0600' }
 
+dotfile_apm_path: ~/.atom/packages
 dotfiles_apm_packages:
   - sync-settings # Other packages and settings are pulled by this package
 
