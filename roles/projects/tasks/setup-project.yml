@@ -21,7 +21,7 @@
     msg: "Will use ssh key {{ projects_ssh_keys[project.ssh_key] }} to clone {{ project.name }}"
   when: project.ssh_key is defined
 
-- name: Checkin project existence
+- name: Checking project existence
   stat:
     path: "{{ project_directory }}"
   register: project_directory_check
