@@ -19,6 +19,13 @@ dotfiles_zsh_plugins:
   - docker-compose
   - docker-machine
 
+darwin_zsh_plugins:
+  - brew
+  - brew-cask
+  - osx
+
+debian_zsh_plugins: []
+
 dotfiles_files:
   - { name: 'agignore' }
   - { name: 'aliases' }

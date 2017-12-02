@@ -22,7 +22,11 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=({{ (dotfiles_zsh_plugins + dotfiles_zsh_additional_plugins)|join(' ') }})
+{%- if dev_distribution == 'darwin' and darwin_zsh_plugins %}
+plugins=({{ (dotfiles_zsh_plugins + darwin_zsh_plugins) | join(' ') }})
+{% elif debian_zsh_plugins %}
+plugins=({{ (dotfiles_zsh_plugins + debian_zsh_plugins) | join(' ') }})
+{% endif -%}
 
 # User configuration
 source $ZSH/oh-my-zsh.sh

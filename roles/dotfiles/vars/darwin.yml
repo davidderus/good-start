@@ -1,6 +1,0 @@
----
-
-dotfiles_zsh_additional_plugins:
-  - brew
-  - brew-cask
-  - osx
