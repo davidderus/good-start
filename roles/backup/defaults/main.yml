@@ -1,5 +1,13 @@
 ---
 
+github_release_regex: 'https:\/\/github\.com\/%s\/releases\/download\/[\d\w\.]{5,}\/[\w\.]+_%s\.\w+'
+
+restic_repository: 'restic/restic'
+restic_linux_binary_name: linux_amd64
+restic_release_regex: "{{ github_release_regex | format((restic_repository | regex_escape), restic_linux_binary_name) }}"
+
+restic_binary_dest: '/usr/local/bin/restic'
+
 backup_scripts_directory: ~/restic-backup
 backup_additional_exclusions: []
 backup_cleanup: True

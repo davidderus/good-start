@@ -5,6 +5,5 @@
   register: restic_exists
   ignore_errors: yes
 
-- fail:
-    msg: Restic is not installed, aborting!
-  when: restic_exists.skipped is not defined and restic_exists.rc != 0
+- include: install.yml
+  when: not ansible_check_mode and restic_exists.rc != 0

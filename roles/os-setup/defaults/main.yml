@@ -25,8 +25,6 @@ common_apps:
   - vagrant # VM per projects
   - firefox # Alternative browser
 
-github_release_regex: 'https:\/\/github\.com\/%s\/releases\/download\/[\d\w\.]{5,}\/[\w\.]+_%s\.\w+'
-
 go_get:
   - github.com/ddollar/forego # Foreman in Go
   - github.com/cortesi/devd/cmd/devd # Local webserver for developers
@@ -169,11 +167,6 @@ debian_custom_apps:
   - fzf
   - postman
   - spotify
-  - restic
-
-restic_repository: 'restic/restic'
-restic_linux_binary_name: linux_amd64
-restic_release_regex: "{{ github_release_regex | format((restic_repository | regex_escape), restic_linux_binary_name) }}"
 
 # debian_zipped_binaries will use the first file matching app.binary_name or app.name.
 # You can use a wilcard to match a custom filename like 'binary_v*'.
