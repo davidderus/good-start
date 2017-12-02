@@ -26,7 +26,7 @@ ZSH_THEME="robbyrussell"
 plugins=({{ (dotfiles_zsh_plugins + darwin_zsh_plugins) | join(' ') }})
 {% elif debian_zsh_plugins %}
 plugins=({{ (dotfiles_zsh_plugins + debian_zsh_plugins) | join(' ') }})
-{% endif -%}
+{% endif %}
 
 # User configuration
 source $ZSH/oh-my-zsh.sh
