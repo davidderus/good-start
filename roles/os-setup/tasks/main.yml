@@ -24,30 +24,12 @@
     - apps
     - golang
 
-- name: Create temporary build directory
-  tempfile:
-    state: directory
-    suffix: build
-  register: apps_build_dir
-  tags:
-    - apps
-
 - name: Installing custom apps
   include: common/zipped-binary.yml
   vars:
-    apps_build_dir_path: "{{ apps_build_dir.path }}"
-    app_build_dir: "{{ apps_build_dir_path }}/build_{{ app.name }}"
     app_binary_name: "{{ app.binary_name | default(app.name) }}"
   with_items: "{{ zipped_binaries }}"
   loop_control:
     loop_var: app
-  tags:
-    - apps
-
-- name: Remove temp build directory
-  file:
-    path: "{{ apps_build_dir.path }}"
-    state: absent
-  when: apps_build_dir is defined and apps_build_dir.path is defined # Preventing check-mode error
   tags:
     - apps
