@@ -31,5 +31,6 @@
   with_items: "{{ zipped_binaries }}"
   loop_control:
     loop_var: app
+  when: not ansible_check_mode
   tags:
     - apps
