@@ -2,6 +2,13 @@
 
 ## Releases
 
+### Unreleased
+
+- Optimising zipped-binary task:
+  - temp dir creation only if required
+  - check mode in parent
+- macOS restarter are now handlers
+
 ### v1.0.0-beta.6 - 2017/11/26
 
 - Fixing solarized handling for vim
