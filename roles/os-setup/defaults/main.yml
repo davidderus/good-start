@@ -27,7 +27,11 @@ common_apps:
 
 github_release_regex: 'https:\/\/github\.com\/%s\/releases\/download\/[\d\w\.]{5,}\/[\w\.]+_%s\.\w+'
 
-zipped_binaries: [] # Default is none. This will be overrided on a per-OS basis
+go_get:
+  - github.com/ddollar/forego # Foreman in Go
+  - github.com/cortesi/devd/cmd/devd # Local webserver for developers
+
+default_binary_dest: '/usr/local/bin'
 
 ##################
 # macOS specific #
@@ -48,9 +52,7 @@ brew_packages:
   - rclone # Cloud sync à-la rsync
   - caddy # Webserver/Reverse-Proxy/more…
   - fdupes # Duplicates file finder
-  - devd # Local webserver for developers
   - watch # GNU watch command
-  - forego # Foreman in Go
   - ag # Grep replacement
   - fzf # Command line fuzzy finder
   - diff-so-fancy # Differ
@@ -115,6 +117,16 @@ osx_added_dock_items:
 
 osx_dock_icons_size: 36.0
 
+# darwin_zipped_binaries will use the first file matching app.binary_name or app.name.
+# You can use a wilcard to match a custom filename like 'binary_v*'.
+#
+# You may also set the `recurse` option to true in order to find the binary
+# in a subfolder.
+#
+# ⚠️  A wrong binary_name or filename may result in a incorrect file being copied
+# to `binary_dest`
+darwin_zipped_binaries: [] # Default is none. This will be overrided on a per-OS basis
+
 launchbar_actions_directory: ~/Library/Application Support/LaunchBar/Actions
 launchbar_actions:
   - filename: 'Spotify - Play:Pause.lbaction'
@@ -150,3 +162,32 @@ aptitude_apps:
   - keepassx
   - terminator
   - synaptic
+
+debian_custom_apps:
+  - atom
+  - diff-so-fancy
+  - fzf
+  - postman
+  - spotify
+  - restic
+
+restic_repository: 'restic/restic'
+restic_linux_binary_name: linux_amd64
+restic_release_regex: "{{ github_release_regex | format((restic_repository | regex_escape), restic_linux_binary_name) }}"
+
+# debian_zipped_binaries will use the first file matching app.binary_name or app.name.
+# You can use a wilcard to match a custom filename like 'binary_v*'.
+#
+# You may also set the `recurse` option to true in order to find the binary
+# in a subfolder.
+#
+# ⚠️  A wrong binary_name or filename may result in a incorrect file being copied
+# to `binary_dest`
+debian_zipped_binaries:
+  - name: rclone
+    url: https://downloads.rclone.org/rclone-current-linux-amd64.zip
+    recurse: true
+  - name: caddy
+    url: https://caddyserver.com/download/linux/amd64?license=personal
+  - name: ngrok
+    url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip

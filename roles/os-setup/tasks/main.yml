@@ -1,14 +1,5 @@
 ---
 
-- name: Loading distribution's vars
-  include_vars: "{{ dev_distribution }}.yml"
-  tags:
-    - apps
-    - zsh
-    - golang
-    - settings
-    - launchbar
-
 - name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
 
@@ -28,7 +19,7 @@
   include: common/zipped-binary.yml
   vars:
     app_binary_name: "{{ app.binary_name | default(app.name) }}"
-  with_items: "{{ zipped_binaries }}"
+  with_items: "{{ dev_distribution + '_zipped_binaries' }}"
   loop_control:
     loop_var: app
   when: not ansible_check_mode
