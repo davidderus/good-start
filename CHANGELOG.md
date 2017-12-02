@@ -4,6 +4,9 @@
 
 ### Unreleased
 
+- We're not constraining a variable storage
+- All vars are now overridable
+  - Available variables are documented in variables.md
 - Optimising zipped-binary task:
   - temp dir creation only if required
   - check mode in parent
