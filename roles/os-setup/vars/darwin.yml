@@ -57,30 +57,28 @@ removed_dock_items:
   - System Preferences
 
 added_dock_items:
-  - name: Finder
-    position: 1
   - name: Mail
-    position: 2
+    position: 1
   - name: "{{ osx_i18n['calendar'] }}"
-    position: 3
+    position: 2
   - name: iTerm
     path: "/Applications/iTerm.app"
-    position: 4
+    position: 3
   - name: Google Chrome
     path: "/Applications/Google Chrome.app"
-    position: 5
+    position: 4
   - name: Spotify
     path: /Applications/Spotify.app
-    position: 6
+    position: 5
   - name: KeePassXC
     path: /Applications/KeePassXC.app
-    position: 7
+    position: 6
   - name: Atom
     path: /Applications/Atom.app
-    position: 8
+    position: 7
   - name: Slack
     path: /Applications/Slack.app
-    position: 9
+    position: 8
 
 dock_icons_size: 36.0
 
