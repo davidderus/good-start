@@ -35,14 +35,14 @@ default_binary_dest: '/usr/local/bin'
 # macOS specific #
 ##################
 
-osx_i18n:
+darwin_i18n:
   calendar: Calendrier
 
-osx_languages:
+darwin_languages:
   - fr
   - en
 
-osx_locale: fr_FR@currency=EUR
+darwin_locale: fr_FR@currency=EUR
 
 brew_packages:
   - md5sha1sum # More checksum tools
@@ -74,7 +74,7 @@ brew_cask_apps:
   - fluid # Dedicated Mac app per website
   - typora # Useful markdown editor
 
-osx_removed_dock_items:
+darwin_removed_dock_items:
   - Launchpad
   - Safari
   - Contacts
@@ -89,10 +89,10 @@ osx_removed_dock_items:
   - App Store
   - System Preferences
 
-osx_added_dock_items:
+darwin_added_dock_items:
   - name: Mail
     position: 1
-  - name: "{{ osx_i18n['calendar'] }}"
+  - name: "{{ darwin_i18n['calendar'] }}"
     position: 2
   - name: iTerm
     path: "/Applications/iTerm.app"
@@ -113,7 +113,7 @@ osx_added_dock_items:
     path: /Applications/Slack.app
     position: 8
 
-osx_dock_icons_size: 36.0
+darwin_dock_icons_size: 36.0
 
 # darwin_zipped_binaries will use the first file matching app.binary_name or app.name.
 # You can use a wilcard to match a custom filename like 'binary_v*'.
