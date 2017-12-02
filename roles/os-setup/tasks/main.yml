@@ -6,6 +6,8 @@
     - apps
     - zsh
     - golang
+    - settings
+    - launchbar
 
 - name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
