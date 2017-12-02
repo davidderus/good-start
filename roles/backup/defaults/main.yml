@@ -1,21 +1,48 @@
 ---
 
+# `backup_repository` is a directory or a remote host
+# see https://restic.readthedocs.io/en/stable/manual.html#initialize-a-repository
+# @note This is a mandatory variable
+# backup_repository: $HOME/my-restic-repository
+
+# `backup_password` is the backup password
+# @note This is a mandatory variable
+# backup_password: "{{ vault_backup_password }}"
+
+# Restic Github repository
+restic_repository: 'restic/restic'
+
+# Platform string in the release file name
+restic_linux_binary_name: linux_amd64
+
+# Github regex to parse a release
 github_release_regex: 'https:\/\/github\.com\/%s\/releases\/download\/[\d\w\.]{5,}\/[\w\.]+_%s\.\w+'
 
-restic_repository: 'restic/restic'
-restic_linux_binary_name: linux_amd64
+# Regex to get restic release infos
 restic_release_regex: "{{ github_release_regex | format((restic_repository | regex_escape), restic_linux_binary_name) }}"
 
+# Path to install restic binary to (Debian)
 restic_binary_dest: '/usr/local/bin/restic'
 
+# Where the backup scripts are saved
 backup_scripts_directory: ~/restic-backup
+
+# Files or directory to excludes in addition to the defaults
 backup_additional_exclusions: []
+
+# Enable cleanup of old backups references (without prune / restic forget)
 backup_cleanup: True
+
+# Specify forget options
 backup_cleanup_settings:
   keep_daily: 7
   keep_weekly: 4
   keep_monthly: 6
+
+# Prune forgotten files
 backup_allow_prune: True
+
+# Sets up a cron to run backup
 backup_with_cron: False
 backup_cron:
   hour: "12,20"

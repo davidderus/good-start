@@ -1,15 +1,34 @@
 ---
 
+# Username to use for the user identity
+# @note this is mandatory
+# dotfiles_user_name: John Doe
+
+# Email to use for the user identity
+# @note this is mandatory
+# dotfiles_user_email: john@doe.com
+
+# Enable a developpment log for day-to-day notes
 dotfiles_devlog_enabled: True
+
+# Sets the $EDITOR
 dotfiles_default_editor: nvim
+
+# Sets the $PAGER
 dotfiles_default_pager: vimpager
+
+# Sets the $GOPATH
 dotfiles_go_path: ~/go/
 
 dotfiles_locale: en_US.UTF-8
 
+# Sets the pager used by git
 dotfiles_git_pager: diff-so-fancy
+
+# Sets the editor used by git
 dotfiles_git_editor: "{{ dotfiles_default_editor }}"
 
+# Lists enabled Oh-my-zsh plugins
 dotfiles_zsh_plugins:
   - git
   - ruby
@@ -19,13 +38,20 @@ dotfiles_zsh_plugins:
   - docker-compose
   - docker-machine
 
+# List enabled zsh plugins for Darwin
 darwin_zsh_plugins:
   - brew
   - brew-cask
   - osx
 
+# List enabled zsh plugins for Debian
 debian_zsh_plugins: []
 
+# List the dotfiles to sync
+# Format:
+#   {name: 'template-name', destination: 'optional-destination'}
+#   where 'optional-destination' is a destination different
+#     than ~/.template-name (see roles/dotfiles/templates/src for details)
 dotfiles_files:
   - { name: 'agignore' }
   - { name: 'aliases' }
@@ -41,11 +67,16 @@ dotfiles_files:
   - { name: 'direnvrc' }
   - { name: 'aria2.conf', destination: '~/.aria2/aria2.conf' }
 
+# Username to use for git identity
 dotfiles_git_name: "{{ dotfiles_user_name }}"
+
+# Email to use for git identity
 dotfiles_git_email: "{{ dotfiles_user_email }}"
 
+# Will override any changes to the system dotfiles
 dotfiles_sync_force: True
 
+# Directories to build before syncing dotfiles
 dotfiles_required_directories:
   - ~/.ansible/group_vars
   - ~/.ansible/host_vars
@@ -57,15 +88,20 @@ dotfiles_required_directories:
   - ~/.config/terminator
   - "{{ dotfiles_vimplug_destination | dirname }}"
 
+# Files to create  before syncing dotfiles
 dotfiles_required_files:
   - { path: '~/.ansible/hosts.ini', mode: '0600' }
   - { path: '~/.ssh/config', mode: '0600' }
   - { path: '~/.extra', mode: '0600' }
 
+# Path to Atom packages
 dotfiles_apm_path: ~/.atom/packages
+
+# A list of Atom packages to install
 dotfiles_apm_packages:
   - sync-settings # Other packages and settings are pulled by this package
 
+# Will use neovim system-wide instead of vim
 dotfiles_with_neovim: True
 dotfiles_vimplug_destination: "{{ '~/.local/share/nvim/site/autoload/plug.vim' if dotfiles_with_neovim else '~/.vim/autoload/plug.vim' }}"
 dotfiles_vim_executable: "{{ 'nvim' if dotfiles_with_neovim else 'vim' }}"
@@ -80,8 +116,14 @@ dotfiles_terminal_shortcuts:
     action: backward-word
     comment: Maj + <-
 
+# Install Atom packages mentioned in dotfiles (apm)
 dotfiles_install_atom_packages: True
+
+# Install tmux packages mentioned in dotfiles (tpm)
 dotfiles_install_tmux_packages: True
+
+# Install Vim packages mentioned in dotfiles (vim-plug)
 dotfiles_install_vim_packages: True
 
+# Iterm settings directory as defined in iTerm2
 dotfiles_iterm_settings_directory: ~/.config/iterm2

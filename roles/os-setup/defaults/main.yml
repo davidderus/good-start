@@ -1,6 +1,6 @@
 ---
 
-# Packages existing for aptitude and brew
+# The default cross-platform list of packages to install
 common_packages:
   - bash # Updating default macOS bash
   - ffmpeg # Video and GIFs modifications and conversions
@@ -20,30 +20,37 @@ common_packages:
   - vim # An up-to-date vim version
   - jq # JSON manipulation
 
+# The default cross-platform list of apps to install
 common_apps:
   - virtualbox # Virtualisation
   - vagrant # VM per projects
   - firefox # Alternative browser
 
+# An array of Golang packages to get
 go_get:
   - github.com/ddollar/forego # Foreman in Go
   - github.com/cortesi/devd/cmd/devd # Local webserver for developers
 
+# Defines the place to store manually downloaded binaries
 default_binary_dest: '/usr/local/bin'
 
 ##################
 # macOS specific #
 ##################
 
+# Key-values translations to be used elsewhere (for example in the Dock setup)
 darwin_i18n:
   calendar: Calendrier
 
+# An array of string of system languages
 darwin_languages:
   - fr
   - en
 
+# The system locale
 darwin_locale: fr_FR@currency=EUR
 
+# macOS specific packages
 brew_packages:
   - md5sha1sum # More checksum tools
   - coreutils # for things like realpath…
@@ -57,6 +64,7 @@ brew_packages:
   - ssh-copy-id # Copy ssh keys to remote hosts
   - dockutil # Dock management from the command line
 
+# macOS specific apps
 brew_cask_apps:
   - google-chrome # Default browser
   - appcleaner # For easy apps cleanup
@@ -74,6 +82,7 @@ brew_cask_apps:
   - fluid # Dedicated Mac app per website
   - typora # Useful markdown editor
 
+# An array of string of items to remove from the Dock
 darwin_removed_dock_items:
   - Launchpad
   - Safari
@@ -89,6 +98,7 @@ darwin_removed_dock_items:
   - App Store
   - System Preferences
 
+# An array of hashes{name, path, position} of positionned items to add to the dock
 darwin_added_dock_items:
   - name: Mail
     position: 1
@@ -113,6 +123,7 @@ darwin_added_dock_items:
     path: /Applications/Slack.app
     position: 8
 
+# The Dock icons size
 darwin_dock_icons_size: 36.0
 
 # darwin_zipped_binaries will use the first file matching app.binary_name or app.name.
@@ -125,7 +136,16 @@ darwin_dock_icons_size: 36.0
 # to `binary_dest`
 darwin_zipped_binaries: [] # Default is none. This will be overrided on a per-OS basis
 
+# Launchbar – Plist domain
+launchbar_plist_domain: at.obdev.LaunchBar
+
+# Launchbar – Configuration Plist
+launchbar_configuration_file: ~/Library/Application Support/LaunchBar/Configuration.plist
+
+# Launchbar – Where to store actions
 launchbar_actions_directory: ~/Library/Application Support/LaunchBar/Actions
+
+# Launchbar – What actions to GET and install
 launchbar_actions:
   - filename: 'Spotify - Play:Pause.lbaction'
     url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Play:Pause.lbaction?raw=true
@@ -139,13 +159,12 @@ launchbar_actions:
   - filename: 'Caffeinate.lbaction'
     url: https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction
     checksum: 'sha256:0c71985eb6189fd021851718417064dcbe9ba14e9762194894583aeea95b3224'
-launchbar_plist_domain: at.obdev.LaunchBar
-launchbar_configuration_file: ~/Library/Application Support/LaunchBar/Configuration.plist
 
 ###################
 # Debian specific #
 ###################
 
+# APT-specific packages
 aptitude_packages:
   - silversearcher-ag
   - gnupg2
@@ -154,6 +173,7 @@ aptitude_packages:
   - fdupes # Duplicates file finder
   - unzip
 
+# APT-specific apps
 aptitude_apps:
   - default-jre
   - chromium-browser
@@ -161,6 +181,8 @@ aptitude_apps:
   - terminator
   - synaptic
 
+# A list of custom install task to load for Debian
+# Each one of these apps as a dedicated yml file with tasks to install it
 debian_custom_apps:
   - atom
   - diff-so-fancy

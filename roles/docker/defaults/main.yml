@@ -1,10 +1,20 @@
 ---
 
+# Images are pulled from Docker Hub or any public Docker registry
 docker_images_to_pull: []
 
-# For Debian/Ubuntu only
+###################
+# Debian specific #
+###################
+
+# Docker machine release version
 docker_machine_version: v0.12.2
+
+# Docker machine release filename
 docker_machine_filename: docker-machine-linux-x86_64
+
+# Release url to download from
 docker_machine_url: "https://github.com/docker/machine/releases/download/{{ docker_machine_version }}/{{ docker_machine_filename }}"
 
+# Max time to wait for Docker Daemon
 docker_daemon_waiting_time: 30
