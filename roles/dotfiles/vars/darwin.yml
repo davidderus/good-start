@@ -1,7 +1,5 @@
 ---
 
-dotfiles_iterm_settings_directory: ~/.config/iterm2
-
 dotfiles_zsh_additional_plugins:
   - brew
   - brew-cask

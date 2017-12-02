@@ -211,18 +211,18 @@
 - name: Remove all useless Dock items
   shell: dockutil --remove '{{ item }}' --no-restart
   ignore_errors: true
-  with_items: removed_dock_items
+  with_items: osx_removed_dock_items
   notify: Restart Dock
 
 - name: Check if the Dock items exist or add it
   shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }}' --no-restart
-  with_items: "{{ added_dock_items }}"
+  with_items: "{{ osx_added_dock_items }}"
   when: item.path is defined
   notify: Restart Dock
 
 - name: Fix the Dock items order
   shell: dockutil --move '{{ item.name }}' --position {{ item.position }}
-  with_items: "{{ added_dock_items }}"
+  with_items: "{{ osx_added_dock_items }}"
   notify: Restart Dock
 
 - name: Auto-hide the Dock
@@ -238,7 +238,7 @@
     domain: com.apple.dock
     key: tilesize
     type: float
-    value: "{{ dock_icons_size }}"
+    value: "{{ osx_dock_icons_size }}"
   notify: Restart Dock
 
 - name: Automatically hide and show the Dock

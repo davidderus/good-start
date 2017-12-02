@@ -1,20 +1,5 @@
 ---
 
-aptitude_packages:
-  - silversearcher-ag
-  - gnupg2
-  - zsh
-  - python-setuptools
-  - fdupes # Duplicates file finder
-  - unzip
-
-aptitude_apps:
-  - default-jre
-  - chromium-browser
-  - keepassx
-  - terminator
-  - synaptic
-
 default_binary_dest: '/usr/bin'
 
 # zipped_binaries will use the first file matching app.binary_name or app.name.

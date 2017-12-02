@@ -76,3 +76,5 @@ dotfiles_terminal_shortcuts:
 dotfiles_install_atom_packages: True
 dotfiles_install_tmux_packages: True
 dotfiles_install_vim_packages: True
+
+dotfiles_iterm_settings_directory: ~/.config/iterm2
