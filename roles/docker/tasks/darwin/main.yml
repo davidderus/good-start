@@ -6,9 +6,10 @@
     state: present
 
 - name: Checking if Docker is running
-  shell: "docker info >/dev/null 2>&1"
+  shell: "pgrep {{ docker_running_process_name }} >/dev/null 2>&1"
   register: docker_status
   ignore_errors: yes
+  changed_when: False
 
 - name: Launching Docker daemon
   command: open /Applications/Docker.app

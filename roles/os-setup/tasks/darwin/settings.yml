@@ -12,6 +12,7 @@
     key: NSDocumentSaveNewDocumentsToCloud
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Disable apps quarantine
   osx_defaults:
@@ -19,12 +20,14 @@
     key: LSQuarantine
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Disable auto-correct
   osx_defaults:
     key: NSAutomaticSpellingCorrectionEnabled
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Require password immediately after sleep or screen saver begins
   osx_defaults:
@@ -32,6 +35,7 @@
     key: askForPassword
     type: integer
     value: 1
+  notify: Refresh UI
 
 - name: Require password immediately after sleep or screen saver begins
   osx_defaults:
@@ -39,6 +43,7 @@
     key: askForPasswordDelay
     type: float
     value: 0.0
+  notify: Refresh UI
 
 - name: Avoid creating .DS_Store files on network volumes
   osx_defaults:
@@ -46,6 +51,7 @@
     key: DSDontWriteNetworkStores
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Avoid creating .DS_Store files on USB volumes
   osx_defaults:
@@ -53,12 +59,14 @@
     key: DSDontWriteUSBStores
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Expand save panel by default
   osx_defaults:
     key: NSNavPanelExpandedStateForSaveMode
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Automatically quit printer app once the print jobs complete
   osx_defaults:
@@ -66,6 +74,7 @@
     key: "Quit When Finished"
     type: bool
     value:  true
+  notify: Refresh UI
 
 - name: Prevent Time Machine from prompting to use new hard drives as backup volume
   osx_defaults:
@@ -73,6 +82,7 @@
     key: DoNotOfferNewDisksForBackup
     type: bool
     value: true
+  notify: Refresh UI
 
 ##########
 # Finder #
@@ -83,6 +93,7 @@
     key: AppleShowAllExtensions
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Show status bar
   osx_defaults:
@@ -90,6 +101,7 @@
     key: ShowStatusBar
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Show path bar
   osx_defaults:
@@ -97,12 +109,14 @@
     key: ShowPathbar
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: When performing a search, search the current folder by default
   osx_defaults:
     domain: com.apple.finder
     key: FXDefaultSearchScope
     value: "SCcf"
+  notify: Refresh UI
 
 - name: Disable the warning when changing a file extension
   osx_defaults:
@@ -110,12 +124,14 @@
     key: FXEnableExtensionChangeWarning
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Use list view in all Finder windows by default
   osx_defaults:
     domain: com.apple.finder
     key: FXPreferredViewStyle
     value: "clmv"
+  notify: Refresh UI
 
 - name: Hide icons for external hard drives on the desktop
   osx_defaults:
@@ -123,6 +139,7 @@
     key: ShowExternalHardDrivesOnDesktop
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Hide icons for hard drives on the desktop
   osx_defaults:
@@ -130,6 +147,7 @@
     key: ShowHardDrivesOnDesktop
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Hide icons for servers on the desktop
   osx_defaults:
@@ -137,6 +155,7 @@
     key: ShowMountedServersOnDesktop
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Hide icons for removable media on the desktop
   osx_defaults:
@@ -144,6 +163,7 @@
     key: ShowRemovableMediaOnDesktop
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Disable windows shadow in screen capture
   osx_defaults:
@@ -151,6 +171,7 @@
     key: disable-shadow
     type: boolean
     value: true
+  notify: Refresh UI
 
 ########################
 # Internationalization #
@@ -160,42 +181,60 @@
   osx_defaults:
     key: AppleLanguages
     type: array
-    value: "{{ osx_languages }}"
+    value: "{{ darwin_languages }}"
+  notify: Refresh UI
 
 - name: Setup keyboard language
   osx_defaults:
     key: AppleLocale
-    value: "{{ osx_locale }}"
+    value: "{{ darwin_locale }}"
+  notify: Refresh UI
 
 - name: Setting measurement unit
   osx_defaults:
     key: AppleMeasurementUnits
     type: string
     value: Centimeters
+  notify: Refresh UI
 
 - name: Enabling metric units
   osx_defaults:
     key: AppleMetricUnits
     type: bool
     value: true
+  notify: Refresh UI
 
 ########
 # Dock #
 ########
 
 - name: Remove all useless Dock items
-  shell: dockutil --remove '{{ item }}'
+  command: dockutil --remove '{{ item }}' --no-restart
   ignore_errors: true
-  with_items: removed_dock_items
+  register: darwin_dock_remove
+  changed_when: darwin_dock_remove.stdout == ''
+  with_items: darwin_removed_dock_items
+  notify: Restart Dock
 
-- name: Check if the Dock items exist
-  shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }} --no-restart'
-  with_items: "{{ added_dock_items }}"
-  when: path is defined
+# TODO Evolve to a dockutil --add based on the dock item positions output
+- name: Check if the Dock items exist or add it
+  shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }}' --no-restart
+  register: darwin_dock_add
+  changed_when: darwin_dock_add.stdout | search('was not found')
+  with_items: "{{ darwin_added_dock_items }}"
+  notify: Restart Dock
+
+- name: Register Dock items positions
+  command: dockutil --find '{{ item.name }}'
+  register: darwin_dock_positions
+  changed_when: False
+  with_items: "{{ darwin_added_dock_items }}"
 
 - name: Fix the Dock items order
-  shell: dockutil --move '{{ item.name }}' --position {{ item.position }}
-  with_items: "{{ added_dock_items }}"
+  command: dockutil --move '{{ item.item.name }}' --position {{ item.item.position }}
+  when: item.stdout.find('at slot %s' % item.item.position) < 0
+  with_items: "{{ darwin_dock_positions.results }}"
+  notify: Restart Dock
 
 - name: Auto-hide the Dock
   osx_defaults:
@@ -203,13 +242,15 @@
     key: autohide-time-modifier
     type: bool
     value: true
+  notify: Restart Dock
 
 - name: Set the icon size of Dock items to X pixels
   osx_defaults:
     domain: com.apple.dock
     key: tilesize
     type: float
-    value: "{{ dock_icons_size }}"
+    value: "{{ darwin_dock_icons_size }}"
+  notify: Restart Dock
 
 - name: Automatically hide and show the Dock
   osx_defaults:
@@ -217,6 +258,7 @@
     key: autohide
     type: bool
     value: true
+  notify: Restart Dock
 
 ##########
 # Spaces #
@@ -228,6 +270,7 @@
     key: mcx-disabled
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Don’t automatically rearrange Spaces based on most recent use
   osx_defaults:
@@ -235,6 +278,7 @@
     key: mru-spaces
     type: bool
     value: false
+  notify: Refresh UI
 
 ##############
 # Appearance #
@@ -244,12 +288,14 @@
   osx_defaults:
     key: AppleInterfaceStyle
     value: Dark
+  notify: Refresh UI
 
 - name: Disable transparency
   osx_defaults:
     key: AppleEnableMenuBarTransparency
     type: bool
     value: false
+  notify: Refresh UI
 
 - name: Activate debug menu in Safari
   osx_defaults:
@@ -258,6 +304,7 @@
     type: bool
     value: true
     state: present
+  notify: Refresh UI
 
 #############
 # App Store #
@@ -269,6 +316,7 @@
     key: AutomaticCheckEnabled
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Check for software updates daily, not just once per week
   osx_defaults:
@@ -276,6 +324,7 @@
     key: ScheduleFrequency
     type: int
     value: 1
+  notify: Refresh UI
 
 - name: Download newly available updates in background
   osx_defaults:
@@ -283,6 +332,7 @@
     key: AutomaticDownload
     type: int
     value: 1
+  notify: Refresh UI
 
 - name: Install System data files & security updates
   osx_defaults:
@@ -290,6 +340,7 @@
     key: CriticalUpdateInstall
     type: int
     value: 1
+  notify: Refresh UI
 
 ########
 # Apps #
@@ -301,6 +352,7 @@
     key: DisablePrintPreview
     type: bool
     value: true
+  notify: Refresh UI
 
 - name: Expand the print dialog by default
   osx_defaults:
@@ -308,15 +360,4 @@
     key: PMPrintingExpandedStateForPrint2
     type: bool
     value: true
-
-##############
-# Restarting #
-##############
-
-- name: Restart processes
-  command: "killall {{ item | quote }}"
-  ignore_errors: yes
-  with_items:
-    - Finder
-    - Dock
-    - SystemUIServer
+  notify: Refresh UI

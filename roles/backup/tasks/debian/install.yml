@@ -1,50 +1,38 @@
 ---
 
-- name: Check for restic
-  stat:
-    path: "{{ default_binary_dest }}/restic"
-  register: restic_binary
-
 - name: Get latest release of restic
   uri:
     url: https://api.github.com/repos/restic/restic/releases/latest
     return_content: yes
   register: release_page
-  when: restic_binary.stat.exists == False
 
 # Ansible recommends not to use curl directly, so let's have fun
 # (instead of doing `curl -s https://api.github.com/repos/restic/restic/releases/latest | grep 'browser_download_url.*linux_amd64' | cut -d \" -f 4`)
 - set_fact:
     restic_release_url: "{{ release_page.content | regex_search(restic_release_regex) }}"
-  when: restic_binary.stat.exists == False
 
 - name: Create temporary build directory
   tempfile:
     state: directory
     suffix: restic
   register: restic_build_dir
-  when: restic_binary.stat.exists == False
 
 - name: "Download restic from {{ restic_release_url }}"
   get_url:
     url: "{{ restic_release_url }}"
     dest: "{{ restic_build_dir.path }}/restic.bz2"
-  when: restic_binary.stat.exists == False
 
 - name: Decompress restic
   command: "bzip2 -d {{ restic_build_dir.path }}/restic.bz2"
-  when: restic_binary.stat.exists == False
 
 - name: Install restic
   copy:
     src: "{{ restic_build_dir.path }}/restic"
-    dest: "{{ default_binary_dest }}/restic"
+    dest: "{{ restic_binary_dest }}"
     mode: 0755
   become: true
-  when: restic_binary.stat.exists == False
 
 - name: Remove temp build directory
   file:
     path: "{{ restic_build_dir.path }}"
     state: absent
-  when: restic_binary.stat.exists == False

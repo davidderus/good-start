@@ -1,10 +1,12 @@
-# good-start v1.0.0-beta.6
+# good-start v1.0.0
 
 Advanced developer setup for macOS and Debian/Ubuntu.
 
 ## Disclaimer
 
-**⚠️ This is a beta, meaning that this project is not fully tested yet.**
+This is a stable release.
+
+This was tested on Ubuntu 16.04 and macOS 10.13.1 with all roles on.
 
 ## Quick start
 
@@ -12,8 +14,11 @@ Advanced developer setup for macOS and Debian/Ubuntu.
 # Setup ansible and other requirements
 ./ansible-install.sh
 
-# Copy the vars template
-cp host_vars/localhost/vars.yml.tpl host_vars/localhost/vars.yml
+# (OPTIONNAL) Make an host_vars directory
+mkdir -p host_vars/localhost
+
+# Copy the vars template (see §Configuration for an advanced vars setup)
+cp vars.yml.tpl host_vars/localhost/vars.yml
 
 # Edit the vars to match your requirements
 vim host_vars/localhost/vars.yml
@@ -40,19 +45,19 @@ manually.
 ## Configuration
 
 All roles configuration files (*clear text or encrypted via `ansible-vault`*)
-must be stored in `host_vars/localhost`.
+may be stored wherever you want.
 
-As shown in the quick start, you may use the `host_vars/localhost/vars.yml.tpl`
-file to discover the available variables.
+As shown in the quick start, you may use the `vars.yml.tpl` as a basic model.
+If you want to override the roles variables, look at the `variables.md` file
+for a detailed list of all the variables and installed packages/plugins.
 
 You may modify the `playbook.yml` file to disable some roles or use
 the `--tags` arg*.
 
-It may be a good idea to backup or version the `host_vars/localhost` directory
-in a secure location if you want to reproduce your setup.
+If you choose to use the `host_vars/localhost` directory, it may be a good idea
+to back it up or version it in a secure location if you want to reproduce your setup.
 
-Using `ansible-vault` to [encrypt your sensible infos](http://docs.ansible.com/ansible/latest/playbooks_best_practices.html#best-practices-for-variables-and-vaults) may be a good idea on a shared computer or if the directory is
-synced on an insecure drive.
+Using `ansible-vault` to [encrypt your sensible infos](http://docs.ansible.com/ansible/latest/playbooks_best_practices.html#best-practices-for-variables-and-vaults) may be a good idea on a shared computer or if the directory is synced on an insecure drive.
 
 ## Features
 
@@ -78,15 +83,15 @@ This playbook includes the following roles:
 > Customizes your apps for a better productivity.
 
 - Dotfiles generation for:
-    - Ansible
-    - Direnv
-    - Git
-    - Screen
-    - The Silver Searcher
-    - Tmux
-    - Vim
-    - Zsh
-    - Aria2
+  - Ansible
+  - Direnv
+  - Git
+  - Screen
+  - The Silver Searcher
+  - Tmux
+  - Vim
+  - Zsh
+  - Aria2
 - SSH key generation (*only if none found*)
 - Vim/Neovim packages installation
 - Tmux packages installation
@@ -136,3 +141,7 @@ MIT Licence. Click [here](LICENCE) to see the full text.
 
 With the project `Vagrantfile`, you can test the playbook on Ubuntu Xenial and macOS Sierra.
 Use `vagrant up` to launch the two VMs, and ssh into both to test the playbook in the `/vagrant` mounted directory.
+
+## variables.md
+
+To regenerate the `variables.md` file, use `bash doc-generator.sh > variables.md`.

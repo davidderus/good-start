@@ -1,0 +1,15 @@
+---
+
+- name: Restart Finder
+  command: killall Finder
+  ignore_errors: yes
+  listen: Refresh UI
+
+- name: Restart Dock
+  command: killall Dock
+  ignore_errors: yes
+
+- name: Restart UIServer
+  command: killall SystemUIServer
+  ignore_errors: yes
+  listen: Refresh UI

@@ -1,9 +1,31 @@
 ---
 
+# Projects root is the directory where project will be cloned
 projects_root: ~/src
 
+# SSH keys to use to clone some projects
+# Example:
+# projects_ssh_keys:
+#    my-key: ~/.ssh/id_mykey
 projects_ssh_keys: {}
 
+# A list of projects to clone
+# Example:
+# projects_list:
+#   - repo: 'https://github.com/ansible/hello-world.git'
+#     name: 'ansible'
+#     parent_directory: 'Python'
+#     with_direnv: True
+#     docker_machine_name: ansible # use docker-machine ansible
+#     docker_compose_app: ansible # export DKC_SERVICE=ansible
+#     direnv_exports:
+#       DEFAULT_BRANCH: devel
+#   - repo: 'https://github.com/codeunion/dotenv-example'
+#     name: 'fake'
+#     setup_env: True # copy
+#     env_file: env.example
+#     ssh_key: my-key
 projects_list: []
 
-projects_default_env_tpl: env.tpl 
+# The default env template file used by your projects (instead of setting a env_file per project)
+projects_default_env_tpl: env.tpl
