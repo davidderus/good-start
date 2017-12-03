@@ -11,5 +11,5 @@
 
 - name: Apps to install (custom installation)
   include: "custom-install/{{ item }}.yml"
-  with_items: "{{ custom_app_installations }}"
+  with_items: "{{ debian_custom_apps }}"
   tags: apps

@@ -1,14 +1,5 @@
 ---
 
-- name: Loading distribution's vars
-  include_vars: "{{ dev_distribution }}.yml"
-  tags:
-    - apps
-    - zsh
-    - golang
-    - settings
-    - launchbar
-
 - name: "{{ ansible_distribution }} Setup"
   include: "{{ dev_distribution }}/main.yml"
 
@@ -24,13 +15,24 @@
     - apps
     - golang
 
-- name: Installing custom apps
+- name: Installing custom apps (Darwin)
   include: common/zipped-binary.yml
   vars:
     app_binary_name: "{{ app.binary_name | default(app.name) }}"
-  with_items: "{{ zipped_binaries }}"
+  with_items: "{{ darwin_zipped_binaries }}"
   loop_control:
     loop_var: app
-  when: not ansible_check_mode
+  when: not ansible_check_mode and dev_distribution == 'darwin'
+  tags:
+    - apps
+
+- name: Installing custom apps (Debian)
+  include: common/zipped-binary.yml
+  vars:
+    app_binary_name: "{{ app.binary_name | default(app.name) }}"
+  with_items: "{{ debian_zipped_binaries }}"
+  loop_control:
+    loop_var: app
+  when: not ansible_check_mode and dev_distribution == 'debian'
   tags:
     - apps

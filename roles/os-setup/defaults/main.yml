@@ -1,6 +1,6 @@
 ---
 
-# Packages existing for aptitude and brew
+# The default cross-platform list of packages to install
 common_packages:
   - bash # Updating default macOS bash
   - ffmpeg # Video and GIFs modifications and conversions
@@ -20,11 +20,189 @@ common_packages:
   - vim # An up-to-date vim version
   - jq # JSON manipulation
 
+# The default cross-platform list of apps to install
 common_apps:
   - virtualbox # Virtualisation
   - vagrant # VM per projects
   - firefox # Alternative browser
 
-github_release_regex: 'https:\/\/github\.com\/%s\/releases\/download\/[\d\w\.]{5,}\/[\w\.]+_%s\.\w+'
+# An array of Golang packages to get
+go_get:
+  - github.com/ddollar/forego # Foreman in Go
+  - github.com/cortesi/devd/cmd/devd # Local webserver for developers
 
-zipped_binaries: [] # Default is none. This will be overrided on a per-OS basis
+# Defines the place to store manually downloaded binaries
+default_binary_dest: '/usr/local/bin'
+
+##################
+# macOS specific #
+##################
+
+# Key-values translations to be used elsewhere (for example in the Dock setup)
+darwin_i18n:
+  calendar: Calendrier
+
+# An array of string of system languages
+darwin_languages:
+  - fr
+  - en
+
+# The system locale
+darwin_locale: fr_FR@currency=EUR
+
+# macOS specific packages
+brew_packages:
+  - md5sha1sum # More checksum tools
+  - coreutils # for things like realpath…
+  - rclone # Cloud sync à-la rsync
+  - caddy # Webserver/Reverse-Proxy/more…
+  - fdupes # Duplicates file finder
+  - watch # GNU watch command
+  - ag # Grep replacement
+  - fzf # Command line fuzzy finder
+  - diff-so-fancy # Differ
+  - ssh-copy-id # Copy ssh keys to remote hosts
+  - dockutil # Dock management from the command line
+
+# macOS specific apps
+brew_cask_apps:
+  - google-chrome # Default browser
+  - appcleaner # For easy apps cleanup
+  - iterm2 # Default terminal emulator
+  - atom # Default code editor
+  - launchbar # Spotlight replacement
+  - keepassxc # Password manager
+  - gpg-suite # GPG made easy (+ Mail.app extension)
+  - slack # For team communications
+  - spotify # Music ease the mind
+  - lunchy # Launchctl wrapper
+  - spectacle # Window manager
+  - ngrok # Secure(?) tunneling
+  - postman # HTTP requesting interface
+  - fluid # Dedicated Mac app per website
+  - typora # Useful markdown editor
+
+# An array of string of items to remove from the Dock
+darwin_removed_dock_items:
+  - Launchpad
+  - Safari
+  - Contacts
+  - Notes
+  - Reminders
+  - Maps
+  - Photos
+  - Messages
+  - FaceTime
+  - iTunes
+  - iBooks
+  - App Store
+  - System Preferences
+
+# An array of hashes{name, path, position} of positionned items to add to the dock
+darwin_added_dock_items:
+  - name: Mail
+    position: 1
+  - name: "{{ darwin_i18n['calendar'] }}"
+    position: 2
+  - name: iTerm
+    path: "/Applications/iTerm.app"
+    position: 3
+  - name: Google Chrome
+    path: "/Applications/Google Chrome.app"
+    position: 4
+  - name: Spotify
+    path: /Applications/Spotify.app
+    position: 5
+  - name: KeePassXC
+    path: /Applications/KeePassXC.app
+    position: 6
+  - name: Atom
+    path: /Applications/Atom.app
+    position: 7
+  - name: Slack
+    path: /Applications/Slack.app
+    position: 8
+
+# The Dock icons size
+darwin_dock_icons_size: 36.0
+
+# darwin_zipped_binaries will use the first file matching app.binary_name or app.name.
+# You can use a wilcard to match a custom filename like 'binary_v*'.
+#
+# You may also set the `recurse` option to true in order to find the binary
+# in a subfolder.
+#
+# ⚠️  A wrong binary_name or filename may result in a incorrect file being copied
+# to `binary_dest`
+darwin_zipped_binaries: [] # Default is none. This will be overrided on a per-OS basis
+
+# Launchbar – Plist domain
+launchbar_plist_domain: at.obdev.LaunchBar
+
+# Launchbar – Configuration Plist
+launchbar_configuration_file: ~/Library/Application Support/LaunchBar/Configuration.plist
+
+# Launchbar – Where to store actions
+launchbar_actions_directory: ~/Library/Application Support/LaunchBar/Actions
+
+# Launchbar – What actions to GET and install
+launchbar_actions:
+  - filename: 'Spotify - Play:Pause.lbaction'
+    url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Play:Pause.lbaction?raw=true
+    checksum: 'sha256:a08d1bb667c6cec1089ac7dfd853c2a376e3d5269a8ad5e380cafe85526cb141'
+  - filename: 'Spotify - Next Song.lbaction'
+    url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Next%20Song.lbaction?raw=true
+    checksum: 'sha256:e6e2ee949eafed06ea93baf58cdc36af8e84258fb01f6562b15f706cc1bd8c1a'
+  - filename: 'Spotify - Previous Song.lbaction'
+    url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Previous%20Song.lbaction?raw=true
+    checksum: 'sha256:f4f3698b1bda0d40e893d00afb972248b20fa143a02cce91213325f068703d62'
+  - filename: 'Caffeinate.lbaction'
+    url: https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction
+    checksum: 'sha256:0c71985eb6189fd021851718417064dcbe9ba14e9762194894583aeea95b3224'
+
+###################
+# Debian specific #
+###################
+
+# APT-specific packages
+aptitude_packages:
+  - silversearcher-ag
+  - gnupg2
+  - zsh
+  - python-setuptools
+  - fdupes # Duplicates file finder
+  - unzip
+
+# APT-specific apps
+aptitude_apps:
+  - default-jre
+  - chromium-browser
+  - keepassx
+  - terminator
+  - synaptic
+
+# A list of custom install task to load for Debian
+# Each one of these apps as a dedicated yml file with tasks to install it
+debian_custom_apps:
+  - atom
+  - diff-so-fancy
+  - fzf
+  - postman
+  - spotify
+
+# debian_zipped_binaries will use the first file matching app.binary_name or app.name.
+# You can use a wilcard to match a custom filename like 'binary_v*'.
+#
+# You may also set the `recurse` option to true in order to find the binary
+# in a subfolder.
+#
+# ⚠️  A wrong binary_name or filename may result in a incorrect file being copied
+# to `binary_dest`
+debian_zipped_binaries:
+  - name: rclone
+    url: https://downloads.rclone.org/rclone-current-linux-amd64.zip
+    recurse: true
+  - name: caddy
+    url: https://caddyserver.com/download/linux/amd64?license=personal
+  - name: ngrok
+    url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip

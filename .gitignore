@@ -1,2 +1,1 @@
-host_vars/localhost/*
-!host_vars/localhost/vars.yml.tpl
+host_vars/
