@@ -34,7 +34,7 @@
 
 - name: Launching Docker daemon
   service:
-    name: {{ docker_service_name }}
+    name: "{{ docker_service_name }}"
     state: started
     enabled: True
   register: docker_daemon_launched
