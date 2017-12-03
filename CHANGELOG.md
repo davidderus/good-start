@@ -2,8 +2,11 @@
 
 ## Releases
 
-### Unreleased
+### v1.0.0 - 2017/12/03
 
+- Updating dockutil shell behaviour and fixing order command
+- Not registering anything and improving skip for apm
+- Quicker and idempotent process check for macOS docker
 - We're not constraining a variable storage
 - All vars are now overridable
   - Available variables are documented in variables.md
