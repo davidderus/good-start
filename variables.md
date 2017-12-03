@@ -1,4 +1,4 @@
-# Overrides
+# Variables
 
 What follows is a listing of all the overridable vars of good-start with their default values.
 Feel free to override any of them in your host_vars.
@@ -76,6 +76,9 @@ docker_machine_url: "https://github.com/docker/machine/releases/download/{{ dock
 
 # Max time to wait for Docker Daemon
 docker_daemon_waiting_time: 30
+
+# Docker hypervisor process name on macOS, used to check if Docker is running
+docker_running_process_name: com.docker.hyperkit # Using Docker Hypervisor
 ```
 
 ## `dotfiles` role – roles/dotfiles/defaults/main.yml
