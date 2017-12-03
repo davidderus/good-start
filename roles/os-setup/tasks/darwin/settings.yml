@@ -211,18 +211,29 @@
 - name: Remove all useless Dock items
   shell: dockutil --remove '{{ item }}' --no-restart
   ignore_errors: true
+  register: darwin_dock_remove
+  changed_when: darwin_dock_remove.stdout == ''
   with_items: darwin_removed_dock_items
   notify: Restart Dock
 
 - name: Check if the Dock items exist or add it
   shell: dockutil --find '{{ item.name }}' || dockutil --add '{{ item.path }}' --no-restart
+  register: darwin_dock_add
+  changed_when: darwin_dock_add.stdout | search('was not found')
   with_items: "{{ darwin_added_dock_items }}"
   when: item.path is defined
   notify: Restart Dock
 
-- name: Fix the Dock items order
-  shell: dockutil --move '{{ item.name }}' --position {{ item.position }}
+- name: Register Dock items positions
+  shell: dockutil --find '{{ item.name }}'
+  register: darwin_dock_positions
+  changed_when: False
   with_items: "{{ darwin_added_dock_items }}"
+
+- name: Fix the Dock items order
+  shell: dockutil --move '{{ item.item.name }}' --position {{ item.item.position }}
+  when: not item.stdout.find('at slot %d' % item.item.position)
+  with_items: "{{ darwin_dock_positions.results }}"
   notify: Restart Dock
 
 - name: Auto-hide the Dock
