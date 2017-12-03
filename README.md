@@ -1,10 +1,12 @@
-# good-start v1.0.0-beta.6
+# good-start v1.0.0
 
 Advanced developer setup for macOS and Debian/Ubuntu.
 
 ## Disclaimer
 
-**⚠️ This is a beta, meaning that this project is not fully tested yet.**
+This is a stable release.
+
+This was tested on Ubuntu 16.04 and macOS 10.13.1 with all roles on.
 
 ## Quick start
 
