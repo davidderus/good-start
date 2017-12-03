@@ -47,7 +47,7 @@ may be stored wherever you want.
 
 As shown in the quick start, you may use the `vars.yml.tpl` as a basic model.
 If you want to override the roles variables, look at the `variables.md` file
-for a detailed list of all the variables.
+for a detailed list of all the variables and installed packages/plugins.
 
 You may modify the `playbook.yml` file to disable some roles or use
 the `--tags` arg*.
@@ -81,15 +81,15 @@ This playbook includes the following roles:
 > Customizes your apps for a better productivity.
 
 - Dotfiles generation for:
-    - Ansible
-    - Direnv
-    - Git
-    - Screen
-    - The Silver Searcher
-    - Tmux
-    - Vim
-    - Zsh
-    - Aria2
+  - Ansible
+  - Direnv
+  - Git
+  - Screen
+  - The Silver Searcher
+  - Tmux
+  - Vim
+  - Zsh
+  - Aria2
 - SSH key generation (*only if none found*)
 - Vim/Neovim packages installation
 - Tmux packages installation

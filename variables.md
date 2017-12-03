@@ -317,8 +317,10 @@ darwin_removed_dock_items:
 # An array of hashes{name, path, position} of positionned items to add to the dock
 darwin_added_dock_items:
   - name: Mail
+    path: /Applications/Mail.app
     position: 1
   - name: "{{ darwin_i18n['calendar'] }}"
+    path: /Applications/Calendar.app
     position: 2
   - name: iTerm
     path: "/Applications/iTerm.app"
