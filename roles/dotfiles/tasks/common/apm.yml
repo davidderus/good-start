@@ -17,6 +17,5 @@
 
 - name: Atom packages installation
   command: "apm install {{ item | quote }}"
-  register: apm_install_output
-  when: item not in apm_packages_list
+  when: item not in apm_packages_list.stdout_lines
   with_items: "{{ dotfiles_apm_packages }}"
