@@ -4,6 +4,7 @@
   shell: command -v restic >/dev/null 2>&1
   register: restic_exists
   ignore_errors: yes
+  changed_when: False
 
 - include: install.yml
   when: not ansible_check_mode and restic_exists.rc != 0

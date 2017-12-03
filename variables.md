@@ -79,6 +79,9 @@ docker_daemon_waiting_time: 30
 
 # Docker hypervisor process name on macOS, used to check if Docker is running
 docker_running_process_name: com.docker.hyperkit # Using Docker Hypervisor
+
+# Docker service name on Debian
+docker_service_name: docker.service
 ```
 
 ## `dotfiles` role – roles/dotfiles/defaults/main.yml
