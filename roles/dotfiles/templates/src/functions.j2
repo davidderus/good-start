@@ -3,10 +3,11 @@
 # Devlog handling #
 ###################
 
+export DEVLOG_DIR="{{ dotfiles_devlog_directory }}"
+
 # Creates a devlog directory for the current user and init a Caddyfile for easier devlog browsing
 # Usage: `devlog_init`
 devlog_init() {
-  DEVLOG_DIR="$HOME/Devlog"
   mkdir -p $DEVLOG_DIR
   echo "localhost:2020\ngzip\nbrowse\nmarkdown { ext .md .txt }" > $DEVLOG_DIR/Caddyfile
 }
@@ -15,7 +16,7 @@ devlog_init() {
 # Post path: $HOME/Devlog/$WEEK_NUMBER/$DATE-$NAME.md
 # Usage: `devlog_post MyApp`
 devlog_post() {
-  dev_dir=`date +"$HOME/Devlog/S%V"`
+  dev_dir=`date +"$DEVLOG_DIR/S%V"`
   mkdir -p $dev_dir
   filename=`date +"$dev_dir/%Y-%m-%d-$1.md"`
   vim $filename
@@ -24,14 +25,14 @@ devlog_post() {
 # Serves the Devlog thanks to Caddy
 # Usage: devlog_serve
 devlog_serve() {
-  cd $HOME/Devlog
+  cd $DEVLOG_DIR
   caddy
 }
 
 # Searches a string in the Devlog
 # Usage: `devlog_search foobar`
 devlog_search() {
-  ag -i --markdown $1 $HOME/Devlog/
+  ag -i --markdown $1 $DEVLOG_DIR/
 }
 
 # DEPRECATED

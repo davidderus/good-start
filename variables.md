@@ -97,6 +97,7 @@ docker_service_name: docker.service
 
 # Enable a developpment log for day-to-day notes
 dotfiles_devlog_enabled: True
+dotfiles_devlog_directory: '$HOME/Devlog'
 
 # Sets the $EDITOR
 dotfiles_default_editor: nvim
