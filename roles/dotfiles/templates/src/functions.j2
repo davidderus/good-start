@@ -16,9 +16,9 @@ devlog_init() {
 # Post path: $HOME/Devlog/$WEEK_NUMBER/$DATE-$NAME.md
 # Usage: `devlog_post MyApp`
 devlog_post() {
-  dev_dir=`date +"$DEVLOG_DIR/S%V"`
+  dev_dir=$(date +"$DEVLOG_DIR/S%V")
   mkdir -p $dev_dir
-  filename=`date +"$dev_dir/%Y-%m-%d-$1.md"`
+  filename=$(date +"$dev_dir/%Y-%m-%d-$1.md" | sed 's/ /-/g')
   vim $filename
 }
 
