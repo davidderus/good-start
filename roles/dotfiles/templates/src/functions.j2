@@ -39,9 +39,9 @@ devlog_search() {
 # unalias devlog
 {% endif %}
 
-#######
-# ——— #
-#######
+#############
+# Utilities #
+#############
 
 # Replace a pattern by another globally in a set of files without backups
 # WARNING: Always diff the result to prevent some mistakes
@@ -49,4 +49,23 @@ devlog_search() {
 # Usage: sed_in_place 0.3.9 0.3.10 bower.json package.json app/scripts/config.js
 sed_in_place() {
   sed -i '' -e "s/$1/$2/g" ${@:3}
+}
+
+# ssh-config reads your ssh-config and find a given key for an host or its entire config
+#
+# Usage:
+# ssh-config neo #=> Returns the full config for the neo host
+# ssh-config neo user #=> Returns the username for host neo
+ssh-config() {
+  local hostname=$1
+  local config_key=$2
+  local value=$(sed -n "/Host $hostname/,/Host/p" ~/.ssh/config)
+
+  if [[ -n $config_key ]]; then
+    local new_value=$(echo $value | grep -i "  $config_key " | cut  -d ' ' -f 4)
+
+    if [[ -n $new_value ]]; then value=$new_value; fi
+  fi
+
+  echo $value
 }
