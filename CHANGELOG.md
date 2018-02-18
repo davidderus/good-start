@@ -10,6 +10,10 @@
   - Improved devlog post creation
   - Improved devlog serving
 - Adding less to git diff in addition to diff-so-fancy
+- Adding syncthing for macos
+- Adding small ssh-config reader script
+- Adding vscode workspace files to gitignore
+- Supporting custom devlog directory
 
 ### v1.0.0 - 2017/12/03
 
