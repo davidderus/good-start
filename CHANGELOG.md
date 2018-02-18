@@ -2,6 +2,15 @@
 
 ## Releases
 
+### Unreleased
+
+- Updating Devlog to v1.1.0
+  - New shell syntax: one entrypoint for all commands, devlog
+  - Supporting quick notes
+  - Improved devlog post creation
+  - Improved devlog serving
+- Adding less to git diff in addition to diff-so-fancy
+
 ### v1.0.0 - 2017/12/03
 
 - Updating dockutil shell behaviour and fixing order command
