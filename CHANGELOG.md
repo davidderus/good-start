@@ -2,7 +2,7 @@
 
 ## Releases
 
-### Unreleased
+### v1.1.0 - 2018/02/18
 
 - Updating Devlog to v1.1.0
   - New shell syntax: one entrypoint for all commands, devlog
