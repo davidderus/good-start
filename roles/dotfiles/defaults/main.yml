@@ -24,7 +24,7 @@ dotfiles_go_path: ~/go/
 dotfiles_locale: en_US.UTF-8
 
 # Sets the pager used by git
-dotfiles_git_pager: diff-so-fancy
+dotfiles_git_pager: "diff-so-fancy | less --tabs=4 -RFX"
 
 # Sets the editor used by git
 dotfiles_git_editor: "{{ dotfiles_default_editor }}"
