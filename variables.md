@@ -97,6 +97,7 @@ docker_service_name: docker.service
 
 # Enable a developpment log for day-to-day notes
 dotfiles_devlog_enabled: True
+dotfiles_devlog_directory: '$HOME/Devlog'
 
 # Sets the $EDITOR
 dotfiles_default_editor: nvim
@@ -110,7 +111,7 @@ dotfiles_go_path: ~/go/
 dotfiles_locale: en_US.UTF-8
 
 # Sets the pager used by git
-dotfiles_git_pager: diff-so-fancy
+dotfiles_git_pager: "diff-so-fancy | less --tabs=4 -RFX"
 
 # Sets the editor used by git
 dotfiles_git_editor: "{{ dotfiles_default_editor }}"
@@ -282,6 +283,7 @@ brew_packages:
   - diff-so-fancy # Differ
   - ssh-copy-id # Copy ssh keys to remote hosts
   - dockutil # Dock management from the command line
+  - syncthing # Secure files sync
 
 # macOS specific apps
 brew_cask_apps:

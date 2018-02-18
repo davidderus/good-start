@@ -3,44 +3,101 @@
 # Devlog handling #
 ###################
 
-# Creates a devlog directory for the current user and init a Caddyfile for easier devlog browsing
-# Usage: `devlog_init`
-devlog_init() {
-  DEVLOG_DIR="$HOME/Devlog"
-  mkdir -p $DEVLOG_DIR
-  echo "localhost:2020\ngzip\nbrowse\nmarkdown { ext .md .txt }" > $DEVLOG_DIR/Caddyfile
+export DEVLOG_DIR="{{ dotfiles_devlog_directory }}"
+
+# Manipulates devlog
+# Usage: `devlog *`
+devlog() {
+  case "$1" in
+    help)
+      __devlog_usage
+      ;;
+    serve)
+      __devlog_serve
+      ;;
+    search)
+      __devlog_search $1
+      ;;
+    post)
+      __devlog_post $@
+      ;;
+    *)
+      [[ ! -z "$@" ]] && __devlog_post note $@ || __devlog_usage
+      ;;
+  esac
+}
+
+# Prints devlog usage
+# Usage: `devlog help`
+__devlog_usage() {
+  read -r -d '' devlog_usage <<EOM
+\e[32m# Devlog v1.1.0\e[39m
+
+\e[4m## Directory\e[24m
+
+$DEVLOG_DIR
+
+\e[4m## Usage\e[24m
+
+\e[1mdevlog help\e[0m: Shows this message.
+\e[1mdevlog init\e[0m: Creates a basic devlog dir and Caddyfile.
+\e[1mdevlog serve\e[0m: Serves the devlog directory content on localhost:2020.
+\e[1mdevlog search\e[0m: Looks for a given string through every file in the devlog directory.
+\e[1mdevlog post\e[0m: Creates a post with a given title and open it in the default editor.
+\e[1mdevlog\e[0m: Takes the following text and create a quick note. If a note already exists for the day, the text will be appended.
+EOM
+
+  echo -e "$devlog_usage"
 }
 
 # Creates or opens a post
 # Post path: $HOME/Devlog/$WEEK_NUMBER/$DATE-$NAME.md
-# Usage: `devlog_post MyApp`
-devlog_post() {
-  dev_dir=`date +"$HOME/Devlog/S%V"`
+__devlog_post() {
+  case "$1" in
+    post)
+      local file_title="${@:2}"
+      file_title=${file_title:-'Daily Post'}
+
+      # Removing spaces and lowercasing title for filename
+      local file_name=$(echo $file_title | tr ' ' '-' | tr '[:upper:]' '[:lower:]')
+      ;;
+    note)
+      local file_name="note"
+      ;;
+  esac
+
+  local dev_dir=$(date +"$DEVLOG_DIR/S%V")
   mkdir -p $dev_dir
-  filename=`date +"$dev_dir/%Y-%m-%d-$1.md"`
-  vim $filename
+
+  local file_path=$(date +"$dev_dir/%Y-%m-%d-$file_name.md")
+
+  if [[ "$1" == "post" ]]; then
+    # Adding title to file if new
+    [[ ! -f "$file_path" ]] && echo "# $file_title" > $file_path
+
+    # Opening file
+    "${EDITOR:-vim}" $file_path
+  else
+    # Appending input text to the note
+    echo "${@:2}" >> $file_path
+  fi
 }
 
 # Serves the Devlog thanks to Caddy
-# Usage: devlog_serve
-devlog_serve() {
-  cd $HOME/Devlog
-  caddy
+__devlog_serve() {
+  local caddyfile="localhost:2020\ngzip\nbrowse\nmarkdown { ext .md .txt }"
+  echo "$caddyfile" | caddy -conf stdin -root "$DEVLOG_DIR"
 }
 
 # Searches a string in the Devlog
-# Usage: `devlog_search foobar`
-devlog_search() {
-  ag -i --markdown $1 $HOME/Devlog/
+__devlog_search() {
+  ag -i --markdown $1 $DEVLOG_DIR/
 }
-
-# DEPRECATED
-# unalias devlog
 {% endif %}
 
-#######
-# ——— #
-#######
+#############
+# Utilities #
+#############
 
 # Replace a pattern by another globally in a set of files without backups
 # WARNING: Always diff the result to prevent some mistakes
@@ -48,4 +105,23 @@ devlog_search() {
 # Usage: sed_in_place 0.3.9 0.3.10 bower.json package.json app/scripts/config.js
 sed_in_place() {
   sed -i '' -e "s/$1/$2/g" ${@:3}
+}
+
+# ssh-config reads your ssh-config and find a given key for an host or its entire config
+#
+# Usage:
+# ssh-config neo #=> Returns the full config for the neo host
+# ssh-config neo user #=> Returns the username for host neo
+ssh-config() {
+  local hostname=$1
+  local config_key=$2
+  local value=$(sed -n "/Host $hostname/,/Host/p" ~/.ssh/config)
+
+  if [[ -n $config_key ]]; then
+    local new_value=$(echo $value | grep -i "  $config_key " | cut  -d ' ' -f 4)
+
+    if [[ -n $new_value ]]; then value=$new_value; fi
+  fi
+
+  echo $value
 }

@@ -63,6 +63,7 @@ brew_packages:
   - diff-so-fancy # Differ
   - ssh-copy-id # Copy ssh keys to remote hosts
   - dockutil # Dock management from the command line
+  - syncthing # Secure files sync
 
 # macOS specific apps
 brew_cask_apps:
