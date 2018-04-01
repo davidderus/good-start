@@ -302,6 +302,7 @@ brew_cask_apps:
   - postman # HTTP requesting interface
   - fluid # Dedicated Mac app per website
   - typora # Useful markdown editor
+  - dash # Docs and snippets
 
 # An array of string of items to remove from the Dock
 darwin_removed_dock_items:
