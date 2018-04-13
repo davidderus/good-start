@@ -25,7 +25,9 @@
   environment:
     RESTIC_REPOSITORY: "{{ backup_repository }}"
     RESTIC_PASSWORD: "{{ backup_password }}"
-  when: scripts_dir.stat.exists == False
+  when:
+    - scripts_dir.stat.exists == False
+    - backup_init
 
 - name: Setup backup cron
   cron:
