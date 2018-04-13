@@ -7,6 +7,9 @@ unset HISTFILE
 # Vars setup
 export RESTIC_REPOSITORY='{{ backup_repository }}'
 export RESTIC_PASSWORD='{{ backup_password }}'
+{% for key, value in backup_env_vars.iteritems() %}
+export {{ key }}='{{ value }}'
+{% endfor %}
 
 # Backing up home dir
 # Some folders and files are excluded, see Exclusions
