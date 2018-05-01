@@ -53,6 +53,12 @@ backup_with_cron: False
 backup_cron:
   hour: "12,20"
   minute: "30"
+
+# Handling extra environment variables to export
+backup_env_vars: {}
+
+# Init restic
+backup_init: True
 ```
 
 ## `docker` role – roles/docker/defaults/main.yml
@@ -302,6 +308,7 @@ brew_cask_apps:
   - postman # HTTP requesting interface
   - fluid # Dedicated Mac app per website
   - typora # Useful markdown editor
+  - dash # Docs and snippets
 
 # An array of string of items to remove from the Dock
 darwin_removed_dock_items:

@@ -2,6 +2,17 @@
 
 ## Releases
 
+### v1.2.0 - 2018/05/01
+
+- Fixing bug preventing devlog search
+- Preventing devlog alias conflict
+- Adding an option to skip restic init process
+- Removing restic tap as it is not required anymore
+- Allowing custom env vars for backup (_like AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY_)
+- Installing Dash.app on macOS
+- Ignoring vscode directory for git
+- Better stat command on macOS
+
 ### v1.1.0 - 2018/02/18
 
 - Updating Devlog to v1.1.0
