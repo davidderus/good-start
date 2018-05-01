@@ -2,7 +2,7 @@
 
 ## Releases
 
-### Unreleased
+### v1.2.0 - 2018/05/01
 
 - Fixing bug preventing devlog search
 - Preventing devlog alias conflict
