@@ -77,7 +77,7 @@ brew_cask_apps:
   - google-chrome # Default browser
   - appcleaner # For easy apps cleanup
   - iterm2 # Default terminal emulator
-  - atom # Default code editor
+  #- atom # Default code editor
   - launchbar # Spotlight replacement
   - keepassxc # Password manager
   - gpg-suite # GPG made easy (+ Mail.app extension)
@@ -90,6 +90,7 @@ brew_cask_apps:
   - fluid # Dedicated Mac app per website
   - typora # Useful markdown editor
   - dash # Docs and snippets
+  - visual-studio-code-insiders # Default code editor
 
 # An array of string of items to remove from the Dock
 darwin_removed_dock_items:
@@ -127,8 +128,8 @@ darwin_added_dock_items:
   - name: KeePassXC
     path: /Applications/KeePassXC.app
     position: 6
-  - name: Atom
-    path: /Applications/Atom.app
+  - name: 'Visual Studio Code - Insiders'
+    path: '/Applications/Visual Studio Code - Insiders.app'
     position: 7
   - name: Slack
     path: /Applications/Slack.app
@@ -195,12 +196,13 @@ aptitude_apps:
 # A list of custom install task to load for Debian
 # Each one of these apps as a dedicated yml file with tasks to install it
 debian_custom_apps:
-  - atom
+  #- atom
   - diff-so-fancy
   - fzf
   - postman
   - spotify
   - syncthing
+  - vscode-insiders
 
 # debian_zipped_binaries will use the first file matching app.binary_name or app.name.
 # You can use a wilcard to match a custom filename like 'binary_v*'.
