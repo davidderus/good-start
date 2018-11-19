@@ -97,6 +97,7 @@ This playbook includes the following roles:
 - Vim/Neovim packages installation
 - Tmux packages installation
 - Atom packages installation
+- VSCode packages installation
 - Neovim setup (*tags: `neovim`*)
 - Iterm2 setup with custom config and theming (*macOS only | tags: `iterm`*)
 - Terminator setup with custom config (*Debian/Ubuntu only | tags: `terminator`*)

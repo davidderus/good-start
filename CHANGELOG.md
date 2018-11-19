@@ -4,6 +4,8 @@
 
 ### Unreleased
 
+- Add VSCode extensions installation support
+- Switch from Atom to VSCode as default code editor
 - Add dev fonts installation (Fira Code, Roboto…)
 - Use latest go version on Debian
 - Support syncthing installation for Debian
