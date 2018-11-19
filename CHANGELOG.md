@@ -2,6 +2,15 @@
 
 ## Releases
 
+### Unreleased
+
+- Add dev fonts installation (Fira Code, Roboto…)
+- Use latest go version on Debian
+- Support syncthing installation for Debian
+- Add parallel, jpegoptim and optipng packages
+- Ignore `todo.md` file in Git repos
+- Ignore some Ruby gem files in Git repos
+
 ### v1.2.0 - 2018/05/01
 
 - Fixing bug preventing devlog search

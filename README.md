@@ -75,6 +75,7 @@ This playbook includes the following roles:
 - Customize the Dock content (*macOS only | tags: `settings`*)
 - Oh-My-Zsh setup (*tags: `apps,zsh`*)
 - Launchbar configuration updates and actions installation (*tags: `launchbar`*)
+- Dev fonts installation (Fira Code, Roboto…) (*tags: `fonts`*)
 
 ### dotfiles role
 
