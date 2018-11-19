@@ -142,6 +142,8 @@ MIT Licence. Click [here](LICENCE) to see the full text.
 With the project `Vagrantfile`, you can test the playbook on Ubuntu Xenial and macOS Sierra.
 Use `vagrant up` to launch the two VMs, and ssh into both to test the playbook in the `/vagrant` mounted directory.
 
+You can run `sudo passwd root` to define the root password on the vagrant box.
+
 ## variables.md
 
 To regenerate the `variables.md` file, use `bash doc-generator.sh > variables.md`.
