@@ -196,6 +196,7 @@ debian_custom_apps:
   - fzf
   - postman
   - spotify
+  - syncthing
 
 # debian_zipped_binaries will use the first file matching app.binary_name or app.name.
 # You can use a wilcard to match a custom filename like 'binary_v*'.

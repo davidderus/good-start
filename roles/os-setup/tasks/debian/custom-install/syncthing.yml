@@ -1,0 +1,25 @@
+---
+
+- name: Add syncthing apt-key
+  apt_key:
+    id: D26E6ED000654A3E
+    url: https://syncthing.net/release-key.txt
+
+- name: Add syncthing repo
+  apt_repository:
+    repo: deb https://apt.syncthing.net/ syncthing stable
+    state: present
+
+- name: Update repositories cache and install syncthing
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - apt-transport-https
+    - syncthing
+
+- name: Open optionnal ports
+  ufw:
+    name: syncthing
+    rule: allow
