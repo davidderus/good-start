@@ -4,6 +4,10 @@
   include: apm.yml
   when: dotfiles_install_atom_packages
 
+- name: Installing VSCode packages
+  include: vscode.yml
+  when: dotfiles_install_vscode_packages
+
 - name: Installing tmux packages
   include: tpm.yml
   when: dotfiles_install_tmux_packages

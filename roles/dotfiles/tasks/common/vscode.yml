@@ -1,0 +1,15 @@
+---
+
+##########
+# VSCode #
+##########
+
+- name: Getting existing packages list
+  command: "{{ dotfiles_vscode_app_name }} --list-extensions"
+  changed_when: False
+  register: vscode_packages_list
+
+- name: Atom packages installation
+  command: "{{ dotfiles_vscode_app_name }} --install-extension {{ item | quote }}"
+  when: item not in vscode_packages_list.stdout_lines
+  with_items: "{{ dotfiles_vscode_packages }}"

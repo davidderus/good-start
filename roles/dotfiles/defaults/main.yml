@@ -102,6 +102,10 @@ dotfiles_apm_path: ~/.atom/packages
 dotfiles_apm_packages:
   - sync-settings # Other packages and settings are pulled by this package
 
+dotfiles_vscode_app_name: 'code-insiders'
+dotfiles_vscode_packages:
+  - Shan.code-settings-sync # Other packages and settings are pulled by this package
+
 # Will use neovim system-wide instead of vim
 dotfiles_with_neovim: True
 dotfiles_vimplug_destination: "{{ '~/.local/share/nvim/site/autoload/plug.vim' if dotfiles_with_neovim else '~/.vim/autoload/plug.vim' }}"
@@ -118,7 +122,10 @@ dotfiles_terminal_shortcuts:
     comment: Maj + <-
 
 # Install Atom packages mentioned in dotfiles (apm)
-dotfiles_install_atom_packages: True
+dotfiles_install_atom_packages: False
+
+# Install VSCode packages mentioned in dotfiles (code-insiders)
+dotfiles_install_vscode_packages: True
 
 # Install tmux packages mentioned in dotfiles (tpm)
 dotfiles_install_tmux_packages: True
