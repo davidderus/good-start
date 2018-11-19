@@ -218,3 +218,28 @@ debian_zipped_binaries:
     url: https://caddyserver.com/download/linux/amd64?license=personal
   - name: ngrok
     url: https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-amd64.zip
+
+fonts_repo_base: 'https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts'
+
+fonts:
+  macos:
+    - font-firacode-nerd-font
+    - font-roboto
+    - font-sourcecodepro-nerd-font
+  debian:
+    - filename: 'firacode-regular-nerd-font.otf'
+      url: '{{ fonts_repo_base }}/FiraCode/Regular/complete/Fura%20Code%20Regular%20Nerd%20Font%20Complete.otf'
+    - filename: 'firacode-medium-nerd-font.otf'
+      url: '{{ fonts_repo_base }}/FiraCode/Medium/complete/Fura%20Code%20Medium%20Nerd%20Font%20Complete.otf'
+    - filename: 'firacode-bold-nerd-font.otf'
+      url: '{{ fonts_repo_base }}/FiraCode/Bold/complete/Fura%20Code%20Bold%20Nerd%20Font%20Complete.otf'
+    - filename: 'roboto-mono-regular-nerd-font.ttf'
+      url: '{{ fonts_repo_base }}/RobotoMono/Regular/complete/Roboto%20Mono%20Nerd%20Font%20Complete.ttf'
+    - filename: 'roboto-mono-italic-nerd-font.ttf'
+      url: '{{ fonts_repo_base }}/RobotoMono/Italic/complete/Roboto%20Mono%20Italic%20Nerd%20Font%20Complete.ttf'
+    - filename: 'roboto-mono-bold-nerd-font.ttf'
+      url: '{{ fonts_repo_base }}/RobotoMono/Bold/complete/Roboto%20Mono%20Bold%20Nerd%20Font%20Complete.ttf'
+    - filename: 'sourcecodepro-regular-nerd-font.ttf'
+      url: '{{ fonts_repo_base }}/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete.ttf'
+    - filename: 'sourcecodepro-bold-nerd-font.ttf'
+      url: '{{ fonts_repo_base }}/SourceCodePro/Bold/complete/Sauce%20Code%20Pro%20Bold%20Nerd%20Font%20Complete.ttf'

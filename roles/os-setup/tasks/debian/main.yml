@@ -1,5 +1,9 @@
 ---
 
+- name: Fonts to install
+  include: fonts.yml
+  tags: fonts
+
 - name: Apps to install (apt installation)
   apt:
     name: "{{ item }}"
@@ -8,6 +12,7 @@
     cache_valid_time: 3600
   with_items: "{{ common_packages | union(aptitude_packages) | union(aptitude_apps) }}"
   become: true
+  tags: apps
 
 - name: Apps to install (custom installation)
   include: "custom-install/{{ item }}.yml"

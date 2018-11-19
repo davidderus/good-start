@@ -1,0 +1,13 @@
+---
+
+- name: Add fonts tap
+  homebrew_tap:
+    name: caskroom/fonts
+    state: present
+
+- name: Install fonts
+  homebrew_cask:
+    name: '{{ item }}'
+    state: present
+    update_homebrew: yes
+  with_items: '{{ fonts.macos }}'

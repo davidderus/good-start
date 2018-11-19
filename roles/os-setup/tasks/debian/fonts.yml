@@ -1,0 +1,14 @@
+---
+
+- name: Make user fonts directory
+  file:
+    path: '~/.fonts'
+    state: directory
+    mode: 0755
+
+- name: Put fonts in user fonts directory
+  get_url:
+    url: '{{ item.url }}'
+    dest: '~/.fonts/{{ item.filename }}'
+    mode: 0644
+  with_items: '{{ fonts.debian }}'

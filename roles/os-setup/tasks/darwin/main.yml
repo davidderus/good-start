@@ -1,16 +1,17 @@
 ---
 
+- name: Fonts to install
+  include: fonts.yml
+  tags: fonts
+
 - name: Apps to install
   include: apps.yml
-  tags:
-    - apps
+  tags: apps
 
 - name: OS settings
   include: settings.yml
-  tags:
-    - settings
+  tags: settings
 
 - name: Launchbar actions and settings
   include: launchbar.yml
-  tags:
-    - launchbar
+  tags: launchbar
