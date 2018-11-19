@@ -1,11 +1,29 @@
 ---
 
-- name: Installing Golang
-  apt:
-    name: golang-go
+- name: Add Golang ppa
+  apt_repository:
+    repo: ppa:gophers/archive
     state: present
   when: dev_distribution == 'debian'
   become: true
+
+- name: Installing Golang
+  apt:
+    name: '{{ go_debian_pkg.name }}'
+    state: present
+    update_cache: yes
+  when: dev_distribution == 'debian'
+  become: true
+
+- name: Making go binaries accessible
+  file:
+    src: '{{ go_debian_pkg.bin_dir }}/{{ item }}'
+    dest: '/usr/bin/{{ item }}'
+    state: link
+  become: true
+  with_items:
+    - go
+    - gofmt
 
 - name: Installing Golang
   homebrew:

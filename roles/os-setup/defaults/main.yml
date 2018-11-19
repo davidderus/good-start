@@ -34,6 +34,10 @@ go_get:
   - github.com/ddollar/forego # Foreman in Go
   - github.com/cortesi/devd/cmd/devd # Local webserver for developers
 
+go_debian_pkg:
+  name: golang-1.10-go
+  bin_dir: /usr/lib/go-1.10/bin
+
 # Defines the place to store manually downloaded binaries
 default_binary_dest: '/usr/local/bin'
 
