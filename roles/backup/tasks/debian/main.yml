@@ -7,4 +7,4 @@
   changed_when: False
 
 - include: install.yml
-  when: not ansible_check_mode and restic_exists.rc != 0
+  when: not ansible_check_mode and restic_exists is defined and restic_exists.rc != 0
