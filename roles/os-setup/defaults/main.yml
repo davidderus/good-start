@@ -19,6 +19,9 @@ common_packages:
   - direnv # Per directory ENV vars
   - vim # An up-to-date vim version
   - jq # JSON manipulation
+  - parallel # build and execute shell command lines in parallel
+  - jpegoptim # Images optimisation
+  - optipng # Images optimisation
 
 # The default cross-platform list of apps to install
 common_apps:
