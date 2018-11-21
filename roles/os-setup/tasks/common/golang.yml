@@ -20,6 +20,7 @@
     src: '{{ go_debian_pkg.bin_dir }}/{{ item }}'
     dest: '/usr/bin/{{ item }}'
     state: link
+  when: dev_distribution == 'debian'
   become: true
   with_items:
     - go
