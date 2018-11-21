@@ -2,7 +2,7 @@
 use docker-machine {{ project.docker_machine_name }}
 {% endif %}
 
-{% for key, value in project.direnv_exports.iteritems() %}
+{% for key, value in project.direnv_exports.items() %}
 export {{ key }}={{ value }}
 {% endfor %}
 

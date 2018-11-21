@@ -7,7 +7,7 @@ unset HISTFILE
 # Vars setup
 export RESTIC_REPOSITORY='{{ backup_repository }}'
 export RESTIC_PASSWORD='{{ backup_password }}'
-{% for key, value in backup_env_vars.iteritems() %}
+{% for key, value in backup_env_vars.items() %}
 export {{ key }}='{{ value }}'
 {% endfor %}
 
@@ -25,7 +25,7 @@ echo "== Cleaning up old backups"
 
 restic forget
 {%- if backup_allow_prune %} --prune{%- endif %}
-{% for key, value in backup_cleanup_settings.iteritems() %}
+{% for key, value in backup_cleanup_settings.items() %}
  --{{ key | replace('_', '-') }}={{ value }}
 {%- endfor %}
 
