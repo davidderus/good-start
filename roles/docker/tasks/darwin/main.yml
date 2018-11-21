@@ -4,6 +4,7 @@
   homebrew_cask:
     name: docker # Will also install docker-compose and docker-machine
     state: present
+    accept_external_apps: True
 
 - name: Checking if Docker is running
   shell: "pgrep {{ docker_running_process_name }} >/dev/null 2>&1"
