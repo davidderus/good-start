@@ -9,7 +9,7 @@
   changed_when: False
   register: vscode_packages_list
 
-- name: Atom packages installation
+- name: VSCode packages installation
   command: "{{ dotfiles_vscode_app_name }} --install-extension {{ item | quote }}"
-  when: item not in vscode_packages_list.stdout_lines
+  when: not ansible_check_mode and item not in vscode_packages_list.stdout_lines
   with_items: "{{ dotfiles_vscode_packages }}"

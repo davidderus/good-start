@@ -232,7 +232,7 @@
 
 - name: Fix the Dock items order
   command: dockutil --move '{{ item.item.name }}' --position {{ item.item.position }}
-  when: item.stdout.find('at slot %s' % item.item.position) < 0
+  when: not ansible_check_mode and item.stdout.find('at slot %s' % item.item.position) < 0
   with_items: "{{ darwin_dock_positions.results }}"
   notify: Restart Dock
 
