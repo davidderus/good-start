@@ -43,6 +43,11 @@ alias dkce='docker-compose exec $DKC_SERVICE '
 alias rsync="rsync -azP" # Adding recursivity, compression and progress to rsync by default
 alias top="htop"
 {% if dev_distribution == 'darwin' %}alias stat='stat -x'{% endif %}
+	
+{% if dev_distribution == 'debian' %}
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'
+{% endif %}
 
 {% if dotfiles_with_neovim %}alias vim="nvim"{% endif %}
 
