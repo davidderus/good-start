@@ -184,6 +184,7 @@ aptitude_packages:
   - python-setuptools
   - fdupes # Duplicates file finder
   - unzip
+  - xclip # clipboard integration from cli
 
 # APT-specific apps
 aptitude_apps:
