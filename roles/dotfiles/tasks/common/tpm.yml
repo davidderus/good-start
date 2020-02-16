@@ -15,4 +15,4 @@
 - name: Installing tmux packages
   command: ~/.tmux/plugins/tpm/bin/install_plugins
   register: install_plugins_output
-  changed_when: install_plugins_output.stdout | search('Installing')
+  changed_when: install_plugins_output.stdout is search('Installing')
