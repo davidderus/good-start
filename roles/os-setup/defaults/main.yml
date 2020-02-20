@@ -59,7 +59,6 @@ darwin_locale: fr_FR@currency=EUR
 
 # macOS specific packages
 brew_packages:
-  - md5sha1sum # More checksum tools
   - coreutils # for things like realpath…
   - rclone # Cloud sync à-la rsync
   - caddy # Webserver/Reverse-Proxy/more…
@@ -71,6 +70,9 @@ brew_packages:
   - ssh-copy-id # Copy ssh keys to remote hosts
   - dockutil # Dock management from the command line
   - syncthing # Secure files sync
+  - hugo
+  - gomplate
+  - nmap
 
 # macOS specific apps
 brew_cask_apps:
@@ -90,7 +92,11 @@ brew_cask_apps:
   - fluid # Dedicated Mac app per website
   - typora # Useful markdown editor
   - dash # Docs and snippets
-  - visual-studio-code-insiders # Default code editor
+  - the-unarchiver
+  - namechanger
+  - sensiblesidebuttons
+  - atext
+  - homebrew/cask-versions/firefox-developer-edition
 
 # An array of string of items to remove from the Dock
 darwin_removed_dock_items:
@@ -168,9 +174,6 @@ launchbar_actions:
   - filename: 'Spotify - Previous Song.lbaction'
     url: https://github.com/mlinzner/LaunchBarActions/blob/master/actions/Control%20Spotify/packages/Spotify%20-%20Previous%20Song.lbaction?raw=true
     checksum: 'sha256:f4f3698b1bda0d40e893d00afb972248b20fa143a02cce91213325f068703d62'
-  - filename: 'Caffeinate.lbaction'
-    url: https://s3.amazonaws.com/renaghan/lbdist/Caffeinate.lbaction
-    checksum: 'sha256:0c71985eb6189fd021851718417064dcbe9ba14e9762194894583aeea95b3224'
 
 ###################
 # Debian specific #
