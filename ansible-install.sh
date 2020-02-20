@@ -58,7 +58,6 @@ macSetup() {
   fi
 
   echo "-> Tapping brew cask"
-  brew tap caskroom/cask
 
   echo "-> Updating brew"
   brew update
