@@ -88,6 +88,7 @@ dotfiles_required_directories:
   - ~/.config/nvim
   - ~/.config/terminator
   - "{{ dotfiles_vimplug_destination | dirname }}"
+  - ~/.ssh
 
 # Files to create  before syncing dotfiles
 dotfiles_required_files:
